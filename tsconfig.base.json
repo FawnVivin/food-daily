@@ -10,11 +10,44 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es6",
+      "dom",
+      "dom.iterable",
+      "es2017",
+      "es2020",
+      "ESNext"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "noImplicitAny": true,
+    "noUnusedParameters": false,
+    "noEmit": true,
+    "pretty": true,
+    "noUnusedLocals": false,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@food-dairy/mobile/features/home": [
+        "libs/mobile/features/home/src/index.ts"
+      ],
+      "@food-dairy/mobile/features/profile": [
+        "libs/mobile/features/profile/src/index.ts"
+      ],
+      "@food-dairy/mobile/ui": [
+        "libs/mobile/ui/src/index.ts"
+      ],
+      "@food-dairy/shared/types": [
+        "libs/shared/types/src/index.ts"
+      ],
+      "@food-dairy/shared/ui": [
+        "libs/shared/ui/src/index.ts"
+      ]
+    }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }
