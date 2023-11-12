@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import type {User} from "@food-dairy/shared/types";
+import type {User} from "@food-daily/shared/types";
 
 @Injectable()
 export class AppService {

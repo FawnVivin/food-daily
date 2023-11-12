@@ -29,34 +29,34 @@
     "noImplicitReturns": true,
     "baseUrl": ".",
     "paths": {
-      "@food-dairy/mobile/constants": [
+      "@food-daily/mobile/constants": [
         "libs/mobile/constants/src/index.ts"
       ],
-      "@food-dairy/mobile/features/authorization": [
+      "@food-daily/mobile/features/authorization": [
         "libs/mobile/features/authorization/src/index.ts"
       ],
-      "@food-dairy/mobile/features/home": [
+      "@food-daily/mobile/features/home": [
         "libs/mobile/features/home/src/index.ts"
       ],
-      "@food-dairy/mobile/features/profile": [
+      "@food-daily/mobile/features/profile": [
         "libs/mobile/features/profile/src/index.ts"
       ],
-      "@food-dairy/mobile/features/statistics": [
+      "@food-daily/mobile/features/statistics": [
         "libs/mobile/features/statistics/src/index.ts"
       ],
-      "@food-dairy/mobile/features/user-products": [
+      "@food-daily/mobile/features/user-products": [
         "libs/mobile/features/user-products/src/index.ts"
       ],
-      "@food-dairy/mobile/types": [
+      "@food-daily/mobile/types": [
         "libs/mobile/types/src/index.ts"
       ],
-      "@food-dairy/mobile/ui": [
+      "@food-daily/mobile/ui": [
         "libs/mobile/ui/src/index.ts"
       ],
-      "@food-dairy/shared/types": [
+      "@food-daily/shared/types": [
         "libs/shared/types/src/index.ts"
       ],
-      "@food-dairy/shared/ui": [
+      "@food-daily/shared/ui": [
         "libs/shared/ui/src/index.ts"
       ]
     }

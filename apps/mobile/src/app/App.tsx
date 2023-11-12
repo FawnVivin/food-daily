@@ -4,12 +4,12 @@ import { adaptNavigationTheme, PaperProvider } from 'react-native-paper'
 import { ThemeProvider} from 'styled-components'
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { darkTheme, lightTheme } from '@food-dairy/mobile/ui'
-import { HomeScreen } from '@food-dairy/mobile/features/home'
-import { Authorization } from '@food-dairy/mobile/features/authorization'
+import { darkTheme, lightTheme } from '@food-daily/mobile/ui'
+import { HomeScreen } from '@food-daily/mobile/features/home'
+import { Authorization } from '@food-daily/mobile/features/authorization'
 
 
-import type { RootStackParamList } from '@food-dairy/mobile/types'
+import type { RootStackParamList } from '@food-daily/mobile/types'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -35,6 +35,6 @@ export const App = () => {
 
 
 
-AppRegistry.registerComponent('food-dairy-mobile', () => App);
+AppRegistry.registerComponent('food-daily-mobile', () => App);
 
 export default App;
