@@ -1,8 +1,8 @@
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Statistics } from '@food-dairy/mobile/features/statistics'
-import { UserProducts } from '@food-dairy/mobile/features/user-products'
-import { Profile } from '@food-dairy/mobile/features/profile'
+import { Statistics } from '@food-daily/mobile/features/statistics'
+import { UserProducts } from '@food-daily/mobile/features/user-products'
+import { Profile } from '@food-daily/mobile/features/profile'
 
 import { Home } from '../Home'
 

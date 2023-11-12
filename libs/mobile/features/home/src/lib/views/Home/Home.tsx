@@ -2,7 +2,7 @@ import { Button } from 'react-native-paper'
 
 import { HomeRoot, HomeTitle } from './Home.styles'
 
-import type { RootStackParamList } from '@food-dairy/mobile/types'
+import type { RootStackParamList } from '@food-daily/mobile/types'
 import type { FC } from 'react'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 

@@ -3,7 +3,7 @@ import { Button } from 'react-native-paper'
 
 import type { FC } from 'react'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
-import type { RootStackParamList } from '@food-dairy/mobile/types'
+import type { RootStackParamList } from '@food-daily/mobile/types'
 
 export const Authorization:FC<NativeStackScreenProps<RootStackParamList>> = ({navigation}) => (
     <View>

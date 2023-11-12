@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body } from '@nestjs/common'
-import { User } from '@food-dairy/shared/types'
+import { User } from '@food-daily/shared/types'
 
 import { AppService } from './app.service';
 
