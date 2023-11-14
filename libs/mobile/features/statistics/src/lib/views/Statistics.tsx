@@ -1,7 +1,9 @@
 import {Text} from 'react-native-paper'
-import {View} from'react-native'
+import { DefaultView } from '@food-daily/mobile/ui'
 const Statistics = () => (
-  <View><Text>Statistics</Text></View>
+  <DefaultView>
+    <Text>Statistics</Text>
+  </DefaultView>
   )
 
 export default Statistics

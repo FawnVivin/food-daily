@@ -8,15 +8,13 @@ import { Home } from '../Home'
 
 const Tab = createBottomTabNavigator()
 const HomeScreen = () => (
-  <Tab.Navigator
+    <Tab.Navigator
     initialRouteName="Home"
     backBehavior="order"
     screenOptions={{
-      tabBarActiveTintColor: 'violet',
-      tabBarInactiveTintColor: 'white',
       tabBarShowLabel:false,
-      headerStyle:{backgroundColor:'#2A2C38', },
-      tabBarStyle:{backgroundColor:'#22242E', height:80}
+      tabBarStyle:{height:80, borderTopWidth: 0 },
+      headerShown:false
     }}
   >
     <Tab.Screen
@@ -30,8 +28,7 @@ const HomeScreen = () => (
 
           return <MaterialCommunityIcons name="home-outline" color={color} size={26} />
         },
-        headerTitleAlign:'center',
-        headerTitleStyle:{color:'white'}
+        headerShown:false
       }}
     />
     <Tab.Screen
@@ -44,8 +41,7 @@ const HomeScreen = () => (
 
           return <MaterialCommunityIcons name="chart-box-outline" color={color} size={26} />
         },
-        headerTitleAlign:'center',
-        headerTitleStyle:{color:'white'}
+        headerTitleAlign:'center'
       }}
     />
     <Tab.Screen
@@ -58,8 +54,7 @@ const HomeScreen = () => (
 
           return <MaterialCommunityIcons name="food-apple-outline" color={color} size={26} />
         },
-        headerTitleAlign:'center',
-        headerTitleStyle:{color:'white'}
+        headerTitleAlign:'center'
       }}
     />
     <Tab.Screen
@@ -73,8 +68,7 @@ const HomeScreen = () => (
 
           return  <MaterialCommunityIcons name="account-outline" color={color} size={26} />
         },
-        headerTitleAlign:'center',
-        headerTitleStyle:{color:'white'}
+        headerTitleAlign:'center'
       }}
     />
   </Tab.Navigator>

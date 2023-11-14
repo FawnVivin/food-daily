@@ -1,15 +1,10 @@
 import styled from 'styled-components'
-import { View } from 'react-native'
-import { Text} from "react-native-paper";
+import { DefaultView } from '@food-daily/mobile/ui'
 
 
-export const HomeRoot = styled(View)`
+export const HomeRoot = styled(DefaultView)`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 25px;
   height: 100%;
 `
 
-export const HomeTitle = styled(Text)`
-  color: ${({theme})=>theme.palette.primary.main};
-`

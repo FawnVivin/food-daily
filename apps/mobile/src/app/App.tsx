@@ -7,9 +7,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { darkTheme, lightTheme } from '@food-daily/mobile/ui'
 import { HomeScreen } from '@food-daily/mobile/features/home'
 import { Authorization } from '@food-daily/mobile/features/authorization'
-
-
 import type { RootStackParamList } from '@food-daily/mobile/types'
+import Meal from '../../../../libs/mobile/features/meal/src/lib/views/Meal/Meal'
+import Product from '../../../../libs/mobile/features/product/src/lib/views/Product/Product'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -24,9 +24,11 @@ export const App = () => {
   <PaperProvider theme ={theme}>
     <ThemeProvider theme={theme}>
       <NavigationContainer theme={navTheme}>
-         <Stack.Navigator initialRouteName={"HomeScreen"}>
-           <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown:false}}/>
-           <Stack.Screen name="AuthorizationScreen" component={Authorization} />
+         <Stack.Navigator initialRouteName={'HomeScreen'} screenOptions={{headerShown:false}}>
+           <Stack.Screen name={'HomeScreen'} component={HomeScreen}/>
+           <Stack.Screen name={'AuthorizationScreen'} component={Authorization} />
+           <Stack.Screen name={'MealScreen'} component={Meal}/>
+           <Stack.Screen name={'ProductScreen'} component={Product}/>
          </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>

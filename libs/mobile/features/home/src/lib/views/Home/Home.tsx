@@ -1,12 +1,16 @@
-import { Button } from 'react-native-paper'
+import { ScrollView } from 'react-native'
 
-import { HomeRoot, HomeTitle } from './Home.styles'
+import { HomeHeader, HomePageSection, MealList, StatisticsBlock } from '../../components'
+import { currentStats } from '../../fixtures'
+
+import { HomeRoot } from './Home.styles'
 
 import type { RootStackParamList } from '@food-daily/mobile/types'
 import type { FC } from 'react'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-const Home:FC<NativeStackScreenProps<RootStackParamList>> = ({navigation}) =>
+
+const Home:FC<NativeStackScreenProps<RootStackParamList>> = () =>
   // const [users, setUsers] = useState<User[]>([])
   //
   // useEffect( ()=>{
@@ -19,15 +23,20 @@ const Home:FC<NativeStackScreenProps<RootStackParamList>> = ({navigation}) =>
   //
   // },[])
     (
-    <HomeRoot>
-      <HomeTitle>Home page</HomeTitle>
-      <Button onPress={()=>navigation.navigate('AuthorizationScreen')}>Press</Button>
-       {/* {users.map((user,index)=> */}
-       {/* <HomeTitle key={index}> */}
-       {/*   {`${user.name  } ${  user.age}`} */}
-       {/* </HomeTitle>) */}
-       {/* } */}
-    </HomeRoot>
+      <ScrollView>
+        <HomeRoot>
+          <HomeHeader name={'Виктория Инешина'}/>
+            <StatisticsBlock stats={currentStats}/>
+            <HomePageSection title={'Приемы пищи'}>
+              <MealList/>
+            </HomePageSection>
+           {/* {users.map((user,index)=> */}
+           {/* <HomeTitle key={index}> */}
+           {/*   {`${user.name  } ${  user.age}`} */}
+           {/* </HomeTitle>) */}
+           {/* } */}
+        </HomeRoot>
+      </ScrollView>
   )
 
 export default Home
