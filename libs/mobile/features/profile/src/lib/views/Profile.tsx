@@ -1,9 +1,10 @@
-import { View, Text } from 'react-native'
+import { Text } from 'react-native'
+import { DefaultView } from '@food-daily/mobile/ui'
 
 const Profile = () => (
-  <View>
+  <DefaultView>
     <Text>Profile</Text>
-  </View>
+  </DefaultView>
 )
 
 export default Profile

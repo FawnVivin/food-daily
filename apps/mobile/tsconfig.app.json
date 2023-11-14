@@ -8,7 +8,7 @@
   "files": [
     "../../node_modules/@nx/react/typings/cssmodule.d.ts",
     "../../node_modules/@nx/react/typings/image.d.ts",
-    "../../libs/shared/ui/src/lib/theme/theme.d.ts"
+    "../../../theme.d.ts"
   ],
   "exclude": [
     "jest.config.ts",

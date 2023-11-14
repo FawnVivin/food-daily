@@ -22,10 +22,10 @@ const lightTheme =
     "onError": "rgb(255, 255, 255)",
     "errorContainer": "rgb(255, 218, 214)",
     "onErrorContainer": "rgb(65, 0, 2)",
-    "background": "rgb(255, 251, 255)",
-    "onBackground": "rgb(29, 27, 30)",
-    "surface": "rgb(231,213,231)",
-    "onSurface": "rgb(29, 27, 30)",
+    "background": "rgb(180,171,180)",
+    "onBackground": "rgb(240,234,243)",
+    "surface": "rgb(252,246,252)",
+    "onSurface": "rgb(246,242,250)",
     "surfaceVariant": "rgb(234, 223, 234)",
     "onSurfaceVariant": "rgb(75, 68, 77)",
     "outline": "rgb(125, 116, 126)",
@@ -45,7 +45,7 @@ const lightTheme =
     },
     "surfaceDisabled": "rgba(29, 27, 30, 0.12)",
     "onSurfaceDisabled": "rgba(29, 27, 30, 0.38)",
-    "backdrop": "rgba(182,169,182,0.4)"
+    "backdrop": "rgb(128,117,131)"
   }
 }
 

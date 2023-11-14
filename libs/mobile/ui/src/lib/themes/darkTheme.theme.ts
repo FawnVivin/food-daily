@@ -45,7 +45,7 @@ const darkTheme =
     },
     "surfaceDisabled": "rgba(232, 224, 229, 0.12)",
     "onSurfaceDisabled": "rgba(232, 224, 229, 0.38)",
-    "backdrop": "rgba(53, 46, 54, 0.4)"
+    "backdrop": "rgba(67,63,68,0.4)"
     }
   }
 
