@@ -6,6 +6,7 @@ export type Product = {
   authorId:number,
   verified:boolean
 }
+
 export type ProductParams = {
   fats: number,
   proteins:number,

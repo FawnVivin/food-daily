@@ -1,18 +1,31 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import type { StackNavigationProp } from '@react-navigation/stack'
 
-export enum MealType{
-  dinner='Ужин',
-  breakfast='Завтрак',
-  lunch='Обед'
+export enum MealType {
+  dinner = 'Ужин',
+  breakfast = 'Завтрак',
+  lunch = 'Обед'
+}
+
+export enum ProductScreens {
+  mealProduct = 'MealProductScreen',
+  userProduct = 'UserProductScreen',
+  searchProduct = 'SearchProductScreen'
 }
 
 export type RootStackParamList = {
-  AuthorizationScreen:undefined,
-  HomeScreen:undefined,
+  AuthorizationScreen: undefined,
+  HomeScreen: undefined,
   MealScreen: {
-    mealType: 'dinner'|'breakfast'|'lunch'
+    mealType: 'breakfast' | 'dinner' | 'lunch'
   },
-  ProductScreen: {
+  SearchProductScreen: {
+    productId: number
+  },
+  MealProductScreen: {
+    productId: number
+  },
+  UserProductsScreen: undefined,
+  UserProductScreen: {
     productId: number
   }
 }
