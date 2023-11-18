@@ -10,6 +10,7 @@ export const ProductItemNumberRoot = styled(View)`
   align-items: center;
   background-color: ${({theme})=>theme.colors.primary};
 `
+
 export const NumberText = styled(Text)`
   color: ${({theme})=>theme.colors.primaryContainer};
   font-weight: 800;

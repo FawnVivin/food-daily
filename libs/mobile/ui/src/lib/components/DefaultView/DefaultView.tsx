@@ -8,6 +8,7 @@ import type { FC } from 'react'
 
 const DefaultView:FC<DefaultViewProps> = (props) => {
   const {top} = useSafeAreaInsets();
+
   return(
     <DefaultViewRoot {...props} $top={top}/>
 )}

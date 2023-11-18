@@ -59,7 +59,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "extends": [
-        "./lint/.eslintrc-hr-bonus.json"
+        "./lint/.eslintrc-food-daily.json"
       ],
       "rules": {
         "@nx/enforce-module-boundaries": [
