@@ -9,7 +9,6 @@ import { ButtonWrapper, UserProductRoot } from './UserProduct.styles'
 import type { RootStackParamList } from '@food-daily/mobile/types'
 import type { RouteProp} from '@react-navigation/native';
 
-
 const UserProduct = () => {
   const { colors } = useTheme()
   const { params } = useRoute<RouteProp<RootStackParamList, 'UserProductScreen'>>()

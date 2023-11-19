@@ -5,6 +5,7 @@ export const Meals = {
   breakfast: 'Завтрак',
   lunch: 'Обед'
 }
+
 export type MealType = keyof typeof Meals
 
 export enum ProductScreens {
@@ -20,6 +21,7 @@ export type RootStackParamList = {
   AddProductMenuScreen: undefined
   UserProductsScreen: undefined,
   AddUserProductsScreen: undefined,
+  CreateProductScreen: undefined,
   MealScreen: {
     mealType: MealType
   },

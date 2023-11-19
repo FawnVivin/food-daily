@@ -1,24 +1,21 @@
-import { Button, Divider, Menu, RadioButton } from 'react-native-paper'
+import { Button } from 'react-native-paper'
 import { useForm } from 'react-hook-form'
-import { FormDescriptionBlock, FormTextInput } from '@food-daily/mobile/ui'
+import { FormTextInput } from '@food-daily/mobile/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { searchProductFormSchema } from './schemas'
 import {
-  AddButtonWrapper, SearchProductFormRoot,
-  TextInputWrapper
+  AddButtonWrapper, SearchProductFormRoot
 } from './SearchProductForm.styles'
+import { SelectMealType } from './parts'
 
 import type { SubmitHandler } from 'react-hook-form'
 import type { SearchProductFormParams } from './SearchProductForm.types'
-import { useState } from 'react'
-import { SelectMealType } from './parts'
 
 const SearchProductForm = () => {
-  const [visible, setVisible] = useState(false)
-  const [value, setValue] = useState('breakfast')
-  const { control, handleSubmit, formState: { isValid } } = useForm<SearchProductFormParams>({
-    resolver: zodResolver(searchProductFormSchema)
+  const { control, handleSubmit, formState: { isValid, errors } } = useForm<SearchProductFormParams>({
+    resolver: zodResolver(searchProductFormSchema),
+    mode: 'onTouched'
   })
 
   const handlePress: SubmitHandler<SearchProductFormParams> = (data) => {
@@ -27,14 +24,13 @@ const SearchProductForm = () => {
 
   return (
     <SearchProductFormRoot>
-      <TextInputWrapper>
-        <FormTextInput
-          control={control}
-          name={'weight'}
-          placeholder={'Введите количество'}
-        />
-        <FormDescriptionBlock content={'ГР.'} />
-      </TextInputWrapper>
+      <FormTextInput
+        control={control}
+        name={'weight'}
+        placeholder={'Введите количество'}
+        descriptionBlockContent={'ГР.'}
+        errorMessage={errors.weight?.message}
+      />
       <SelectMealType control={control} />
       <AddButtonWrapper>
         <Button

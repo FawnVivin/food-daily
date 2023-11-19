@@ -1,12 +1,16 @@
-import { MealItem } from './parts'
-import { MealListRoot } from './MealList.styles'
 import { Button } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
-import { ScreenNavigationProps } from '@food-daily/mobile/types'
+
+
+import { MealListRoot } from './MealList.styles'
+import { MealItem } from './parts'
+
+import type { ScreenNavigationProps } from '@food-daily/mobile/types'
 
 const MealList = () => {
   const navigation = useNavigation<ScreenNavigationProps>()
   const handlePress = () => navigation.navigate('AddProductMenuScreen')
+
   return (<MealListRoot>
     <MealItem title={'Завтрак'} description={'Главный прием пищи дня!'} mealType={'breakfast'} />
     <MealItem title={'Обед'} description={'Сейчас бы супчик...)'} mealType={'lunch'} />

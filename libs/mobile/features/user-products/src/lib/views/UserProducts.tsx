@@ -11,7 +11,7 @@ import type { ScreenNavigationProps } from '@food-daily/mobile/types';
 
 const UserProducts = () => {
   const navigation = useNavigation<ScreenNavigationProps>()
-  const handlePlusPress = () => navigation.goBack()
+  const handlePlusPress = () => navigation.navigate('CreateProductScreen')
 
   return(
     <Fragment>

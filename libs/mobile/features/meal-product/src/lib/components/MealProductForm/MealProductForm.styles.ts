@@ -2,11 +2,6 @@ import styled from 'styled-components'
 import { View } from 'react-native'
 import { Button } from 'react-native-paper'
 
-export const TextInputWrapper = styled(View)`
-  flex-direction: row;
-  gap: 15px;
-`
-
 export const MealProductFormRoot = styled(View)`
   position: relative;
   height: 25%;
