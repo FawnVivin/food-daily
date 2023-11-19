@@ -8,7 +8,7 @@ export const TextInputWrapper = styled(View)`
 
 export const SearchProductFormRoot = styled(View)`
   position: relative;
-  height: 25%;
+  height: 35%;
   justify-content: space-between;
   padding: 10px 36px 15px 36px;
 `

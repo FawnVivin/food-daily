@@ -12,8 +12,11 @@ import { MealProduct } from '@food-daily/mobile/features/meal-product'
 import { UserProducts } from '@food-daily/mobile/features/user-products'
 import { UserProduct } from '@food-daily/mobile/features/user-product'
 import { SearchProduct } from '@food-daily/mobile/features/search-product'
+import { SearchProducts } from '@food-daily/mobile/features/search-products'
 
 import type { RootStackParamList } from '@food-daily/mobile/types'
+import { AddProductMenu } from '@food-daily/mobile/features/add-product-menu'
+import { AddUserProducts } from '@food-daily/mobile/features/add-user-products'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -36,6 +39,9 @@ export const App = () => {
             <Stack.Screen name={'UserProductScreen'} component={UserProduct} />
             <Stack.Screen name={'UserProductsScreen'} component={UserProducts} />
             <Stack.Screen name={'SearchProductScreen'} component={SearchProduct} />
+            <Stack.Screen name={'SearchProductsScreen'} component={SearchProducts} />
+            <Stack.Screen name={'AddProductMenuScreen'} component={AddProductMenu} />
+            <Stack.Screen name={'AddUserProductsScreen'} component={AddUserProducts} />
           </Stack.Navigator>
         </NavigationContainer>
       </ThemeProvider>
