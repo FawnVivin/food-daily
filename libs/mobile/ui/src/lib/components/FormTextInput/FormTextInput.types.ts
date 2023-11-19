@@ -5,4 +5,6 @@ export type FormTextInputProps = FieldValues & {
   name: string,
   placeholder: string,
   icon?: string
+  descriptionBlockContent?:string
+  multiline?:boolean
 }

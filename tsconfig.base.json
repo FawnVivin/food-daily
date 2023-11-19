@@ -41,6 +41,9 @@
       "@food-daily/mobile/features/authorization": [
         "libs/mobile/features/authorization/src/index.ts"
       ],
+      "@food-daily/mobile/features/create-product": [
+        "libs/mobile/features/create-product/src/index.ts"
+      ],
       "@food-daily/mobile/features/home": [
         "libs/mobile/features/home/src/index.ts"
       ],

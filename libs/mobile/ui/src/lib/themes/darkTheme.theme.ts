@@ -18,7 +18,7 @@ const darkTheme =
     "onTertiary": "rgb(103, 0, 27)",
     "tertiaryContainer": "rgb(146, 0, 42)",
     "onTertiaryContainer": "rgb(246,201,203)",
-    "error": "rgb(255, 180, 171)",
+    "error": "rgb(218,42,74)",
     "onError": "rgb(105, 0, 5)",
     "errorContainer": "rgb(147, 0, 10)",
     "onErrorContainer": "rgb(255, 180, 171)",

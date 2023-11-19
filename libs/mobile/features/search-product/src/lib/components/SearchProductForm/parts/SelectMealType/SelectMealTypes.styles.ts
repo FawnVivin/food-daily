@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { Button, Menu } from 'react-native-paper'
+import { Button } from 'react-native-paper'
+
 export const SelectMealTypesButton = styled(Button)`
   margin-top: 10px;
   height: 50px;

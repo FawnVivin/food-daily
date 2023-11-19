@@ -1,16 +1,20 @@
 import { Fragment } from 'react'
 import { Header, Section } from '@food-daily/mobile/ui'
 import { useNavigation } from '@react-navigation/native'
-import { ScreenNavigationProps } from '@food-daily/mobile/types'
-import { List, Text } from 'react-native-paper'
-import { AddProductMenuRoot, MenuItem } from './AddProductMenu.styles'
+import { Text } from 'react-native-paper'
+
 import { randomFoodFacts } from '../../../../../../constants/src/randomFoodFacts'
+
+import { AddProductMenuRoot, MenuItem } from './AddProductMenu.styles'
+
+import type { ScreenNavigationProps } from '@food-daily/mobile/types'
 
 
 const AddProductMenu = () => {
   const navigation = useNavigation<ScreenNavigationProps>()
   const handleSearchPress = () => navigation.navigate('SearchProductsScreen')
   const handleUserProductsPress = () => navigation.navigate('AddUserProductsScreen')
+
   return (
     <Fragment>
       <Header title={'Добавить продукт'} />

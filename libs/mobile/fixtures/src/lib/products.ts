@@ -17,21 +17,21 @@ export const products: Product[] = [
   },
   {
     id: 2,
-    title: 'Яблоко',
+    title: 'Банан',
     description: 'Lorem Ipsum - это текст-"рыба", часто используемый в Lorem Ipsum - это текст-"рыба", часто используемый в Lorem Ipsum - это текст-"рыба", часто используемый в Lorem Ipsum - это текст-"рыба", часто используемый в Lorem Ipsum - это текст-"рыба", часто Lorem Ipsum - это текст-"рыба", часто используемый в Lorem Ipsum - это текст-"рыба", часто используемый в Lorem Ipsum - это текст-"рыба", часто используемый в Lorem Ipsum - это текст-"рыба", часто используемый в Lorem Ipsum - это текст-"рыба", часто используемый в Lorem Ipsum - это текст-"рыба", часто используемый в Lorem Ipsum - это текст-"рыба", часто используемый в ',
     params: {
-      fats: 12,
+      fats: 128,
       proteins: 36,
       calories: 168,
-      carbohydrates: 159,
-      weight: 136
+      carbohydrates: 59,
+      weight: 369
     },
     authorId: 1,
     verified: false
   },
   {
     id: 3,
-    title: 'Яблоко',
+    title: 'Груша',
     description: 'fghjk',
     params: {
       fats: 12,
@@ -45,7 +45,7 @@ export const products: Product[] = [
   },
   {
     id: 4,
-    title: 'Яблоко',
+    title: 'Лимон',
     description: 'fghjk',
     params: {
       fats: 12,
@@ -59,7 +59,7 @@ export const products: Product[] = [
   },
   {
     id: 5,
-    title: 'Яблоко',
+    title: 'Яблочный пирог',
     description: 'fghjk',
     params: {
       fats: 12,
@@ -73,7 +73,7 @@ export const products: Product[] = [
   },
   {
     id: 6,
-    title: 'Яблоко',
+    title: 'Яблочный компот',
     description: 'fghjk',
     params: {
       fats: 12,
@@ -87,7 +87,7 @@ export const products: Product[] = [
   },
   {
     id: 7,
-    title: 'Яблоко',
+    title: 'Грушевый сок',
     description: 'fghjk',
     params: {
       fats: 12,
@@ -101,7 +101,7 @@ export const products: Product[] = [
   },
   {
     id: 8,
-    title: 'Яблоко',
+    title: 'Банановое пюре',
     description: 'fghjk',
     params: {
       fats: 12,

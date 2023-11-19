@@ -1,18 +1,19 @@
 import { useTheme } from 'react-native-paper'
 import { useForm } from 'react-hook-form'
-import { FormDescriptionBlock, FormTextInput } from '@food-daily/mobile/ui'
+import { FormTextInput } from '@food-daily/mobile/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { DeleteButton, EditButton, MealButtons, MealProductFormRoot, TextInputWrapper } from './MealProductForm.styles'
+import { DeleteButton, EditButton, MealButtons, MealProductFormRoot } from './MealProductForm.styles'
 import { mealProductFormSchema } from './schemas'
 
-import type { SubmitHandler} from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form'
 import type { FC } from 'react'
 import type { MealProductFormParams, MealProductFormProps } from './MealProductForm.types'
 
 const MealProductForm: FC<MealProductFormProps> = ({ weight }) => {
-  const { control, handleSubmit, formState: { isValid } } = useForm<MealProductFormParams>({
-    resolver: zodResolver(mealProductFormSchema)
+  const { control, handleSubmit, formState: { isValid, errors } } = useForm<MealProductFormParams>({
+    resolver: zodResolver(mealProductFormSchema),
+    mode:'onTouched'
   })
   const { colors } = useTheme()
 
@@ -22,15 +23,14 @@ const MealProductForm: FC<MealProductFormProps> = ({ weight }) => {
 
   return (
     <MealProductFormRoot>
-      <TextInputWrapper>
-        <FormTextInput
-          control={control}
-          name={'weight'}
-          placeholder={'Введите количество'}
-          defaultValue={String(weight)}
-        />
-        <FormDescriptionBlock content={'ГР.'} />
-      </TextInputWrapper>
+      <FormTextInput
+        control={control}
+        name={'weight'}
+        placeholder={'Введите количество'}
+        defaultValue={String(weight)}
+        descriptionBlockContent={'ГР.'}
+        errorMessage={errors.weight?.message}
+      />
       <MealButtons>
         <DeleteButton
           onPress={handleSubmit(handlePress)}

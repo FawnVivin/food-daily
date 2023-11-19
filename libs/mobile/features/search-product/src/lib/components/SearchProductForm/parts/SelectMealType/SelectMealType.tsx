@@ -1,13 +1,19 @@
-import { FC, useState } from 'react'
-import { Controller, FieldValues } from 'react-hook-form'
+import { useState } from 'react'
+import { Controller } from 'react-hook-form'
 import { Divider, Menu, RadioButton, Text } from 'react-native-paper'
+import { Meals } from '@food-daily/mobile/types'
+
 import { SelectMealTypesButton } from './SelectMealTypes.styles'
-import { Meals, MealType } from '@food-daily/mobile/types'
+
+import type { MealType } from '@food-daily/mobile/types';
+import type { FieldValues } from 'react-hook-form';
+import type { FC} from 'react';
 
 
 const SelectMealType: FC<FieldValues> = ({ control }) => {
   const [visible, setVisible] = useState(false)
   const handlePress = () => setVisible(!visible)
+
   return (
     <Controller
       control={control}
