@@ -32,6 +32,12 @@
       "@food-daily/mobile/constants": [
         "libs/mobile/constants/src/index.ts"
       ],
+      "@food-daily/mobile/features/add-product-menu": [
+        "libs/mobile/features/add-product-menu/src/index.ts"
+      ],
+      "@food-daily/mobile/features/add-user-products": [
+        "libs/mobile/features/add-user-products/src/index.ts"
+      ],
       "@food-daily/mobile/features/authorization": [
         "libs/mobile/features/authorization/src/index.ts"
       ],
@@ -52,6 +58,9 @@
       ],
       "@food-daily/mobile/features/search-product": [
         "libs/mobile/features/search-product/src/index.ts"
+      ],
+      "@food-daily/mobile/features/search-products": [
+        "libs/mobile/features/search-products/src/index.ts"
       ],
       "@food-daily/mobile/features/statistics": [
         "libs/mobile/features/statistics/src/index.ts"
