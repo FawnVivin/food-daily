@@ -32,7 +32,7 @@ export const App = () => {
     <PaperProvider theme={theme}>
       <ThemeProvider theme={theme}>
         <NavigationContainer theme={navTheme}>
-          <Stack.Navigator initialRouteName={'HomeScreen'} screenOptions={{ headerShown: false }}>
+          <Stack.Navigator initialRouteName={'HomeScreen'} screenOptions={{ headerShown: false, animation: "slide_from_right" }}>
             <Stack.Screen name={'HomeScreen'} component={HomeScreen} />
             <Stack.Screen name={'AuthorizationScreen'} component={Authorization} />
             <Stack.Screen name={'MealScreen'} component={Meal} />

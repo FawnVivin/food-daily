@@ -8,16 +8,16 @@ import { mealProductFormSchema } from './schemas'
 
 import type { SubmitHandler } from 'react-hook-form'
 import type { FC } from 'react'
-import type { MealProductFormParams, MealProductFormProps } from './MealProductForm.types'
+import type { MealProductFormProps } from './MealProductForm.types'
 
 const MealProductForm: FC<MealProductFormProps> = ({ weight }) => {
-  const { control, handleSubmit, formState: { isValid, errors } } = useForm<MealProductFormParams>({
+  const { control, handleSubmit, formState: { isValid, errors } } = useForm<MealProductFormProps>({
     resolver: zodResolver(mealProductFormSchema),
     mode:'onTouched'
   })
   const { colors } = useTheme()
 
-  const handlePress: SubmitHandler<MealProductFormParams> = (data) => {
+  const handlePress: SubmitHandler<MealProductFormProps> = (data) => {
     alert(data)
   }
 
@@ -30,6 +30,7 @@ const MealProductForm: FC<MealProductFormProps> = ({ weight }) => {
         defaultValue={String(weight)}
         descriptionBlockContent={'ГР.'}
         errorMessage={errors.weight?.message}
+        inputType={'numeric'}
       />
       <MealButtons>
         <DeleteButton

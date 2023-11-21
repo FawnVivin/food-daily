@@ -18,6 +18,7 @@ const ProductParams = () => {
           icon={'fire'}
           errorMessage={errors.calories?.message}
           descriptionBlockContent={'ГР.'}
+          inputType={'numeric'}
         />
         <FormTextInput
           name={'proteins'}
@@ -26,6 +27,7 @@ const ProductParams = () => {
           icon={'food-steak'}
           errorMessage={errors.proteins?.message}
           descriptionBlockContent={'ГР.'}
+          inputType={'numeric'}
         />
         <FormTextInput
           name={'fats'}
@@ -34,6 +36,7 @@ const ProductParams = () => {
           icon={'water'}
           errorMessage={errors.fats?.message}
           descriptionBlockContent={'ГР.'}
+          inputType={'numeric'}
         />
         <FormTextInput
           name={'carbohydrates'}
@@ -42,6 +45,7 @@ const ProductParams = () => {
           icon={'cookie'}
           errorMessage={errors.carbohydrates?.message}
           descriptionBlockContent={'ГР.'}
+          inputType={'numeric'}
         />
       </ProductParamsRoot>
   )

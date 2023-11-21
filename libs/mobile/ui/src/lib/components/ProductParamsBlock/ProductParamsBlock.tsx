@@ -1,5 +1,6 @@
+import { ParamItem } from '../ParamItem'
+
 import { CaloriesBlock, MacroNutrients, ProductParamsBlockRoot } from './ProductParamsBlock.styles'
-import { ParamItem } from './parts'
 
 import type { FC } from 'react'
 import type { ProductParams } from '@food-daily/shared/types'
