@@ -18,7 +18,7 @@ const handlePress:SubmitHandler<CreateProductFormParams> = (data) => console.log
 
   return (
     <Fragment>
-      <Header title={'Добавить продукт'} />
+      <Header title={'Создать продукт'} />
       <CreateProductRoot>
         <FormProvider {...formMethods}>
           <CreateProductForm />

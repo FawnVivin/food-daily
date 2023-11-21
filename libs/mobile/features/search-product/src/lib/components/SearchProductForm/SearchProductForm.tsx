@@ -1,13 +1,13 @@
 import { Button } from 'react-native-paper'
 import { useForm } from 'react-hook-form'
-import { FormTextInput } from '@food-daily/mobile/ui'
+import { FormSelect, FormTextInput } from '@food-daily/mobile/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { searchProductFormSchema } from './schemas'
 import {
   AddButtonWrapper, SearchProductFormRoot
 } from './SearchProductForm.styles'
-import { SelectMealType } from './parts'
+import { mealTypes } from './constants/mealTypes'
 
 import type { SubmitHandler } from 'react-hook-form'
 import type { SearchProductFormParams } from './SearchProductForm.types'
@@ -31,7 +31,7 @@ const SearchProductForm = () => {
         descriptionBlockContent={'ГР.'}
         errorMessage={errors.weight?.message}
       />
-      <SelectMealType control={control} />
+      <FormSelect name={'mealType'} label={'Прием пищи'} data={mealTypes} defaultValue={'Завтрак'} control = {control} icon={'food-outline'}/>
       <AddButtonWrapper>
         <Button
           onPress={handleSubmit(handlePress)}

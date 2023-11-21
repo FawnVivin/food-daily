@@ -18,7 +18,8 @@ const FormTextInput: FC<FormTextInputProps> =
      icon,
      descriptionBlockContent,
      multiline = false,
-     errorMessage = ''
+     errorMessage = '',
+    inputType = 'default'
    }) => (
     <View>
       <FormTextInputRoot>
@@ -34,6 +35,7 @@ const FormTextInput: FC<FormTextInputProps> =
               placeholder={placeholder}
               underlineColor={'transparent'}
               activeUnderlineColor={'transparent'}
+              keyboardType={inputType}
             />
           )}
           defaultValue={defaultValue || ''}

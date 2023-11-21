@@ -1,4 +1,4 @@
 export type SearchProductFormParams = {
-  weight: string
+  weight: number
   mealType: string
 }

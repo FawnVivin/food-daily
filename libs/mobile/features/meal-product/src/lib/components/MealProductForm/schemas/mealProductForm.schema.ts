@@ -1,8 +1,8 @@
 import { z } from 'zod'
 
 import type { ZodType } from 'zod';
-import type { MealProductFormParams } from '../MealProductForm.types'
+import type { MealProductFormProps } from '../MealProductForm.types'
 
-export const mealProductFormSchema: ZodType<MealProductFormParams> = z.object({
-  weight: z.string().regex(/^[0-9]+$/, {message:'This parameter must be a number'}).max(4)
+export const mealProductFormSchema: ZodType<MealProductFormProps> = z.object({
+  weight: z.coerce.number().min(1).max(5000)
 })

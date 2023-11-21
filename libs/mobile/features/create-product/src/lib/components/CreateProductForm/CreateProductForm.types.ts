@@ -1,8 +1,3 @@
-export type CreateProductFormParams = {
-  name: string,
-  calories: string,
-  proteins: string,
-  fats: string,
-  carbohydrates: string,
-  description: string
-}
+import type { Product, ProductParams } from '@food-daily/shared/types'
+
+export type CreateProductFormParams = Omit<ProductParams, 'weight'> & Pick<Product, 'description'|'name'>
