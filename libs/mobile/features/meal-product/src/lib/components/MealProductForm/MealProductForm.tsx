@@ -27,7 +27,7 @@ const MealProductForm: FC<MealProductFormProps> = ({ weight }) => {
         control={control}
         name={'weight'}
         placeholder={'Введите количество'}
-        defaultValue={String(weight)}
+        defaultValue={weight}
         descriptionBlockContent={'ГР.'}
         errorMessage={errors.weight?.message}
         inputType={'numeric'}

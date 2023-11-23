@@ -10,7 +10,7 @@ import type { FC } from 'react'
 import type { StackNavigationProp } from '@react-navigation/stack'
 import type { RootStackParamList } from '@food-daily/mobile/types'
 
-const ProductItem: FC<ProductItemProps> = ({ screenType, title, params, itemNumber, id }) => {
+const ProductItem: FC<ProductItemProps> = ({ screenType, name, params, itemNumber, id }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>()
   const handleProductPress = () => navigation.navigate(screenType, { productId: id })
 
@@ -18,7 +18,7 @@ const ProductItem: FC<ProductItemProps> = ({ screenType, title, params, itemNumb
     <ProductItemRoot
       onPress={handleProductPress}
       titleNumberOfLines={2}
-      title={title}
+      title={name}
       description={<ProductItemDescription {...params} />}
       left={() => <ProductItemNumber itemNumber={itemNumber} />}
     />

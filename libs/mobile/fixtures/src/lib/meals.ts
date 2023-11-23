@@ -2,7 +2,7 @@ export const meals = {
   breakfast:[
     {
       id:1,
-      title:'Яблоко',
+      name:'Яблоко',
       description:'fghjk',
       params:{
         fats: 12,
@@ -16,7 +16,7 @@ export const meals = {
     },
     {
       id:2,
-      title:'Яблоко',
+      name:'Яблоко',
       description:'fghjk',
       params:{
         fats: 12,
@@ -30,7 +30,7 @@ export const meals = {
     },
     {
       id:3,
-      title:'Яблоко',
+      name:'Яблоко',
       description:'fghjk',
       params:{
         fats: 12,
@@ -44,7 +44,7 @@ export const meals = {
     },
     {
       id:4,
-      title:'Яблоко',
+      name:'Яблоко',
       description:'fghjk',
       params:{
         fats: 12,
@@ -58,7 +58,7 @@ export const meals = {
     },
     {
       id:5,
-      title:'Яблоко',
+      name:'Яблоко',
       description:'fghjk',
       params:{
         fats: 12,
@@ -72,7 +72,7 @@ export const meals = {
     },
     {
       id:6,
-      title:'Яблоко',
+      name:'Яблоко',
       description:'fghjk',
       params:{
         fats: 12,
@@ -86,7 +86,7 @@ export const meals = {
     },
     {
       id:7,
-      title:'Яблоко',
+      name:'Яблоко',
       description:'fghjk',
       params:{
         fats: 12,
@@ -100,7 +100,7 @@ export const meals = {
     },
     {
       id:8,
-      title:'Яблоко',
+      name:'Яблоко',
       description:'fghjk',
       params:{
         fats: 12,
@@ -116,7 +116,7 @@ export const meals = {
   dinner:[
     {
       id:1,
-      title:'Яблоко',
+      name:'Яблоко',
       description:'fghjk',
       params:{
         fats: 12,
@@ -130,7 +130,7 @@ export const meals = {
     },
     {
       id:2,
-      title:'Яблоко',
+      name:'Яблоко',
       description:'fghjk',
       params:{
         fats: 12,
@@ -146,7 +146,7 @@ export const meals = {
   lunch:[
     {
       id:1,
-      title:'Яблоко',
+      name:'Яблоко',
       description:'fghjk',
       params:{
         fats: 12,
