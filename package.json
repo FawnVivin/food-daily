@@ -36,6 +36,7 @@
     "react-native-svg": "13.4.0",
     "react-native-svg-transformer": "1.0.0",
     "react-native-vector-icons": "^10.0.1",
+    "react-native-water-tracker-twc": "^1.2.5",
     "react-native-web": "~0.18.12",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",

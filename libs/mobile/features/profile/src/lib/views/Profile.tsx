@@ -11,7 +11,6 @@ import { ProfileRoot } from './Profile.styles'
 const Profile = () => (
   <Fragment>
     <Header title={'Профиль'} backButton={false} />
-    <ScrollView>
       <ProfileRoot>
         <UserInfo {...TestUser} />
         <Divider />
@@ -19,7 +18,6 @@ const Profile = () => (
         <Divider />
         <ProfileForm {...TestUser}/>
       </ProfileRoot>
-    </ScrollView>
   </Fragment>
 )
 
