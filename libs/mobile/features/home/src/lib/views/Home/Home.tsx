@@ -1,7 +1,7 @@
 import { ScrollView } from 'react-native'
 import { Section } from '@food-daily/mobile/ui'
 
-import { HomeHeader, MealList, StatisticsBlock } from '../../components'
+import { HomeHeader, MealList, StatisticsBlock , WaterTracker } from '../../components'
 import { currentStats } from '../../fixtures'
 
 import { HomeRoot } from './Home.styles'
@@ -9,7 +9,7 @@ import { HomeRoot } from './Home.styles'
 import type { RootStackParamList } from '@food-daily/mobile/types'
 import type { FC } from 'react'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { ProgressBar } from 'react-native-paper'
+
 
 
 const Home: FC<NativeStackScreenProps<RootStackParamList>> = () =>
@@ -31,6 +31,9 @@ const Home: FC<NativeStackScreenProps<RootStackParamList>> = () =>
         <StatisticsBlock stats={currentStats} />
         <Section title={'Приемы пищи'}>
           <MealList />
+        </Section>
+        <Section title={'Трекер воды'}>
+          <WaterTracker/>
         </Section>
         {/* {users.map((user,index)=> */}
         {/* <HomeTitle key={index}> */}
