@@ -15,7 +15,6 @@ const FormSelect: FC<FormSelectProps> =
      defaultValue,
     label
    }) => {
-    console.log(defaultValue)
     const defaultSelectItem = data.filter((item) => item.value === defaultValue)[0]
     const [selectedList, setSelectedList] = useState<SelectItem[]>([defaultSelectItem])
     const { colors } = useTheme()

@@ -5,48 +5,50 @@ import {
 
 const lightTheme =
 {...DefaultTheme,
-  colors: {
-    "primary": "rgb(151,50,206)",
-    "onPrimary": "rgb(255, 255, 255)",
-    "primaryContainer": "rgb(182,116,201)",
-    "onPrimaryContainer": "rgb(66,8,98)",
-    "secondary": "rgb(182,85,43)",
-    "onSecondary": "rgb(234,191,169)",
-    "secondaryContainer": "rgb(229,142,111)",
-    "onSecondaryContainer": "rgb(203,85,34)",
-    "tertiary": "rgb(188, 9, 58)",
-    "onTertiary": "rgb(210,50,50)",
-    "tertiaryContainer": "rgb(175,0,7)",
-    "onTertiaryContainer": "rgb(64, 0, 13)",
+
+  "colors": {
+  "primary": "rgb(229,220,182)",
+    "onPrimary": "rgb(126,93,48)",
+    "primaryContainer": "rgb(255, 224, 127)",
+    "onPrimaryContainer": "rgb(35, 27, 0)",
+    "secondary": "rgb(217,194,161)",
+    "onSecondary": "rgb(105,32,32)",
+    "secondaryContainer": "rgb(255, 220, 190)",
+    "onSecondaryContainer": "rgb(44, 22, 0)",
+    "tertiary": "rgb(171,229,231)",
+    "onTertiary": "rgb(45,78,101)",
+    "tertiaryContainer": "rgb(91,212,217)",
+    "onTertiaryContainer": "rgb(0, 32, 33)",
     "error": "rgb(186, 26, 26)",
     "onError": "rgb(255, 255, 255)",
     "errorContainer": "rgb(255, 218, 214)",
     "onErrorContainer": "rgb(65, 0, 2)",
-    "background": "rgb(224,213,224)",
-    "onBackground": "rgb(160,111,190)",
-    "surface": "rgb(166,146,166)",
-    "onSurface": "rgb(75,49,103)",
-    "surfaceVariant": "rgb(229,172,229)",
-    "onSurfaceVariant": "rgb(75, 68, 77)",
-    "outline": "rgb(125, 116, 126)",
-    "outlineVariant": "rgb(206, 195, 206)",
+    "background": "rgb(255, 251, 255)",
+    "onBackground": "rgb(30, 27, 22)",
+    "surface": "rgb(220,196,144)",
+    "onSurface": "rgb(30, 27, 22)",
+    "surfaceVariant": "rgb(235, 226, 207)",
+    "onSurfaceVariant": "rgb(76, 70, 57)",
+    "outline": "rgb(125, 119, 103)",
+    "outlineVariant": "rgb(206, 198, 180)",
     "shadow": "rgb(0, 0, 0)",
     "scrim": "rgb(0, 0, 0)",
-    "inverseSurface": "rgb(51, 47, 51)",
-    "inverseOnSurface": "rgb(246, 239, 243)",
-    "inversePrimary": "rgb(231, 180, 255)",
+    "inverseSurface": "rgb(51, 48, 42)",
+    "inverseOnSurface": "rgb(246, 240, 231)",
+    "inversePrimary": "rgb(231, 195, 73)",
     "elevation": {
     "level0": "transparent",
-      "level1": "rgb(249, 241, 252)",
-      "level2": "rgb(246, 235, 250)",
-      "level3": "rgb(242, 228, 248)",
-      "level4": "rgb(241, 226, 247)",
-      "level5": "rgb(239, 222, 246)"
-    },
-    "surfaceDisabled": "rgba(29, 27, 30, 0.12)",
-    "onSurfaceDisabled": "rgba(29, 27, 30, 0.38)",
-    "backdrop": "rgb(128,117,131)"
-  }
+      "level1": "rgb(248, 243, 242)",
+      "level2": "rgb(244, 238, 235)",
+      "level3": "rgb(240, 234, 227)",
+      "level4": "rgb(238, 232, 224)",
+      "level5": "rgb(235, 229, 219)"
+  },
+  "surfaceDisabled": "rgba(30, 27, 22, 0.12)",
+    "onSurfaceDisabled": "rgba(30, 27, 22, 0.38)",
+    "backdrop": "rgba(53, 48, 36, 0.4)"
+}
+
 }
 
 

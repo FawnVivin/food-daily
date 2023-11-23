@@ -19,7 +19,8 @@ const FormTextInput: FC<FormTextInputProps> =
      descriptionBlockContent,
      multiline = false,
      errorMessage = '',
-    inputType = 'default'
+     inputType = 'default',
+    secureTextEntry = false
    }) => (
     <View>
       <FormTextInputRoot>
@@ -27,15 +28,17 @@ const FormTextInput: FC<FormTextInputProps> =
           control={control}
           render={({ field: { onChange, value, onBlur } }) => (
             <FormTextInputWrapper
-              multiline={multiline}
-              left={icon && <TextInput.Icon icon={icon} />}
               onChangeText={onChange}
               onBlur={onBlur}
-              value={String(value)}
-              placeholder={placeholder}
-              underlineColor={'transparent'}
-              activeUnderlineColor={'transparent'}
+              value={value}
+              defaultValue={String(value)}
+              label={placeholder}
               keyboardType={inputType}
+              left={icon && <TextInput.Icon icon={icon} />}
+              error={!!errorMessage}
+              underlineStyle={{display:'none'}}
+              secureTextEntry={secureTextEntry}
+              multiline={multiline}
             />
           )}
           defaultValue={defaultValue || ''}
