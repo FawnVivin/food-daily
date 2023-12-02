@@ -1,20 +1,29 @@
-import { Module } from '@nestjs/common';
+import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { ConsumedProduct, Product, User } from '@food-daily/api/services'
+import { services } from '@food-daily/api/configs'
 
 
 @Module({
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   imports: [
-    // eslint-disable-next-line new-cap,@typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
     ConfigModule.forRoot({
-      load: [()=>({host: "192.168.31.56"})]
+      load: [() => ({ host: '192.168.31.56' })]
     }),
-  ],
-  controllers: [AppController],
-  providers: [AppService]
+    ...services,
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3305,
+      username: 'root',
+      password: 'root',
+      database: 'food-daily',
+      entities: [User, Product, ConsumedProduct],
+      synchronize: true
+    })
+  ]
 })
-export class AppModule {}
+export class AppModule {
+}
 

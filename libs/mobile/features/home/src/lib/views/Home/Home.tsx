@@ -1,7 +1,7 @@
 import { ScrollView } from 'react-native'
 import { Section } from '@food-daily/mobile/ui'
 
-import { HomeHeader, MealList, StatisticsBlock , WaterTracker } from '../../components'
+import { HomeHeader, MealList, StatisticsBlock, WaterTracker } from '../../components'
 import { currentStats } from '../../fixtures'
 
 import { HomeRoot } from './Home.styles'
@@ -9,39 +9,33 @@ import { HomeRoot } from './Home.styles'
 import type { RootStackParamList } from '@food-daily/mobile/types'
 import type { FC } from 'react'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { TestUser } from '@food-daily/mobile/fixtures'
+import { UserNorms } from '@food-daily/shared/types'
 
 
+const Home: FC<NativeStackScreenProps<RootStackParamList>> = () => {
 
-const Home: FC<NativeStackScreenProps<RootStackParamList>> = () =>
-  // const [users, setUsers] = useState<User[]>([])
-  //
-  // useEffect( ()=>{
-  //  void axios.post('http://192.168.31.56:3000/api', {id:"111",name:'Ivan',  age:22})
-  //    .then(()=>{
-  //      void axios.get<User[]>('http://192.168.31.56:3000/api').then((resp)=>setUsers(resp.data))
-  //    }
-  //  )
-  //    .catch((error:Error)=>alert(error.message))
-  //
-  // },[])
-  (
+  const userNorms: UserNorms = {
+    calorieNorm: TestUser.calorieNorm,
+    carbohydrateNorm: TestUser.carbohydrateNorm,
+    proteinNorm: TestUser.proteinNorm,
+    fatsNorm: TestUser.fatsNorm
+  }
+
+  return (
     <ScrollView>
       <HomeRoot>
         <HomeHeader name={'Виктория Инешина'} />
-        <StatisticsBlock stats={currentStats} />
+        <StatisticsBlock userNorms={userNorms} />
         <Section title={'Приемы пищи'}>
           <MealList />
         </Section>
         <Section title={'Трекер воды'}>
-          <WaterTracker/>
+          <WaterTracker />
         </Section>
-        {/* {users.map((user,index)=> */}
-        {/* <HomeTitle key={index}> */}
-        {/*   {`${user.name  } ${  user.age}`} */}
-        {/* </HomeTitle>) */}
-        {/* } */}
       </HomeRoot>
     </ScrollView>
   )
+}
 
 export default Home

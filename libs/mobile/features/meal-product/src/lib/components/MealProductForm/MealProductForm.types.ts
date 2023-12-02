@@ -1,4 +1,5 @@
-import type { ProductParams } from '@food-daily/shared/types'
+import { ConsumedProduct } from '@food-daily/shared/types'
 
-export type MealProductFormProps = Pick<ProductParams, 'weight'>
+
+export type MealProductFormProps = Pick<ConsumedProduct, 'weight'>
 

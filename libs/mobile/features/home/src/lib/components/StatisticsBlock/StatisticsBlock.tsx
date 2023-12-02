@@ -5,12 +5,12 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { StatisticsBlockRoot } from './StatisticsBlock.styles'
 import { CaloriesProgressContent, PFCBlock } from './parts'
 
-import type { StatisticsBlockProps } from './StatisticsBlock.types'
 import type { FC } from 'react'
-
-const StatisticsBlock:FC<StatisticsBlockProps> = ({stats}) => {
+import {currentStats} from '../../fixtures'
+import { StatisticsBlockProps } from './StatisticsBlock.types'
+const StatisticsBlock:FC<StatisticsBlockProps> = ({userNorms}) => {
   const {colors} = useTheme()
-  const caloriesValue = stats.currentCalories/stats.normCalories * 100
+  const caloriesValue = currentStats.calories/userNorms.calorieNorm * 100
 
   return(
     <StatisticsBlockRoot>
@@ -23,12 +23,12 @@ const StatisticsBlock:FC<StatisticsBlockProps> = ({stats}) => {
       >
         {()=>
           <CaloriesProgressContent
-            currentCalories={stats.currentCalories}
-            normCalories={stats.normCalories}
+            currentCalories={currentStats.calories}
+            normCalories={userNorms.calorieNorm}
           />
         }
       </AnimatedCircularProgress>
-      <PFCBlock {...stats}/>
+      <PFCBlock {...currentStats}{...userNorms}/>
     </StatisticsBlockRoot>
   )}
 

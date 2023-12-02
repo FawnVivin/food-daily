@@ -1,4 +1,5 @@
-export type SearchProductFormParams = {
-  weight: number
-  mealType: string
+import { CreateConsumedProductDto } from '@food-daily/shared/types'
+
+export type SearchProductFormParams = Pick<CreateConsumedProductDto, 'weight'>&{
+  meal:string
 }

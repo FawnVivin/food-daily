@@ -2,12 +2,13 @@ import { FormTextInput } from '@food-daily/mobile/ui'
 import { useFormContext } from 'react-hook-form'
 
 import { ProductParamsRoot } from './ProductParams.styles'
+import { CreateProductDto } from '@food-daily/shared/types'
 
-import type { CreateProductFormParams } from '../../CreateProductForm.types'
+
 
 
 const ProductParams = () => {
-  const { control, formState:{errors} } = useFormContext<CreateProductFormParams>()
+  const { control, formState:{errors} } = useFormContext<Omit<CreateProductDto,'authorId'>>()
 
   return (
       <ProductParamsRoot>

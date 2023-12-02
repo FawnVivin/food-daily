@@ -1,5 +1,5 @@
-import type { Stats } from '@food-daily/mobile/types'
+import { UserNorms } from '@food-daily/shared/types'
 
 export type StatisticsBlockProps = {
-  stats:Stats
+  userNorms:UserNorms
 }

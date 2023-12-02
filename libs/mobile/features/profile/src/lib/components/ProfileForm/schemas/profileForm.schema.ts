@@ -8,6 +8,7 @@ export const profileFormSchema: ZodType<ProfileFormParams> = z.object({
   age: z.coerce.number().max(120).min(1),
   height: z.coerce.number().max(300).min(50),
   target: z.string(),
-  sex: z.string()
+  sex: z.string(),
+  activity: z.string()
 
 })
