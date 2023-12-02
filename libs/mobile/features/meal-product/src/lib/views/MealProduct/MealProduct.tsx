@@ -22,10 +22,10 @@ const MealProduct = () => {
   )
   return (
     <Fragment>
-      <Header title={product.title} />
+      <Header title={product.name} />
       <MealProductRoot>
         <ProductDescription {...product} />
-        <MealProductForm weight={product.params.weight} />
+        <MealProductForm weight={product.weight} />
       </MealProductRoot>
     </Fragment>
   )

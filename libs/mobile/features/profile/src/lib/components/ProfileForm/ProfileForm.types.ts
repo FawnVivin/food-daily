@@ -1,6 +1,7 @@
-import type { User } from '@food-daily/shared/types'
+import type { UpdateUserDto } from '@food-daily/shared/types'
 
-export type ProfileFormParams = Omit<User, 'id' | 'name' | 'sex' | 'target'>&{
+export type ProfileFormParams = Omit<UpdateUserDto,   'sex' | 'target'|'activity'>&{
   sex: string,
-  target: string
+  target: string,
+  activity: string
 }

@@ -8,3 +8,4 @@ export type Stats = {
   normU:number,
   currentU:number,
 }
+

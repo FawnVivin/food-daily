@@ -10,7 +10,7 @@ import {
 import { mealTypes } from './constants/mealTypes'
 
 import type { SubmitHandler } from 'react-hook-form'
-import type { SearchProductFormParams } from './SearchProductForm.types'
+import { SearchProductFormParams } from './SearchProductForm.types'
 
 const SearchProductForm = () => {
   const { control, handleSubmit, formState: { isValid, errors } } = useForm<SearchProductFormParams>({
@@ -31,7 +31,7 @@ const SearchProductForm = () => {
         descriptionBlockContent={'ГР.'}
         errorMessage={errors.weight?.message}
       />
-      <FormSelect name={'mealType'} label={'Прием пищи'} data={mealTypes} defaultValue={'Завтрак'} control = {control} icon={'food-outline'}/>
+      <FormSelect name={'meal'} label={'Прием пищи'} data={mealTypes} defaultValue={'Завтрак'} control = {control} icon={'food-outline'}/>
       <AddButtonWrapper>
         <Button
           onPress={handleSubmit(handlePress)}

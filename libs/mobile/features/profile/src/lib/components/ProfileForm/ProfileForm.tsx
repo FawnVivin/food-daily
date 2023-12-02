@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { FormTextInput, FormSelect } from '@food-daily/mobile/ui'
 import { Button } from 'react-native-paper'
-import { Sex, Target } from '@food-daily/shared/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { sexItems, targetItems } from './constants'
@@ -13,14 +12,16 @@ import type { FC } from 'react'
 import type { User } from '@food-daily/shared/types'
 import { Fragment } from 'react'
 import { ScrollView } from 'react-native'
+import { ProfileFormParams } from './ProfileForm.types'
+import { activityItems } from './constants'
 
-const ProfileForm: FC<User> = ({ sex, height, target, weight, age }) => {
-  const { control, handleSubmit, formState: { errors, isValid } } = useForm({
+const ProfileForm: FC<User> = ({ sex, activity, height, target, weight, age }) => {
+  const { control, handleSubmit, formState: { errors, isValid } } = useForm<ProfileFormParams>({
     mode: 'onTouched',
     resolver: zodResolver(profileFormSchema)
   })
 
-  const handlePress: SubmitHandler<any> = (data) => {
+  const handlePress: SubmitHandler<ProfileFormParams> = (data) => {
     console.log(data)
   }
 
@@ -30,7 +31,7 @@ const ProfileForm: FC<User> = ({ sex, height, target, weight, age }) => {
         <ProfileFormRoot>
           <FormSelect
             label={'Пол'}
-            defaultValue={Sex[sex]}
+            defaultValue={sex}
             name={'sex'}
             data={sexItems}
             control={control}
@@ -66,8 +67,16 @@ const ProfileForm: FC<User> = ({ sex, height, target, weight, age }) => {
             inputType={'numeric'}
           />
           <FormSelect
+            label={'Активность'}
+            defaultValue={activity}
+            name={'activity'}
+            data={activityItems}
+            control={control}
+            icon={'weight-lifter'}
+          />
+          <FormSelect
             label={'Цель'}
-            defaultValue={Target[target]}
+            defaultValue={target}
             name={'target'}
             data={targetItems}
             control={control}

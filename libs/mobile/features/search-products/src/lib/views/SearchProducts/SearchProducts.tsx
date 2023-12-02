@@ -18,7 +18,7 @@ const SearchProducts = () => {
 
   const handleChangeText = (value:string) => {
     setSearchValue(value)
-    const filteredProducts = allProducts.filter((product)=>product.title.includes(value))
+    const filteredProducts = allProducts.filter((product)=>product.name.includes(value))
 
     setProducts(filteredProducts)
   }

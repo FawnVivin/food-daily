@@ -26,7 +26,7 @@ const UserProduct = () => {
 
   return (
     <Fragment>
-      <Header title={product.title} />
+      <Header title={product.name} />
       <UserProductRoot>
         <ProductDescription {...product} />
         <ButtonWrapper>

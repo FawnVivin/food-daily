@@ -1,4 +1,4 @@
-import { Sex } from '@food-daily/shared/types'
+import { Sex } from '@food-daily/mobile/types'
 
 import type { SelectItem } from '@food-daily/mobile/ui'
 
