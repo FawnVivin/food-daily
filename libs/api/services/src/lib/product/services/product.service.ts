@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common'
-import { CreateProductDto } from '@food-daily/shared/types'
 import { InjectRepository } from '@nestjs/typeorm'
 import { EntityManager, Repository } from 'typeorm'
+
 import { Product } from '../models'
-import { ConsumedProduct } from '@food-daily/api/services'
+
+import type { CreateProductDto } from '@food-daily/shared/types'
 
 @Injectable()
 export class ProductsService {
@@ -16,6 +17,7 @@ export class ProductsService {
 
   async create(productDto: CreateProductDto) {
     const newProduct = new Product(productDto)
+
     await this.entityManager.save(newProduct)
   }
 
@@ -35,7 +37,8 @@ export class ProductsService {
   }
 
   async updateState(id: number, newState: Product['verified']) {
-    let product = await this.productRepository.findOneBy({ id })
+    const product = await this.productRepository.findOneBy({ id })
+
     product.verified = newState
     await this.entityManager.save(product)
   }

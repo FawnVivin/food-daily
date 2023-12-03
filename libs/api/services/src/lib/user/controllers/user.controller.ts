@@ -1,33 +1,32 @@
-import { Body, Controller, Delete, Get, Param, Put, Post, Patch } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Put, UseGuards } from '@nestjs/common'
+import { Role, UpdateUserDto } from '@food-daily/shared/types'
+
 import { UsersService } from '../services'
-import { CreateUserDto, UpdateUserDto } from '@food-daily/shared/types'
+import { JwtAuthGuard } from '../../authorization/guards'
+import { HasRole } from '../../authorization/decorators'
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
-
-  @Post()
-  async create(@Body() userDto: CreateUserDto) {
-    return this.usersService.create(userDto);
+  constructor(private readonly usersService: UsersService) {
   }
 
+  @HasRole(Role.Admin)
+  @UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
-    return this.usersService.findAll();
+    return this.usersService.findAll()
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: number) {
-    return this.usersService.findOne(id);
-  }
-
+  @HasRole(Role.User)
+  @UseGuards(JwtAuthGuard)
   @Put(':id')
   async update(@Param('id') id: number, @Body() userDto: UpdateUserDto) {
-    return this.usersService.update(id, userDto);
+    return this.usersService.update(id, userDto)
   }
-
+  @HasRole(Role.Admin)
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: number) {
-    return this.usersService.remove(id);
+    return this.usersService.remove(id)
   }
 }

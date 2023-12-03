@@ -1,4 +1,4 @@
-import { DailyStats } from '@food-daily/shared/types'
+import type { DailyStats } from '@food-daily/shared/types'
 
 export const currentStats: DailyStats = {
   calories: 120,

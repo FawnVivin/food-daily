@@ -1,16 +1,15 @@
 import { ScrollView } from 'react-native'
 import { Section } from '@food-daily/mobile/ui'
+import { TestUser } from '@food-daily/mobile/fixtures'
 
 import { HomeHeader, MealList, StatisticsBlock, WaterTracker } from '../../components'
-import { currentStats } from '../../fixtures'
 
 import { HomeRoot } from './Home.styles'
 
 import type { RootStackParamList } from '@food-daily/mobile/types'
 import type { FC } from 'react'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { TestUser } from '@food-daily/mobile/fixtures'
-import { UserNorms } from '@food-daily/shared/types'
+import type { UserNorms } from '@food-daily/shared/types'
 
 
 const Home: FC<NativeStackScreenProps<RootStackParamList>> = () => {

@@ -2,7 +2,9 @@ import { FormTextInput } from '@food-daily/mobile/ui'
 import { useFormContext } from 'react-hook-form'
 
 import { ProductParamsRoot } from './ProductParams.styles'
-import { CreateProductDto } from '@food-daily/shared/types'
+
+import type { CreateProductDto } from '@food-daily/shared/types'
+
 
 
 

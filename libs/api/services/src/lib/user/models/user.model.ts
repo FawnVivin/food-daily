@@ -1,6 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
-import { Activity, Sex, Target, User as UserType } from '@food-daily/shared/types'
-import { ConsumedProduct, Product } from '@food-daily/api/services'
+import { Role } from '@food-daily/shared/types'
+
+import { Product } from '../../product'
+import { ConsumedProduct } from '../../consumedProduct'
+
+import type { Activity, Sex, Target, User as UserType } from '@food-daily/shared/types'
 
 @Entity()
 export class User implements UserType {
@@ -12,6 +16,9 @@ export class User implements UserType {
 
   @Column()
   age: number
+
+  @Column()
+  email: string
 
   @Column()
   height: number
@@ -29,6 +36,9 @@ export class User implements UserType {
   weight: number
 
   @Column()
+  password: string
+
+  @Column({ default: 0 })
   calorieNorm: number
 
   @Column({ default: 0 })
@@ -40,14 +50,15 @@ export class User implements UserType {
   @Column({ default: 0 })
   proteinNorm: number
 
-  @Column({ default: 'user' })
-  role: 'admin' | 'user'
+  @Column({ type:'enum', enum:Role, default: Role.User })
+  role: Role
 
   @OneToMany(() => Product, (product) => product.author, { cascade: ['remove'] })
   products: Product[]
 
   @OneToMany(() => ConsumedProduct, (consumedProduct) => consumedProduct.user)
   consumedProducts: ConsumedProduct[]
+
   constructor(user: Partial<User>) {
     Object.assign(this, user)
   }

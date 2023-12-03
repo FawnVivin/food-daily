@@ -2,7 +2,6 @@ import {  Header } from '@food-daily/mobile/ui'
 import { Fragment } from 'react'
 import { TestUser } from '@food-daily/mobile/fixtures'
 import { Divider } from 'react-native-paper'
-import { ScrollView } from 'react-native'
 
 import { ProfileForm, UserInfo, UserParams } from '../components'
 

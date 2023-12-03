@@ -1,9 +1,11 @@
 import { useFormContext } from 'react-hook-form'
 import { FormTextInput, Section } from '@food-daily/mobile/ui'
-import { CreateProductDto } from '@food-daily/shared/types'
+
 
 import { ProductParams } from './parts/ProductParams'
 import { CreateProductFormRoot } from './CreateProductForm.styles'
+
+import type { CreateProductDto } from '@food-daily/shared/types'
 
 
 const CreateProductForm = () => {

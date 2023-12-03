@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common'
-import { CreateConsumedProductDto, DailyStats } from '@food-daily/shared/types'
 import { InjectRepository } from '@nestjs/typeorm'
 import { EntityManager, MoreThanOrEqual, Repository } from 'typeorm'
+
 import { ConsumedProduct } from '../models'
-import { ProductsService } from '../../product/services'
+
+import type { CreateConsumedProductDto, DailyStats } from '@food-daily/shared/types'
 
 @Injectable()
 export class ConsumedProductsService {
   constructor(
     @InjectRepository(ConsumedProduct)
     private consumedProductRepository: Repository<ConsumedProduct>,
-    private readonly productsService: ProductsService,
     private readonly entityManager: EntityManager
   ) {
   }
@@ -22,8 +22,9 @@ export class ConsumedProductsService {
       proteins,
       carbohydrates,
       calories
-    } = await this.productsService.findOneById(consumedProductDto.productId)
+    } = await this.consumedProductRepository.findOne({ where: { product: { id: consumedProductDto.productId } } })
     const weightCoef = newConsumedProduct.weight / 100
+
     newConsumedProduct.fats = fats * weightCoef
     newConsumedProduct.proteins = proteins * weightCoef
     newConsumedProduct.carbohydrates = carbohydrates * weightCoef
@@ -36,17 +37,23 @@ export class ConsumedProductsService {
   }
 
   async findOneById(id: number): Promise<ConsumedProduct> {
-    return this.consumedProductRepository.findOne({ where: { id }, relations: ['productId'] })
+    return this.consumedProductRepository.findOne({ where: { id }, relations: ['product'] })
   }
 
-  async findAllByMeal(meal: ConsumedProduct['meal']): Promise<ConsumedProduct[]> {
-    return this.consumedProductRepository.find({ where: { meal: meal }, relations: ['productId'] })
+  async findAllByMeal(meal: ConsumedProduct['meal'], userId: number): Promise<ConsumedProduct[]> {
+    return this.consumedProductRepository.find({ where: { meal, user: { id: userId } }, relations: ['product'] })
   }
 
   async updateWeight(id: number, weight: ConsumedProduct['weight']) {
-    let newConsumedProduct = await this.consumedProductRepository.findOneBy({ id })
-    const { fats, proteins, carbohydrates, calories } = await this.productsService.findOneById(newConsumedProduct.id)
+    const newConsumedProduct = await this.consumedProductRepository.findOneBy({ id })
+    const {
+      fats,
+      proteins,
+      carbohydrates,
+      calories
+    } = await this.consumedProductRepository.findOne({ where: { product: { id: newConsumedProduct.product.id } } })
     const weightCoef = weight / 100
+
     newConsumedProduct.weight = weight
     newConsumedProduct.fats = fats * weightCoef
     newConsumedProduct.proteins = proteins * weightCoef
@@ -55,21 +62,21 @@ export class ConsumedProductsService {
     await this.entityManager.save(newConsumedProduct)
   }
 
-  async getDailyStats(userId: number):Promise<DailyStats> {
+  async getDailyStats(userId: number): Promise<DailyStats> {
     const date = new Date()
     const today = new Date(date.getFullYear(),
       date.getMonth(),
-      date.getDate())
-    const products = await this.consumedProductRepository.findBy({ user: { id: userId }, date: MoreThanOrEqual(today) })
+      date.getDate())    const products = await this.consumedProductRepository.findBy({ user: { id: userId }, date: MoreThanOrEqual(today) })
     const caloriesSum = products.reduce((calories, product) => calories += product.calories, 0)
     const proteinsSum = products.reduce((proteins, product) => proteins += product.proteins, 0)
     const fatsSum = products.reduce((fats, product) => fats += product.fats, 0)
     const carbohydratesSum = products.reduce((carbohydrates, product) => carbohydrates += product.carbohydrates, 0)
+
     return {
-      calories:caloriesSum,
-      proteins:proteinsSum,
-      carbohydrates:carbohydratesSum,
-      fats:fatsSum
+      calories: caloriesSum,
+      proteins: proteinsSum,
+      carbohydrates: carbohydratesSum,
+      fats: fatsSum
     }
 
   }
