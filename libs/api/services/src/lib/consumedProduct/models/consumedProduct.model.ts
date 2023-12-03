@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn,  ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm'
 import { Product, User } from '@food-daily/api/services'
-import {  ConsumedProduct as ConsumedProductType, Meal } from '@food-daily/shared/types'
+
+import type {  ConsumedProduct as ConsumedProductType, Meal } from '@food-daily/shared/types'
 
 @Entity()
 export class ConsumedProduct implements ConsumedProductType {

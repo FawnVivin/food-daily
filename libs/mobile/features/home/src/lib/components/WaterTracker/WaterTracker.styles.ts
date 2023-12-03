@@ -18,6 +18,7 @@ export const Content = styled(View)`
 export const CountText =  styled(Text)`
   color: #8CC4DF;
 `
+
 export const PostfixText = styled(Text)`
   font-size: 10px;
 `

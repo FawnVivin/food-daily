@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne, JoinColumn, OneToMany } from 'typeorm'
-import {  Product as ProductType } from '@food-daily/shared/types'
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm'
 import { ConsumedProduct, User } from '@food-daily/api/services'
+
+import type {  Product as ProductType } from '@food-daily/shared/types'
 
 
 @Entity()

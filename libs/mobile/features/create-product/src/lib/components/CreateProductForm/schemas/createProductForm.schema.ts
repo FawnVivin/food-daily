@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
+import type { CreateProductDto } from '@food-daily/shared/types'
 import type { ZodType } from 'zod'
-import { CreateProductDto } from '@food-daily/shared/types'
 
 export const createProductFormSchema: ZodType<Omit<CreateProductDto,'authorId'>> = z.object({
   name: z.string().max(20).min(3),

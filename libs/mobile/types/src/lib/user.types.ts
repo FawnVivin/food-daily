@@ -5,6 +5,7 @@ export enum Activity {
   high="Ежедневный спорт",
   extreme="Профессиональный спорт"
 }
+
 export enum Target  {
   loss= 'Хочу похудеть',
   gain= 'Хочу набрать вес',

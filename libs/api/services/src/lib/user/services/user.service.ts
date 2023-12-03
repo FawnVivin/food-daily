@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common'
-import { User } from '../models'
-import { CreateUserDto, UpdateUserDto } from '@food-daily/shared/types'
 import { InjectRepository } from '@nestjs/typeorm'
 import { EntityManager, Repository } from 'typeorm'
+
+import { User } from '../models'
+
 import { StatsHelper } from './helpers'
+
+import type { CreateUserDto, UpdateUserDto } from '@food-daily/shared/types'
 
 @Injectable()
 export class UsersService {
@@ -30,7 +33,7 @@ export class UsersService {
   }
 
   async update(id: number, newUser: UpdateUserDto) {
-    let user = await this.userRepository.findOneBy({ id })
+    const user = await this.userRepository.findOneBy({ id })
     const { age, sex, weight, height, target } = newUser
     const [calories, proteinNorm, fatsNorm, carbohydrateNorm] = StatsHelper(newUser)
 
@@ -46,16 +49,24 @@ export class UsersService {
     await this.entityManager.save(user)
   }
 
-  async findOne(id: number): Promise<User> {
+  async findOne(email: string): Promise<User> {
     return this.userRepository.findOne({
       where: {
-        id
+        email
       }, relations
   :
     ['products']
   })
   }
-
+  async findOneById(id: number): Promise<User> {
+    return this.userRepository.findOne({
+      where: {
+        id
+      }, relations
+        :
+        ['products']
+    })
+  }
   async findAll(): Promise<User[]> {
     return this.userRepository.find({ relations: ['products'] })
   }

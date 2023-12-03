@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
-
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConsumedProduct, Product, User } from '@food-daily/api/services'
 import { services } from '@food-daily/api/configs'

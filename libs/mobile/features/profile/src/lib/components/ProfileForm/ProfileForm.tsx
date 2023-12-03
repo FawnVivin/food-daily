@@ -2,18 +2,19 @@ import { useForm } from 'react-hook-form'
 import { FormTextInput, FormSelect } from '@food-daily/mobile/ui'
 import { Button } from 'react-native-paper'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Fragment } from 'react'
+import { ScrollView } from 'react-native'
 
-import { sexItems, targetItems } from './constants'
+import { sexItems, targetItems , activityItems } from './constants'
 import { ButtonWrapper, ProfileFormRoot } from './ProfileForm.styles'
 import { profileFormSchema } from './schemas/profileForm.schema'
 
 import type { SubmitHandler } from 'react-hook-form'
 import type { FC } from 'react'
 import type { User } from '@food-daily/shared/types'
-import { Fragment } from 'react'
-import { ScrollView } from 'react-native'
-import { ProfileFormParams } from './ProfileForm.types'
-import { activityItems } from './constants'
+import type { ProfileFormParams } from './ProfileForm.types'
+
+
 
 const ProfileForm: FC<User> = ({ sex, activity, height, target, weight, age }) => {
   const { control, handleSubmit, formState: { errors, isValid } } = useForm<ProfileFormParams>({

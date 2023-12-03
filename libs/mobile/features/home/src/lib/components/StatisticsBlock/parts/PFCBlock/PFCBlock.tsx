@@ -1,15 +1,15 @@
 import { useTheme } from 'react-native-paper'
 
+
 import { PFCItem } from '../../../PFCItem'
 
 import { PFCBlockRoot } from './PFCBlock.styles'
 
+import type { DailyStats, UserNorms } from '@food-daily/shared/types'
 import type { FC } from 'react'
-import type { Stats } from '@food-daily/mobile/types'
-import { DailyStats, UserNorms } from '@food-daily/shared/types'
 
 
-const PFCBlock: FC<UserNorms & DailyStats> = ({ carbohydrateNorm, carbohydrates, proteinNorm, proteins, fatsNorm, fats }) => {
+const PFCBlock: FC<DailyStats & UserNorms> = ({ carbohydrateNorm, carbohydrates, proteinNorm, proteins, fatsNorm, fats }) => {
   const { colors } = useTheme()
 
   return (

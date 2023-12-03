@@ -9,8 +9,8 @@ import {
 } from './SearchProductForm.styles'
 import { mealTypes } from './constants/mealTypes'
 
+import type { SearchProductFormParams } from './SearchProductForm.types'
 import type { SubmitHandler } from 'react-hook-form'
-import { SearchProductFormParams } from './SearchProductForm.types'
 
 const SearchProductForm = () => {
   const { control, handleSubmit, formState: { isValid, errors } } = useForm<SearchProductFormParams>({
