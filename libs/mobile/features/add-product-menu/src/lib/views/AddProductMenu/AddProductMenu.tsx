@@ -2,8 +2,7 @@ import { Fragment } from 'react'
 import { Header, Section } from '@food-daily/mobile/ui'
 import { useNavigation } from '@react-navigation/native'
 import { Text } from 'react-native-paper'
-
-import { randomFoodFacts } from '../../../../../../constants/src/randomFoodFacts'
+import { randomFoodFacts } from '@food-daily/mobile/constants';
 
 import { AddProductMenuRoot, MenuItem } from './AddProductMenu.styles'
 

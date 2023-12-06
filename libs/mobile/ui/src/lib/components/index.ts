@@ -19,3 +19,6 @@ export * from './Header'
 export * from './ParamItem'
 
 export * from './FormSelect'
+
+export * from './DialogBlock'
+

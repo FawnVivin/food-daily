@@ -66,12 +66,12 @@ export class ConsumedProductsService {
     const date = new Date()
     const today = new Date(date.getFullYear(),
       date.getMonth(),
-      date.getDate())    const products = await this.consumedProductRepository.findBy({ user: { id: userId }, date: MoreThanOrEqual(today) })
+      date.getDate())
+    const products = await this.consumedProductRepository.findBy({ user: { id: userId }, date: MoreThanOrEqual(today) })
     const caloriesSum = products.reduce((calories, product) => calories += product.calories, 0)
     const proteinsSum = products.reduce((proteins, product) => proteins += product.proteins, 0)
     const fatsSum = products.reduce((fats, product) => fats += product.fats, 0)
     const carbohydratesSum = products.reduce((carbohydrates, product) => carbohydrates += product.carbohydrates, 0)
-
     return {
       calories: caloriesSum,
       proteins: proteinsSum,

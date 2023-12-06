@@ -1,23 +1,28 @@
-import {  Header } from '@food-daily/mobile/ui'
-import { Fragment } from 'react'
-import { TestUser } from '@food-daily/mobile/fixtures'
-import { Divider } from 'react-native-paper'
+import { Header } from "@food-daily/mobile/ui";
+import { Fragment } from "react";
+import { ActivityIndicator, Divider } from "react-native-paper";
 
-import { ProfileForm, UserInfo, UserParams } from '../components'
+import { ProfileForm, UserInfo, UserParams } from "../components";
 
-import { ProfileRoot } from './Profile.styles'
+import { ProfileRoot } from "./Profile.styles";
+import { useGetUser } from "@food-daily/mobile/api";
 
-const Profile = () => (
-  <Fragment>
-    <Header title={'Профиль'} backButton={false} />
+
+const Profile = () => {
+  const { data, isLoading, isSuccess } = useGetUser();
+  if (isLoading || !isSuccess) return <ActivityIndicator animating={true} />;
+  return (
+    <Fragment>
+      <Header title={"Профиль"} backButton={false} />
       <ProfileRoot>
-        <UserInfo {...TestUser} />
+        <UserInfo {...data} />
         <Divider />
-        <UserParams {...TestUser} />
+        <UserParams {...data} />
         <Divider />
-        <ProfileForm {...TestUser}/>
+        <ProfileForm {...data} />
       </ProfileRoot>
-  </Fragment>
-)
+    </Fragment>
+  );
+};
 
-export default Profile
+export default Profile;

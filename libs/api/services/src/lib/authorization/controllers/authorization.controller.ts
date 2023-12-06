@@ -5,6 +5,7 @@ import { CreateUserDto} from '@food-daily/shared/types';
 import { AuthorizationService } from '../services'
 import { JwtAuthGuard, LocalAuthGuard } from '../guards'
 
+import type { Payload } from '../types'
 import type { User } from '@food-daily/shared/types'
 
 @Controller('auth')
@@ -25,7 +26,6 @@ export class AuthorizationController {
   @UseGuards(JwtAuthGuard)
   @Get()
   async getUser(@Req() req: Request) {
-    console.log(req)
-    return this.authService.getUser(req.user as {user:User})
+    return this.authService.getUser(req.user as Payload)
   }
 }

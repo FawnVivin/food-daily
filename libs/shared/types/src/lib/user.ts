@@ -47,6 +47,11 @@ export type CreateUserDto = {
   password: string
 }
 
+export type Login = {
+  email: string,
+  password: string
+}
+
 export enum Activity {
   minimal,
   weak,
