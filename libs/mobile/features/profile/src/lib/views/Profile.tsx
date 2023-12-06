@@ -1,16 +1,16 @@
 import { Header, ScreenLoader } from "@food-daily/mobile/ui";
 import { Fragment } from "react";
-import { ActivityIndicator, Divider } from "react-native-paper";
+import { Divider } from "react-native-paper";
+import { useGetUser } from "@food-daily/mobile/api";
 
 import { ProfileForm, UserInfo, UserParams } from "../components";
 
 import { ProfileRoot } from "./Profile.styles";
-import { useGetUser } from "@food-daily/mobile/api";
-
 
 const Profile = () => {
   const { data, isLoading, isSuccess } = useGetUser();
-  if (isLoading || !isSuccess) return <ScreenLoader/>
+
+  if (isLoading || !isSuccess) return <ScreenLoader />;
   return (
     <Fragment>
       <Header title={"Профиль"} backButton={false} />

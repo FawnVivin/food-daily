@@ -72,6 +72,7 @@ export class ConsumedProductsService {
     const proteinsSum = products.reduce((proteins, product) => proteins += product.proteins, 0)
     const fatsSum = products.reduce((fats, product) => fats += product.fats, 0)
     const carbohydratesSum = products.reduce((carbohydrates, product) => carbohydrates += product.carbohydrates, 0)
+
     return {
       calories: caloriesSum,
       proteins: proteinsSum,
