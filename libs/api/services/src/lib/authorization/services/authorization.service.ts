@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt'
 
 import { UsersService } from '../../user'
 
+import type { Payload } from '../types'
 import type { CreateUserDto, User } from '@food-daily/shared/types'
 
 
@@ -22,13 +23,15 @@ export class AuthorizationService {
   }
 
   login(user: User) {
+    const payload = {id:user.id, role:user.role, email:user.email}
+
     return {
       user,
-      access_token: this.jwtService.sign({ user })
+      access_token: this.jwtService.sign(payload)
     }
   }
 
-  async getUser({user:{ id }}: {user:User}) {
+  async getUser({ id }:Payload) {
     console.log(id)
     return await this.usersService.findOneById(id)
   }

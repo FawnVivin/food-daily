@@ -15,7 +15,7 @@ const HomeScreen = () => {
   return (
     <Tab.Navigator
       initialRouteName='Home'
-      backBehavior='order'
+      backBehavior='initialRoute'
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: { height: 80, borderTopWidth: 0, backgroundColor: colors.surface },

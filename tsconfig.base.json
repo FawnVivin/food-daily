@@ -35,6 +35,9 @@
       "@food-daily/api/services": [
         "libs/api/services/src/index.ts"
       ],
+      "@food-daily/mobile/api": [
+        "libs/mobile/api/src/index.ts"
+      ],
       "@food-daily/mobile/constants": [
         "libs/mobile/constants/src/index.ts"
       ],
@@ -85,6 +88,9 @@
       ],
       "@food-daily/mobile/helpers": [
         "libs/mobile/helpers/src/index.ts"
+      ],
+      "@food-daily/mobile/hooks": [
+        "libs/mobile/hooks/src/index.ts"
       ],
       "@food-daily/mobile/types": [
         "libs/mobile/types/src/index.ts"
