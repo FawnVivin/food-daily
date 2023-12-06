@@ -4,9 +4,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigation } from '@react-navigation/native'
 import * as SecureStore from 'expo-secure-store';
-
-
-import { useLogin } from '../api'
+import { useLogin } from "@food-daily/mobile/api";
 
 import { authorizationFormSchema } from './schemas/Authorization.schema'
 import { AuthorizationRoot, Title } from './Authorization.styles'
@@ -21,7 +19,7 @@ export const Authorization = () => {
     resolver: zodResolver(authorizationFormSchema)
   })
   const navigation = useNavigation<ScreenNavigationProps>()
-  const { mutate, data: resp, isSuccess, error } = useLogin()
+  const { mutate, error } = useLogin()
 
   const handlePress: SubmitHandler<Login> = (data) => {
     mutate(data, {
@@ -31,7 +29,6 @@ export const Authorization = () => {
         reset()
       }
     })
-
   }
 
   return (
