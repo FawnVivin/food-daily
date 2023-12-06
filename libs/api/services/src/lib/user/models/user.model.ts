@@ -53,7 +53,7 @@ export class User implements UserType {
   @Column({ type:'enum', enum:Role, default: Role.User })
   role: Role
 
-  @OneToMany(() => Product, (product) => product.author, { cascade: ['remove'] })
+  @OneToMany(() => Product, (product) => product.authorId, { cascade: ['remove'] })
   products: Product[]
 
   @OneToMany(() => ConsumedProduct, (consumedProduct) => consumedProduct.user)

@@ -1,42 +1,45 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm'
-import { ConsumedProduct, User } from '@food-daily/api/services'
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ConsumedProduct, User } from "@food-daily/api/services";
 
-import type {  Product as ProductType } from '@food-daily/shared/types'
+import type { Product as ProductType } from "@food-daily/shared/types";
 
 
 @Entity()
 export class Product implements ProductType {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  calories: number
+  calories: number;
 
   @Column()
-  carbohydrates: number
+  carbohydrates: number;
 
-  @Column({type: 'longtext'})
-  description: string
-
-  @Column()
-  fats: number
+  @Column({ type: "longtext" })
+  description: string;
 
   @Column()
-  proteins: number
+  fats: number;
+
+  @Column()
+  proteins: number;
 
   @Column({ default: false })
-  verified: boolean
+  verified: boolean;
 
   @ManyToOne(() => User, (user) => user.products)
-  @JoinColumn()
-  author: number
+  @JoinColumn({ name: "authorId" })
+  authorId: number;
 
-  @OneToMany(() => ConsumedProduct, (consumedProduct) => consumedProduct.product)
-  consumedProducts: ConsumedProduct[]
+  @OneToMany(() => ConsumedProduct, (consumedProduct) => consumedProduct.product, {
+    onDelete: "CASCADE"
+  })
+  consumedProducts: ConsumedProduct[];
+
   constructor(product: Partial<Product>) {
-    Object.assign(this, product)
+    Object.assign(this, product);
   }
 }

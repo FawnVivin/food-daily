@@ -1,4 +1,3 @@
-
 import { List } from 'react-native-paper'
 
 import { ProductItem } from '../ProductItem'

@@ -3,13 +3,9 @@ import { apiUrl, queryClient } from "@food-daily/mobile/constants";
 import { useToken } from "@food-daily/mobile/hooks";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-import { authorizationRoutes, consumedProductsRoutes, userRoutes } from "./api.routes";
+import { authorizationRoutes, consumedProductsRoutes, productsRoutes, userRoutes } from "./api.routes";
 
-import type { DailyStats, Login, UpdateUserDto ,type  User } from "@food-daily/shared/types";
-
-
-
-
+import type { CreateProductDto, DailyStats, Login, Product, UpdateUserDto, User } from "@food-daily/shared/types";
 
 export const api = {
   async get<T>(url: string, params = {}): Promise<T> {
@@ -22,10 +18,13 @@ export const api = {
 
     return res.data;
   },
-  async put<B, T>(url: string, body: B, params = {}): Promise<T> {
+  async put<B>(url: string, body: B, params = {}): Promise<void> {
     const res = await axios.put(`${apiUrl}${url}`, body, { ...params });
 
     return res.data;
+  },
+  async delete(url: string, params = {}): Promise<void> {
+    const res = await axios.delete(`${apiUrl}${url}`, { ...params });
   }
 };
 
@@ -53,8 +52,8 @@ export const useUpdateUser = (userId: number) => {
   const token = useToken();
 
   return useMutation({
-    mutationKey: ["user", userId],
-    mutationFn: (newUser: UpdateUserDto) => api.put<UpdateUserDto, User>(userRoutes.updateUser(userId), newUser, { headers: { Authorization: `Bearer ${token}` } }),
+    mutationKey: ["user"],
+    mutationFn: (newUser: UpdateUserDto) => api.put<UpdateUserDto>(userRoutes.updateUser(userId), newUser, { headers: { Authorization: `Bearer ${token}` } }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["user"] })
   });
 };
@@ -69,3 +68,31 @@ export const useGetDailyStats = (userId: number | undefined) => {
   });
 };
 
+export const useGetProduct = (productId: number) => {
+  const token = useToken();
+
+  return useQuery({
+    queryKey: ["product", productId, token],
+    queryFn: () => api.get<Product>(productsRoutes.getProductById(productId), { headers: { Authorization: `Bearer ${token}` } })
+  });
+};
+
+export const useDeleteProduct = (productId: number) => {
+  const token = useToken();
+
+  return useMutation({
+    mutationKey: ["product"],
+    mutationFn: () => api.delete(productsRoutes.deleteProduct(productId), { headers: { Authorization: `Bearer ${token}` } }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["user"] })
+  });
+};
+
+export const useCreateProduct = () => {
+  const token = useToken();
+
+  return useMutation({
+    mutationKey: ["product"],
+    mutationFn: (newProduct: CreateProductDto) => api.post<CreateProductDto, void>(productsRoutes.createProduct(), newProduct, { headers: { Authorization: `Bearer ${token}` } }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["user"] })
+  });
+};

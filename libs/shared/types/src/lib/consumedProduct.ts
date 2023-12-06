@@ -1,15 +1,10 @@
-import type { Product } from './product'
+import type { ProductParams } from "./product";
 
-export type ConsumedProduct = {
+export type ConsumedProduct = ProductParams & {
   id: number,
   weight: number,
   date: Date,
-  meal: keyof typeof Meal,
-  fats: number,
-  proteins: number,
-  calories: number,
-  carbohydrates: number,
-  product: Product
+  meal: keyof typeof Meal
 }
 
 export type CreateConsumedProductDto = {
@@ -26,7 +21,7 @@ export type DailyStats = {
   carbohydrates: number
 }
 
-export type UpdateConsumedProductDto = Pick<ConsumedProduct, 'weight'>
+export type UpdateConsumedProductDto = Pick<ConsumedProduct, "weight">
 
 export enum Meal {
   breakfast,

@@ -1,33 +1,34 @@
-import { Entity, Column, PrimaryGeneratedColumn,  ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm'
-import { Product, User } from '@food-daily/api/services'
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Product, User } from "@food-daily/api/services";
 
-import type {  ConsumedProduct as ConsumedProductType, Meal } from '@food-daily/shared/types'
+import type { ConsumedProduct as ConsumedProductType, Meal } from "@food-daily/shared/types";
 
 @Entity()
 export class ConsumedProduct implements ConsumedProductType {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
   @Column()
-  calories: number
+  calories: number;
   @Column()
-  carbohydrates: number
+  carbohydrates: number;
   @CreateDateColumn()
-  date: Date
+  date: Date;
   @Column()
-  fats: number
-  @Column('text')
-  meal: keyof typeof Meal
+  fats: number;
+  @Column("text")
+  meal: keyof typeof Meal;
   @Column()
-  proteins: number
+  proteins: number;
   @Column()
-  weight: number
-  @ManyToOne(() => Product,(product) => product.consumedProducts)
+  weight: number;
+  @ManyToOne(() => Product, (product) => product.consumedProducts, { onDelete: "CASCADE" })
   @JoinColumn()
-  product: Product
-  @ManyToOne(() => User, (user) => user.consumedProducts,)
+  product: Product;
+  @ManyToOne(() => User, (user) => user.consumedProducts)
   @JoinColumn()
-  user: User
+  user: User;
+
   constructor(consumedProduct: Partial<ConsumedProduct>) {
-    Object.assign(this, consumedProduct)
+    Object.assign(this, consumedProduct);
   }
 }
