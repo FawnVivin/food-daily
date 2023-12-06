@@ -1,28 +1,26 @@
-import { Banner, Button, Text, useTheme } from 'react-native-paper'
-import { useRoute } from '@react-navigation/native'
-import { getProductById } from '@food-daily/mobile/helpers'
-import { Fragment } from 'react'
-import { Header, ProductDescription } from '@food-daily/mobile/ui'
+import { Button, useTheme } from "react-native-paper";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { Fragment } from "react";
+import { Header, ProductDescription, ScreenLoader } from "@food-daily/mobile/ui";
+import { useDeleteProduct, useGetProduct } from "@food-daily/mobile/api";
 
-import { ButtonWrapper, UserProductRoot } from './UserProduct.styles'
+import { ButtonWrapper, UserProductRoot } from "./UserProduct.styles";
 
-import type { RootStackParamList } from '@food-daily/mobile/types'
-import type { RouteProp} from '@react-navigation/native';
+import type { RootStackParamList, ScreenNavigationProps } from "@food-daily/mobile/types";
+import type { RouteProp } from "@react-navigation/native";
 
 const UserProduct = () => {
-  const { colors } = useTheme()
-  const { params } = useRoute<RouteProp<RootStackParamList, 'UserProductScreen'>>()
-  const product = getProductById(params.productId)
+  const { colors } = useTheme();
+  const navigation = useNavigation<ScreenNavigationProps>()
+  const { params: { productId } } = useRoute<RouteProp<RootStackParamList, "UserProductScreen">>();
+  const { data: product, isSuccess, isLoading } = useGetProduct(productId);
+  const {mutate} = useDeleteProduct(productId)
 
-  if (!product) return (
-    <Banner visible={true}>
-      <Text>Product Not Found(((</Text>
-    </Banner>
-  )
+  if (isLoading || !isSuccess) return <ScreenLoader />;
 
   const handleDelete = () => {
-    alert(`Deleted ${product.id} - product`)
-  }
+    mutate(undefined,{onSuccess:()=>navigation.goBack()})
+  };
 
   return (
     <Fragment>
@@ -32,7 +30,7 @@ const UserProduct = () => {
         <ButtonWrapper>
           <Button
             onPress={handleDelete}
-            mode={'contained'}
+            mode={"contained"}
             buttonColor={colors.tertiaryContainer}
             textColor={colors.onTertiaryContainer}
           >
@@ -41,7 +39,7 @@ const UserProduct = () => {
         </ButtonWrapper>
       </UserProductRoot>
     </Fragment>
-  )
-}
+  );
+};
 
-export default UserProduct
+export default UserProduct;
