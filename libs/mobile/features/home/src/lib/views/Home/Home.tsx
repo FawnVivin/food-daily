@@ -1,5 +1,5 @@
 import { ScrollView } from "react-native";
-import { Section } from "@food-daily/mobile/ui";
+import { ScreenLoader, Section } from "@food-daily/mobile/ui";
 
 import { HomeHeader, MealList, StatisticsBlock, WaterTracker } from "../../components";
 
@@ -17,7 +17,7 @@ import { useGetDailyStats } from "../../api/home";
 const Home: FC<NativeStackScreenProps<RootStackParamList>> = () => {
   const { data: user, isSuccess: isUserSuccess,isLoading: isUserLoading } = useGetUser();
   const { data: stats, isSuccess: isStatsSuccess, isLoading: isStatsLoading } = useGetDailyStats(user?.id);
-  if (!isUserSuccess||!isStatsSuccess || isUserLoading|| isStatsLoading) return <ActivityIndicator animating={true} />;
+  if (!isUserSuccess||!isStatsSuccess || isUserLoading|| isStatsLoading) return <ScreenLoader/>
   const userNorms: UserNorms = {
     calorieNorm: user.calorieNorm,
     carbohydrateNorm: user.carbohydrateNorm,
