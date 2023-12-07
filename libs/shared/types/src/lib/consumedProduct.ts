@@ -1,10 +1,16 @@
-import type { ProductParams } from "./product";
+import type { Product, ProductParams } from "./product";
+import { User } from "./user";
 
 export type ConsumedProduct = ProductParams & {
   id: number,
   weight: number,
   date: Date,
   meal: keyof typeof Meal
+}
+
+export type ConsumedProductDto = ConsumedProduct & {
+  product: Product
+  user: User
 }
 
 export type CreateConsumedProductDto = {

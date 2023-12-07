@@ -7,4 +7,5 @@ export const UserProductRoot = styled(View)`
 
 export const ButtonWrapper = styled(View)`
   padding: 10px 36px;
+  gap: 10px;
 `

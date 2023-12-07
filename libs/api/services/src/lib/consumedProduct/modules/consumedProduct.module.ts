@@ -1,14 +1,14 @@
-import { Module } from '@nestjs/common'
-import { TypeOrmModule } from '@nestjs/typeorm'
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { ConsumedProduct, Product } from "@food-daily/api/models";
 
-import { ConsumedProductsService } from '../services'
-import { ConsumedProduct } from '../models'
-import { ConsumedProductsController } from '../controllers'
-
+import { ConsumedProductsService } from "../services";
+import { ConsumedProductsController } from "../controllers";
+import { BaseProductModule } from "../../baseProduct/modules";
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ConsumedProduct])],
+  imports: [TypeOrmModule.forFeature([ConsumedProduct, Product]), BaseProductModule],
   controllers: [ConsumedProductsController],
   providers: [ConsumedProductsService]
 })

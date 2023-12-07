@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common'
-import { TypeOrmModule } from '@nestjs/typeorm'
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { User } from "@food-daily/api/models";
 
-import { UsersService } from '../services'
-import { User } from '../models'
-import { UsersController } from '../controllers'
+import { UsersService } from "../services";
+import { UsersController } from "../controllers";
 
 
 @Module({
