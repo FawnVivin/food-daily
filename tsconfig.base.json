@@ -32,6 +32,9 @@
       "@food-daily/api/configs": [
         "libs/api/configs/src/index.ts"
       ],
+      "@food-daily/api/models": [
+        "libs/api/models/src/index.ts"
+      ],
       "@food-daily/api/services": [
         "libs/api/services/src/index.ts"
       ],

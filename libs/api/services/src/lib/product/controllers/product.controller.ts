@@ -5,7 +5,7 @@ import { ProductsService } from '../services'
 import { JwtAuthGuard } from '../../authorization/guards'
 import { HasRole } from '../../authorization/decorators'
 
-import type { Product } from '@food-daily/api/services'
+import type { Product } from '@food-daily/api/models'
 
 
 @Controller('products')
@@ -33,8 +33,8 @@ export class ProductsController {
   @HasRole(Role.Admin)
   @UseGuards(JwtAuthGuard)
   @Put(':id')
-  async updateState(@Param('id') id: number, @Body() state:Pick<Product, 'verified'>) {
-    return this.productsService.updateState(id,state.verified)
+  async updateState(@Param('id') id: number, @Body() state:Pick<Product, 'status'>) {
+    return this.productsService.updateState(id,state.status)
   }
 
   @UseGuards(JwtAuthGuard)

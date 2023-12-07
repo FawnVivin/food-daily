@@ -8,7 +8,7 @@ import type { ProductItemProps } from "./ProductItem.types";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import type { RootStackParamList } from "@food-daily/mobile/types";
 
-const ProductItem: FC<ProductItemProps> = ({ screenType, name, itemNumber, id, description, verified, ...params }) => {
+const ProductItem: FC<ProductItemProps> = ({ screenType, name, itemNumber, id, ...params }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const handleProductPress = () => navigation.navigate(screenType, { productId: id });
 

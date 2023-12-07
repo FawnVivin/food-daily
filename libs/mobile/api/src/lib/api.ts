@@ -5,7 +5,18 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { authorizationRoutes, consumedProductsRoutes, productsRoutes, userRoutes } from "./api.routes";
 
-import type { CreateProductDto, DailyStats, Login, Product, UpdateUserDto, User } from "@food-daily/shared/types";
+import type {
+  ConsumedProduct,
+  ConsumedProductDto,
+  CreateConsumedProductDto,
+  CreateProductDto,
+  DailyStats,
+  Login,
+  Product,
+  UpdateConsumedProductDto,
+  UpdateUserDto,
+  User
+} from "@food-daily/shared/types";
 
 export const api = {
   async get<T>(url: string, params = {}): Promise<T> {
@@ -28,15 +39,19 @@ export const api = {
   }
 };
 
-export const useLogin = () =>
-  useMutation({
-    mutationKey: ["auth"],
+export const useLogin = () => {
+  const token = useToken()
+  return useMutation({
+    mutationKey: ["auth", token],
     mutationFn: (data: Login) => api.post<Login, {
       access_token: string,
       user: User
     }>(authorizationRoutes.login(), data),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["user"] })
+    onSuccess: () => {
+      queryClient.clear();
+    }
   });
+};
 
 
 export const useGetUser = () => {
@@ -62,9 +77,62 @@ export const useGetDailyStats = (userId: number | undefined) => {
   const token = useToken();
 
   return useQuery({
-    queryKey: ["stats", token],
+    queryKey: ["consumedProduct", "stats", token],
     queryFn: userId ? () => api.get<DailyStats>(consumedProductsRoutes.dailyStats(userId), { headers: { Authorization: `Bearer ${token}` } }) : undefined,
     enabled: !!userId
+  });
+};
+
+export const useGetProductsByMeal = (meal: ConsumedProduct["meal"], userId?: number) => {
+  const token = useToken();
+
+  return useQuery({
+    queryKey: ["consumedProduct", "meal", meal, token],
+    queryFn: userId ? () => api.get<ConsumedProductDto[]>(consumedProductsRoutes.getProductsByMeal(meal, userId), { headers: { Authorization: `Bearer ${token}` } }) : undefined,
+    enabled: !!userId
+  });
+};
+
+export const useGetConsumedProductsById = (productId: number) => {
+  const token = useToken();
+
+  return useQuery({
+    queryKey: ["consumedProduct", token, productId],
+    queryFn: () => api.get<ConsumedProductDto>(consumedProductsRoutes.getProductById(productId), { headers: { Authorization: `Bearer ${token}` } })
+
+  });
+};
+
+export const useDeleteConsumedProduct = (productId: number) => {
+  const token = useToken();
+
+  return useMutation({
+    mutationKey: ["consumedProduct", "delete", productId],
+    mutationFn: () => api.delete(consumedProductsRoutes.delete(productId), { headers: { Authorization: `Bearer ${token}` } }),
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["consumedProduct", "meal"] }).then(() => queryClient.invalidateQueries({ queryKey: ["consumedProduct", "stats"] }));
+    }
+  });
+};
+
+export const useUpdateConsumedProduct = (productId: number) => {
+  const token = useToken();
+
+  return useMutation({
+    mutationKey: ["consumedProduct", "update", productId],
+    mutationFn: (newProduct: UpdateConsumedProductDto) => api.put<UpdateConsumedProductDto>(consumedProductsRoutes.update(productId), newProduct, { headers: { Authorization: `Bearer ${token}` } }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["consumedProduct"] })
+  });
+};
+
+export const useCreateConsumedProduct = () => {
+  const token = useToken();
+
+  return useMutation({
+    mutationKey: ["consumedProduct", "create"],
+    mutationFn: (newProduct: CreateConsumedProductDto) => api.post<CreateConsumedProductDto, void>(consumedProductsRoutes.create(), newProduct, { headers: { Authorization: `Bearer ${token}` } }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["consumedProduct"] })
+
   });
 };
 
@@ -96,3 +164,14 @@ export const useCreateProduct = () => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["user"] })
   });
 };
+
+export const useGetAllProducts = () => {
+  const token = useToken();
+
+  return useQuery({
+    queryKey: ["products", "all", token],
+    queryFn: () => api.get<Product[]>(productsRoutes.getAllProducts(), { headers: { Authorization: `Bearer ${token}` } })
+  });
+};
+
+

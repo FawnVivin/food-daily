@@ -1,20 +1,25 @@
-import { Fragment } from 'react'
-import { ScrollView } from 'react-native'
-import { ProductScreens } from '@food-daily/mobile/types'
-import { Header, ProductsList } from '@food-daily/mobile/ui'
-import { products } from '@food-daily/mobile/fixtures'
+import { Fragment } from "react";
+import { ScrollView } from "react-native";
+import { ProductScreens } from "@food-daily/mobile/types";
+import { Header, ProductsList, ScreenLoader } from "@food-daily/mobile/ui";
+import { useGetUser } from "@food-daily/mobile/api";
 
-import { AddUserProductsWrapper } from './AddUserProducts.styles'
+import { AddUserProductsWrapper } from "./AddUserProducts.styles";
 
-const AddUserProducts = () => (
-  <Fragment>
-    <Header title={'Ваши продукты'} />
-    <ScrollView>
-      <AddUserProductsWrapper>
-        <ProductsList products={products} screenType={ProductScreens.searchProduct} />
-      </AddUserProductsWrapper>
-    </ScrollView>
-  </Fragment>
-)
+const AddUserProducts = () => {
+  const { data: user, isLoading, isSuccess } = useGetUser();
 
-export default AddUserProducts
+  if (isLoading || !isSuccess) return <ScreenLoader />;
+  return (
+    <Fragment>
+      <Header title={"Ваши продукты"} />
+      <ScrollView>
+        <AddUserProductsWrapper>
+          <ProductsList products={user.products} screenType={ProductScreens.searchProduct} />
+        </AddUserProductsWrapper>
+      </ScrollView>
+    </Fragment>
+  );
+};
+
+export default AddUserProducts;

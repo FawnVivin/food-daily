@@ -1,8 +1,7 @@
-import { Banner, Text } from 'react-native-paper'
 import { useRoute } from '@react-navigation/native'
-import { getProductById } from '@food-daily/mobile/helpers'
 import { Fragment } from 'react'
-import { Header, ProductDescription } from '@food-daily/mobile/ui'
+import { Header, ProductDescription, ScreenLoader } from "@food-daily/mobile/ui";
+import { useGetConsumedProductsById } from "@food-daily/mobile/api";
 
 import { MealProductForm } from '../../components'
 
@@ -13,19 +12,15 @@ import type { RouteProp} from '@react-navigation/native';
 
 const MealProduct = () => {
   const { params } = useRoute<RouteProp<RootStackParamList, 'MealProductScreen'>>()
-  const product = getProductById(params.productId)
+  const {data: consumedProduct, isLoading, isSuccess} = useGetConsumedProductsById(params.productId)
 
-  if (!product) return (
-    <Banner visible={true}>
-      <Text>Product Not Found(((</Text>
-    </Banner>
-  )
+ if (!isSuccess||isLoading) return <ScreenLoader/>
   return (
     <Fragment>
-      <Header title={product.name} />
+      <Header title={consumedProduct.product.name} />
       <MealProductRoot>
-        <ProductDescription {...product} />
-        <MealProductForm weight={product.weight} />
+        <ProductDescription description={consumedProduct.product.description} {...consumedProduct} />
+        <MealProductForm weight={consumedProduct.weight} id={consumedProduct.id}/>
       </MealProductRoot>
     </Fragment>
   )

@@ -8,7 +8,7 @@ import { ProfileForm, UserInfo, UserParams } from "../components";
 import { ProfileRoot } from "./Profile.styles";
 
 const Profile = () => {
-  const { data, isLoading, isSuccess } = useGetUser();
+  const { data, isLoading, isSuccess, error } = useGetUser();
 
   if (isLoading || !isSuccess) return <ScreenLoader />;
   return (

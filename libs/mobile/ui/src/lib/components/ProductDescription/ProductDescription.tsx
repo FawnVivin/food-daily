@@ -4,10 +4,10 @@ import { ProductParamsBlock } from '../ProductParamsBlock'
 import { DescriptionText } from './DescriptionText'
 import { ProductDescriptionRoot } from './ProductDescription.styles'
 
-import type { Product } from '@food-daily/shared/types'
 import type { FC } from 'react'
+import type { ProductDescriptionProps } from "./ProductDescription.types";
 
-const ProductDescription: FC<Product> = ({ description, ...params }) => (
+const ProductDescription: FC<ProductDescriptionProps> = ({ description, ...params }) => (
     <ProductDescriptionRoot>
       <Section title={'На 100 грамм'}>
         <ProductParamsBlock {...params} />
