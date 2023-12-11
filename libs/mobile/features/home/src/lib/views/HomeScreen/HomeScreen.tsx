@@ -6,8 +6,9 @@ import { Profile } from '@food-daily/mobile/features/profile'
 import { useTheme } from 'react-native-paper'
 
 import { Home } from '../Home'
+import { TabParamList } from "@food-daily/mobile/types";
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator<TabParamList>()
 
 const HomeScreen = () => {
   const { colors } = useTheme()

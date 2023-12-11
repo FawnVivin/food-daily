@@ -19,7 +19,7 @@ import type { SubmitHandler } from "react-hook-form";
 const SearchProductForm: FC<SearchProductFormProps> = ({ id }) => {
   const { control, handleSubmit, formState: { isValid, errors } } = useForm<SearchProductFormParams>({
     resolver: zodResolver(searchProductFormSchema),
-    mode: "onTouched"
+    mode: "onChange"
   });
   const { data: user, isSuccess } = useGetUser();
   const { mutate } = useCreateConsumedProduct();

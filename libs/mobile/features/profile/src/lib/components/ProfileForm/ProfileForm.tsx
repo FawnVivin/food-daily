@@ -1,7 +1,9 @@
+import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { DialogBlock, FormSelect, FormTextInput } from "@food-daily/mobile/ui";
 import { Button } from "react-native-paper";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { FC } from "react";
 import { Fragment, useState } from "react";
 import { ScrollView } from "react-native";
 import { useUpdateUser } from "@food-daily/mobile/api";
@@ -11,15 +13,13 @@ import { ButtonWrapper, ProfileFormRoot } from "./ProfileForm.styles";
 import { profileFormSchema } from "./schemas/profileForm.schema";
 
 import type { UpdateUserDto, User } from "@food-daily/shared/types";
-import type { FC } from "react";
-import type { SubmitHandler } from "react-hook-form";
 
 
 const ProfileForm: FC<User> = ({ sex, activity, height, target, weight, age, id }) => {
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [showErrorDialog, setShowErrorDialog] = useState(false);
   const { control, handleSubmit, formState: { errors, isValid } } = useForm<UpdateUserDto>({
-    mode: "onTouched",
+    mode: "onChange",
     resolver: zodResolver(profileFormSchema)
   });
   const { mutate } = useUpdateUser(id);

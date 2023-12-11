@@ -16,7 +16,7 @@ import type { SubmitHandler } from "react-hook-form";
 
 const CreateProduct = () => {
   const { data: user, isSuccess } = useGetUser();
-  const formMethods = useForm<CreateProductDto>({ resolver: zodResolver(createProductFormSchema), mode: "onTouched" });
+  const formMethods = useForm<CreateProductDto>({ resolver: zodResolver(createProductFormSchema), mode: "onChange" });
   const { mutate } = useCreateProduct();
   const navigation = useNavigation();
 

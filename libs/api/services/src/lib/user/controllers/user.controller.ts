@@ -29,4 +29,11 @@ export class UsersController {
   async remove(@Param('id') id: number) {
     return this.usersService.remove(id)
   }
+
+
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  async findOne(@Param('id') id: number) {
+    return this.usersService.findOneById(id)
+  }
 }
