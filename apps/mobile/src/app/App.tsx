@@ -20,6 +20,7 @@ import { queryClient } from "@food-daily/mobile/constants";
 
 import type { RootStackParamList } from "@food-daily/mobile/types";
 import { useToken } from "@food-daily/mobile/hooks";
+import { Registration } from "@food-daily/mobile/features/registration";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -49,6 +50,7 @@ export const App = () => {
               <Stack.Screen name={"AddProductMenuScreen"} component={AddProductMenu} />
               <Stack.Screen name={"AddUserProductsScreen"} component={AddUserProducts} />
               <Stack.Screen name={"CreateProductScreen"} component={CreateProduct} />
+              <Stack.Screen name={"RegistrationScreen"} component={Registration} />
             </Stack.Navigator>
           </NavigationContainer>
         </ThemeProvider>

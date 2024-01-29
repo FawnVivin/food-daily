@@ -17,15 +17,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.fawnvivin.mobile"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.fawnvivin.mobile"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png",

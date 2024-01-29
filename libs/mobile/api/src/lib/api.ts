@@ -9,7 +9,7 @@ import type {
   ConsumedProduct,
   ConsumedProductDto,
   CreateConsumedProductDto,
-  CreateProductDto,
+  CreateProductDto, CreateUserDto,
   DailyStats,
   Login,
   Product,
@@ -54,6 +54,20 @@ export const useLogin = () => {
   });
 };
 
+export const useRegistration = () => {
+  const { changeToken, token } = useToken();
+  return useMutation({
+    mutationKey: ["registration"],
+    mutationFn: (data: CreateUserDto) => api.post<CreateUserDto, {
+      access_token: string,
+      user: User
+    }>(authorizationRoutes.registration(), data),
+    onSuccess: async ({ access_token }) => {
+      await changeToken(access_token);
+      await queryClient.invalidateQueries({ queryKey: ["user"] });
+    }
+  });
+};
 export const useGetUser = () => {
   const { token } = useToken();
 

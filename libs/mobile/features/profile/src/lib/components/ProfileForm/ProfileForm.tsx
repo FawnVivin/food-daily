@@ -8,11 +8,11 @@ import { Fragment, useState } from "react";
 import { ScrollView } from "react-native";
 import { useUpdateUser } from "@food-daily/mobile/api";
 
-import { activityItems, sexItems, targetItems } from "./constants";
 import { ButtonWrapper, ProfileFormRoot } from "./ProfileForm.styles";
 import { profileFormSchema } from "./schemas/profileForm.schema";
 
 import type { UpdateUserDto, User } from "@food-daily/shared/types";
+import { activityItems, sexItems, targetItems } from "@food-daily/mobile/constants";
 
 
 const ProfileForm: FC<User> = ({ sex, activity, height, target, weight, age, id }) => {

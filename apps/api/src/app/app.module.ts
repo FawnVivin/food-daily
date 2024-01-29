@@ -4,7 +4,6 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConsumedProduct, Product, User } from "@food-daily/api/models";
 import { services } from "@food-daily/api/configs";
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({

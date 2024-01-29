@@ -22,6 +22,7 @@ export type TabParamList = {
 };
 
 export type RootStackParamList = {
+  RegistrationScreen: undefined,
   AuthorizationScreen: undefined,
   HomeScreen: undefined,
   SearchProductsScreen: undefined

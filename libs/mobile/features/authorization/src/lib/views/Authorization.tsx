@@ -14,18 +14,21 @@ import type { ScreenNavigationProps } from "@food-daily/mobile/types";
 
 export const Authorization = () => {
   const { control, handleSubmit, reset, formState: { errors, isValid } } = useForm<Login>({
-    mode: "onChange",
+    mode: "onSubmit",
     resolver: zodResolver(authorizationFormSchema)
   });
   const navigation = useNavigation<ScreenNavigationProps>();
   const { mutate, error } = useLogin();
-  const handlePress: SubmitHandler<Login> = (data) => {
+  const handleAuthPress: SubmitHandler<Login> = (data) => {
     mutate(data, {
       onSuccess: () => {
         navigation.navigate("HomeScreen");
         reset();
       }
     });
+  };
+  const handleRegistrationPress = () => {
+    navigation.navigate("RegistrationScreen");
   };
 
   return (
@@ -50,8 +53,8 @@ export const Authorization = () => {
         errorMessage={errors.password?.message}
         secureTextEntry
       />
-      <Button mode={"contained"} icon={"login"} onPress={handleSubmit(handlePress)} disabled={!isValid}>Войти</Button>
-      <Button mode={"contained"} icon={"home-outline"} onPress={handleSubmit(handlePress)} >Регистрация</Button>
+      <Button mode={"contained"} icon={"login"} onPress={handleSubmit(handleAuthPress)} disabled={!isValid}>Войти</Button>
+      <Button mode={"contained"} icon={"home-outline"} onPress={handleRegistrationPress}>Регистрация</Button>
       <Text>{error?.message}</Text>
     </AuthorizationRoot>
   );

@@ -1,3 +1,2 @@
-export {default as RegistrationFirstStep} from './RegistrationFirstStep'
+export {default as Registration} from './Registration'
 
-export {default as RegistrationSecondStep} from './RegistrationSecondStep'
