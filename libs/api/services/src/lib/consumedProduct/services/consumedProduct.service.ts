@@ -60,7 +60,7 @@ export class ConsumedProductsService {
   }
 
   async updateWeight(id: number, weight: ConsumedProduct["weight"]) {
-    const newConsumedProduct = await this.consumedProductRepository.findOneBy({ id });
+    const newConsumedProduct = await this.consumedProductRepository.findOne({ where:{id}, relations:['product'] });
     const {
       fats,
       proteins,

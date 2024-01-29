@@ -21,6 +21,9 @@ export class User implements UserType {
   @Column()
   height: number;
 
+  @Column()
+  weight: number;
+
   @Column("text")
   target: keyof typeof Target;
 
@@ -31,21 +34,18 @@ export class User implements UserType {
   activity: keyof typeof Activity;
 
   @Column()
-  weight: number;
-
-  @Column()
   password: string;
 
-  @Column({ default: 0 })
+  @Column()
   calorieNorm: number;
 
-  @Column({ default: 0 })
+  @Column()
   carbohydrateNorm: number;
 
-  @Column({ default: 0 })
+  @Column()
   fatsNorm: number;
 
-  @Column({ default: 0 })
+  @Column()
   proteinNorm: number;
 
   @Column({ type: "enum", enum: Role, default: Role.User })
@@ -57,6 +57,11 @@ export class User implements UserType {
   @OneToMany(() => ConsumedProduct, (consumedProduct) => consumedProduct.user)
   consumedProducts: ConsumedProduct[];
 
+  // @OneToMany(() => Weight, (weight) => weight.userId)
+  // weight: number;
+  //
+  // @OneToMany(() => Water, (water) => water.userId)
+  // water: number;
   constructor(user: Partial<User>) {
     Object.assign(this, user);
   }

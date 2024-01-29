@@ -1,20 +1,28 @@
-import type { StackNavigationProp } from '@react-navigation/stack'
+import type { StackNavigationProp } from "@react-navigation/stack";
 
 export const Meals = {
-  dinner: 'Ужин',
-  breakfast: 'Завтрак',
-  lunch: 'Обед'
-}
+  dinner: "Ужин",
+  breakfast: "Завтрак",
+  lunch: "Обед"
+};
 
 export type MealType = keyof typeof Meals
 
 export enum ProductScreens {
-  mealProduct = 'MealProductScreen',
-  userProduct = 'UserProductScreen',
-  searchProduct = 'SearchProductScreen'
+  mealProduct = "MealProductScreen",
+  userProduct = "UserProductScreen",
+  searchProduct = "SearchProductScreen"
 }
 
+export type TabParamList = {
+  Home: undefined;
+  Profile: undefined;
+  Statistics: undefined,
+  UserProducts: undefined
+};
+
 export type RootStackParamList = {
+  RegistrationScreen: undefined,
   AuthorizationScreen: undefined,
   HomeScreen: undefined,
   SearchProductsScreen: undefined
@@ -36,4 +44,4 @@ export type RootStackParamList = {
   },
 }
 
-export type ScreenNavigationProps = StackNavigationProp<RootStackParamList>
+export type ScreenNavigationProps = StackNavigationProp<RootStackParamList & TabParamList>

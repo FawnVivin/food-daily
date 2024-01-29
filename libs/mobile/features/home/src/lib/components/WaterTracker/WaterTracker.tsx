@@ -2,13 +2,15 @@ import { Button, IconButton , Text } from 'react-native-paper'
 import { Fragment, useState } from 'react'
 
 import { Content, CountText, PostfixText, WaterTrackerRoot } from './WaterTracker.styles'
+import { DialogBlock } from "@food-daily/mobile/ui";
 
 const WaterTracker = () => {
   const [waterCount, setWaterCount] = useState(0)
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const color = '#8CC4DF'
-
+  const hideSuccessDialog = () => setShowSuccessDialog(false);
   const handleSave = () => {
-    alert(`Отправляем ${waterCount}мл на сохранение`)
+    setShowSuccessDialog(true)
   }
 
   const handleMinus = () => {
@@ -53,6 +55,7 @@ const WaterTracker = () => {
       >
         Сохранить
       </Button>
+      <DialogBlock hideDialog={hideSuccessDialog} show={showSuccessDialog}>Данные успешно обновлены ♥</DialogBlock>
     </Fragment>
   )
 }

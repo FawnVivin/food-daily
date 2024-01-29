@@ -1,29 +1,28 @@
 import { useTheme } from "react-native-paper";
+import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { DialogBlock, FormTextInput } from "@food-daily/mobile/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { FC } from "react";
 import { useState } from "react";
 import { useDeleteConsumedProduct, useUpdateConsumedProduct } from "@food-daily/mobile/api";
 import { useNavigation } from "@react-navigation/native";
 
 import { DeleteButton, EditButton, MealButtons, MealProductFormRoot } from "./MealProductForm.styles";
 import { mealProductFormSchema } from "./schemas";
-
-import type { FC } from "react";
 import type { MealProductFormProps } from "./MealProductForm.types";
 import type { UpdateConsumedProductDto } from "@food-daily/shared/types";
-import type { SubmitHandler } from "react-hook-form";
 
 const MealProductForm: FC<MealProductFormProps> = ({ weight, id }) => {
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [showErrorDialog, setShowErrorDialog] = useState(false);
   const { control, handleSubmit, formState: { isValid, errors } } = useForm<UpdateConsumedProductDto>({
     resolver: zodResolver(mealProductFormSchema),
-    mode: "onTouched"
+    mode: "onChange"
   });
-  const navigation = useNavigation()
-  const { mutate:updateProduct } = useUpdateConsumedProduct(id);
-  const { mutate:deleteProduct } = useDeleteConsumedProduct(id);
+  const navigation = useNavigation();
+  const { mutate: updateProduct } = useUpdateConsumedProduct(id);
+  const { mutate: deleteProduct } = useDeleteConsumedProduct(id);
   const { colors } = useTheme();
 
   const handleUpdate: SubmitHandler<UpdateConsumedProductDto> = (data) => {
@@ -31,7 +30,7 @@ const MealProductForm: FC<MealProductFormProps> = ({ weight, id }) => {
   };
 
   const handleDelete = () => {
-    deleteProduct(undefined,{onSuccess:()=> navigation.goBack()})
+    deleteProduct(undefined, { onSuccess: () => navigation.goBack() });
   };
   const hideSuccessDialog = () => setShowSuccessDialog(false);
   const hideErrorDialog = () => setShowErrorDialog(false);
@@ -51,18 +50,18 @@ const MealProductForm: FC<MealProductFormProps> = ({ weight, id }) => {
         <DeleteButton
           onPress={handleDelete}
           mode={"contained"}
-          buttonColor={colors.secondaryContainer}
+          buttonColor={colors.tertiaryContainer}
           disabled={!isValid}
-          textColor={colors.onSecondaryContainer}
+          textColor={colors.onTertiaryContainer}
         >
           Удалить
         </DeleteButton>
         <EditButton
           onPress={handleSubmit(handleUpdate)}
           mode={"contained"}
-          buttonColor={colors.tertiaryContainer}
+          buttonColor={colors.secondaryContainer}
           disabled={!isValid}
-          textColor={colors.onTertiaryContainer}
+          textColor={colors.onSecondaryContainer}
         >
           Изменить
         </EditButton>

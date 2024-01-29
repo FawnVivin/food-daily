@@ -9,7 +9,7 @@ import type {
   ConsumedProduct,
   ConsumedProductDto,
   CreateConsumedProductDto,
-  CreateProductDto,
+  CreateProductDto, CreateUserDto,
   DailyStats,
   Login,
   Product,
@@ -40,22 +40,36 @@ export const api = {
 };
 
 export const useLogin = () => {
-  const token = useToken()
+  const { changeToken, token } = useToken();
   return useMutation({
-    mutationKey: ["auth", token],
+    mutationKey: ["auth"],
     mutationFn: (data: Login) => api.post<Login, {
       access_token: string,
       user: User
     }>(authorizationRoutes.login(), data),
-    onSuccess: () => {
-      queryClient.clear();
+    onSuccess: async ({ access_token }) => {
+      await changeToken(access_token);
+      await queryClient.invalidateQueries({ queryKey: ["user"] });
     }
   });
 };
 
-
+export const useRegistration = () => {
+  const { changeToken, token } = useToken();
+  return useMutation({
+    mutationKey: ["registration"],
+    mutationFn: (data: CreateUserDto) => api.post<CreateUserDto, {
+      access_token: string,
+      user: User
+    }>(authorizationRoutes.registration(), data),
+    onSuccess: async ({ access_token }) => {
+      await changeToken(access_token);
+      await queryClient.invalidateQueries({ queryKey: ["user"] });
+    }
+  });
+};
 export const useGetUser = () => {
-  const token = useToken();
+  const { token } = useToken();
 
   return useQuery({
     queryKey: ["user", token],
@@ -63,8 +77,19 @@ export const useGetUser = () => {
   });
 };
 
+export const useGetUserById = (userId:number|undefined) => {
+  const { token } = useToken();
+
+  return useQuery({
+    queryKey: ["user",userId, token],
+    queryFn: () => api.get<User>(`${userRoutes.root}/${userId}`, { headers: { Authorization: `Bearer ${token}` } })
+  ,enabled:!!userId
+  });
+};
+
+
 export const useUpdateUser = (userId: number) => {
-  const token = useToken();
+  const { token } = useToken();
 
   return useMutation({
     mutationKey: ["user"],
@@ -74,7 +99,7 @@ export const useUpdateUser = (userId: number) => {
 };
 
 export const useGetDailyStats = (userId: number | undefined) => {
-  const token = useToken();
+  const { token } = useToken();
 
   return useQuery({
     queryKey: ["consumedProduct", "stats", token],
@@ -84,7 +109,7 @@ export const useGetDailyStats = (userId: number | undefined) => {
 };
 
 export const useGetProductsByMeal = (meal: ConsumedProduct["meal"], userId?: number) => {
-  const token = useToken();
+  const { token } = useToken();
 
   return useQuery({
     queryKey: ["consumedProduct", "meal", meal, token],
@@ -94,7 +119,7 @@ export const useGetProductsByMeal = (meal: ConsumedProduct["meal"], userId?: num
 };
 
 export const useGetConsumedProductsById = (productId: number) => {
-  const token = useToken();
+  const { token } = useToken();
 
   return useQuery({
     queryKey: ["consumedProduct", token, productId],
@@ -104,7 +129,7 @@ export const useGetConsumedProductsById = (productId: number) => {
 };
 
 export const useDeleteConsumedProduct = (productId: number) => {
-  const token = useToken();
+  const { token } = useToken();
 
   return useMutation({
     mutationKey: ["consumedProduct", "delete", productId],
@@ -116,7 +141,7 @@ export const useDeleteConsumedProduct = (productId: number) => {
 };
 
 export const useUpdateConsumedProduct = (productId: number) => {
-  const token = useToken();
+  const { token } = useToken();
 
   return useMutation({
     mutationKey: ["consumedProduct", "update", productId],
@@ -126,7 +151,7 @@ export const useUpdateConsumedProduct = (productId: number) => {
 };
 
 export const useCreateConsumedProduct = () => {
-  const token = useToken();
+  const { token } = useToken();
 
   return useMutation({
     mutationKey: ["consumedProduct", "create"],
@@ -137,7 +162,7 @@ export const useCreateConsumedProduct = () => {
 };
 
 export const useGetProduct = (productId: number) => {
-  const token = useToken();
+  const { token } = useToken();
 
   return useQuery({
     queryKey: ["product", productId, token],
@@ -146,7 +171,7 @@ export const useGetProduct = (productId: number) => {
 };
 
 export const useDeleteProduct = (productId: number) => {
-  const token = useToken();
+  const { token } = useToken();
 
   return useMutation({
     mutationKey: ["product"],
@@ -156,7 +181,7 @@ export const useDeleteProduct = (productId: number) => {
 };
 
 export const useCreateProduct = () => {
-  const token = useToken();
+  const { token } = useToken();
 
   return useMutation({
     mutationKey: ["product"],
@@ -166,7 +191,7 @@ export const useCreateProduct = () => {
 };
 
 export const useGetAllProducts = () => {
-  const token = useToken();
+  const { token } = useToken();
 
   return useQuery({
     queryKey: ["products", "all", token],
