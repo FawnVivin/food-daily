@@ -9,21 +9,26 @@ import { useNavigation } from "@react-navigation/native";
 
 import { useRegistration } from "@food-daily/mobile/api";
 import { ScreenNavigationProps } from "@food-daily/mobile/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registrationSchema } from "./shemas";
+import { CreateUserType } from "./Registration.types";
+import { CreateUserDto } from "@food-daily/shared/types";
 
 const Registration = () => {
-  const { control,handleSubmit, formState: { errors } } = useForm();
-  const {mutate} = useRegistration()
+  const { control, handleSubmit, formState: { errors } } = useForm<CreateUserType>({ mode: "onChange", resolver: zodResolver(registrationSchema) });
+  const { mutate } = useRegistration();
   const navigation = useNavigation<ScreenNavigationProps>();
-  const handlePress:SubmitHandler<any> = (data) => {
-    mutate(data)
-   navigation.navigate('HomeScreen')
-  }
+  const handlePress: SubmitHandler<CreateUserType> = (data) => {
+    mutate(data as CreateUserDto);
+    navigation.navigate("HomeScreen");
+  };
   return (
     <Fragment>
       <Header title={"Создание аккаунта"} />
       <RegistrationRoot>
         <RegistrationFormSection title={"Расскажите немного о себе"}>
-          <FormTextInput name={"name"} placeholder={"Полное имя"} control={control} icon={'account-details'}  errorMessage={errors.name?.message}/>
+          <FormTextInput name={"name"} placeholder={"Полное имя"} control={control} icon={"account-details"}
+                         errorMessage={errors.name?.message} />
           <FormTextInput
             name={"age"}
             placeholder={"Возраст"}
