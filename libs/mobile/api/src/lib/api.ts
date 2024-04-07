@@ -3,7 +3,7 @@ import { apiUrl, queryClient } from "@food-daily/mobile/constants";
 import { useToken } from "@food-daily/mobile/hooks";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-import { authorizationRoutes, consumedProductsRoutes, productsRoutes, userRoutes } from "./api.routes";
+import { authorizationRoutes, consumedProductsRoutes, productsRoutes, userRoutes, waterRoutes } from "./api.routes";
 
 import type {
   ConsumedProduct,
@@ -15,7 +15,7 @@ import type {
   Product,
   UpdateConsumedProductDto,
   UpdateUserDto,
-  User
+  User, WaterDto, WaterType
 } from "@food-daily/shared/types";
 
 export const api = {
@@ -199,4 +199,21 @@ export const useGetAllProducts = () => {
   });
 };
 
+export const useUpdateWaterQuantity = () => {
+  const { token } = useToken();
+
+  return useMutation({
+    mutationKey: ["water"],
+    mutationFn: (body: WaterDto) => api.put(waterRoutes.updateWater(), body,{ headers: { Authorization: `Bearer ${token}` } }),
+  });
+}
+
+export const useGetWaterQuantity = (userId:number) => {
+  const { token } = useToken();
+
+  return useQuery({
+    queryKey: ["water", userId, token],
+    queryFn: () => api.get<WaterType>(waterRoutes.getWaterById(userId),{ headers: { Authorization: `Bearer ${token}` } })
+  });
+}
 
