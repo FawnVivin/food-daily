@@ -28,3 +28,9 @@ export const productsRoutes = {
   createProduct: () => productsRoutes.root,
   getAllProducts: () => `${productsRoutes.root}/verified`
 };
+
+export const waterRoutes = {
+  root: "water",
+  updateWater: ()=>waterRoutes.root,
+  getWaterById: (userId: number) => `${waterRoutes.root}/${userId}`,
+}

@@ -1,34 +1,42 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Fragment } from "react";
 import { FormSelect, FormTextInput, Header } from "@food-daily/mobile/ui";
 import { activityItems, sexItems, targetItems } from "@food-daily/mobile/constants";
-import { RegistrationFormSection, RegistrationRoot } from "./Registration.styles";
 import { Button } from "react-native-paper";
-
 import { useNavigation } from "@react-navigation/native";
-
 import { useRegistration } from "@food-daily/mobile/api";
-import { ScreenNavigationProps } from "@food-daily/mobile/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { registrationSchema } from "./shemas";
-import { CreateUserType } from "./Registration.types";
-import { CreateUserDto } from "@food-daily/shared/types";
+import { RegistrationFormSection, RegistrationRoot } from "./Registration.styles";
+
+import type { CreateUserDto } from "@food-daily/shared/types";
+import type { CreateUserType } from "./Registration.types";
+import type { ScreenNavigationProps } from "@food-daily/mobile/types";
+import type { SubmitHandler} from "react-hook-form";
 
 const Registration = () => {
   const { control, handleSubmit, formState: { errors } } = useForm<CreateUserType>({ mode: "onChange", resolver: zodResolver(registrationSchema) });
   const { mutate } = useRegistration();
   const navigation = useNavigation<ScreenNavigationProps>();
+
   const handlePress: SubmitHandler<CreateUserType> = (data) => {
     mutate(data as CreateUserDto);
     navigation.navigate("HomeScreen");
   };
+
   return (
     <Fragment>
-      <Header title={"Создание аккаунта"} />
+      <Header title={"Создание аккаунта пользователя"} />
       <RegistrationRoot>
         <RegistrationFormSection title={"Расскажите немного о себе"}>
-          <FormTextInput name={"name"} placeholder={"Полное имя"} control={control} icon={"account-details"}
-                         errorMessage={errors.name?.message} />
+          <FormTextInput 
+            name={"name"} 
+            placeholder={"Полное имя"} 
+            control={control} 
+            icon={"account-details"} 
+            errorMessage={errors.name?.message} 
+            />
           <FormTextInput
             name={"age"}
             placeholder={"Возраст"}

@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ConsumedProduct, Product, User } from "@food-daily/api/models";
+import { ConsumedProduct, Product, User, Water } from "@food-daily/api/models";
 import { services } from "@food-daily/api/configs";
 
 @Module({
@@ -17,7 +17,7 @@ import { services } from "@food-daily/api/configs";
       username: "root",
       password: "root",
       database: "food-daily",
-      entities: [User, Product, ConsumedProduct],
+      entities: [User, Product, ConsumedProduct, Water],
       synchronize: true
     })
   ]

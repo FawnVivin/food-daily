@@ -9,7 +9,7 @@ import { HomeRoot } from "./Home.styles";
 
 import type { UserNorms } from "@food-daily/shared/types";
 const Home = () => {
-  const { data: user, isSuccess: isUserSuccess, isLoading: isUserLoading, error: userError, refetch } = useGetUser();
+  const { data: user, isSuccess: isUserSuccess, isLoading: isUserLoading, error: userError } = useGetUser();
   const {
     data: stats,
     isSuccess: isStatsSuccess,
@@ -36,7 +36,7 @@ const Home = () => {
           <MealList />
         </Section>
         <Section title={"Трекер воды"}>
-          <WaterTracker />
+          <WaterTracker userId={user.id}/>
         </Section>
       </HomeRoot>
     </ScrollView>

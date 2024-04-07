@@ -2,7 +2,8 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Role } from "@food-daily/shared/types";
 import { ConsumedProduct, Product } from "@food-daily/api/models";
 
-import type { Activity, Sex, Target, User as UserType } from "@food-daily/shared/types";
+import type { Activity, Sex, Target, User as UserType } from "@food-daily/shared/types"
+import { Water } from "./water.model";
 
 @Entity()
 export class User implements UserType {
@@ -60,8 +61,8 @@ export class User implements UserType {
   // @OneToMany(() => Weight, (weight) => weight.userId)
   // weight: number;
   //
-  // @OneToMany(() => Water, (water) => water.userId)
-  // water: number;
+  @OneToMany(() => Water, (water) => water.user)
+  water: number;
   constructor(user: Partial<User>) {
     Object.assign(this, user);
   }

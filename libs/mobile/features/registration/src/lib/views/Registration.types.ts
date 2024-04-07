@@ -1,6 +1,6 @@
-import { CreateUserDto } from "@food-daily/shared/types";
+import type { CreateUserDto } from "@food-daily/shared/types";
 
-export type CreateUserType = Omit<CreateUserDto, "target" | "activity" | "sex"> & {
+export type CreateUserType = Omit<CreateUserDto, "activity" | "sex" | "target"> & {
   target: string,
   sex: string,
   activity: string
