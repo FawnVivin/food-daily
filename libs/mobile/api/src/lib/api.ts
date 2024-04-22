@@ -41,13 +41,14 @@ export const api = {
 
 export const useLogin = () => {
   const { changeToken, token } = useToken();
+
   return useMutation({
     mutationKey: ["auth"],
     mutationFn: (data: Login) => api.post<Login, {
       access_token: string,
       user: User
     }>(authorizationRoutes.login(), data),
-    onSuccess: async ({ access_token }) => {
+    async onSuccess({ access_token }) {
       await changeToken(access_token);
       await queryClient.invalidateQueries({ queryKey: ["user"] });
     }
@@ -56,18 +57,20 @@ export const useLogin = () => {
 
 export const useRegistration = () => {
   const { changeToken, token } = useToken();
+
   return useMutation({
     mutationKey: ["registration"],
     mutationFn: (data: CreateUserDto) => api.post<CreateUserDto, {
       access_token: string,
       user: User
     }>(authorizationRoutes.registration(), data),
-    onSuccess: async ({ access_token }) => {
+    async onSuccess({ access_token }) {
       await changeToken(access_token);
       await queryClient.invalidateQueries({ queryKey: ["user"] });
     }
   });
 };
+
 export const useGetUser = () => {
   const { token } = useToken();
 
@@ -82,8 +85,8 @@ export const useGetUserById = (userId:number|undefined) => {
 
   return useQuery({
     queryKey: ["user",userId, token],
-    queryFn: () => api.get<User>(`${userRoutes.root}/${userId}`, { headers: { Authorization: `Bearer ${token}` } })
-  ,enabled:!!userId
+    queryFn: () => api.get<User>(`${userRoutes.root}/${userId}`, { headers: { Authorization: `Bearer ${token}` } }),
+  enabled:!!userId
   });
 };
 
@@ -135,7 +138,7 @@ export const useDeleteConsumedProduct = (productId: number) => {
     mutationKey: ["consumedProduct", "delete", productId],
     mutationFn: () => api.delete(consumedProductsRoutes.delete(productId), { headers: { Authorization: `Bearer ${token}` } }),
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["consumedProduct", "meal"] }).then(() => queryClient.invalidateQueries({ queryKey: ["consumedProduct", "stats"] }));
+      void queryClient.invalidateQueries({ queryKey: ["consumedProduct", "meal"] }).then(() => queryClient.invalidateQueries({ queryKey: ["consumedProduct", "stats"] }));
     }
   });
 };

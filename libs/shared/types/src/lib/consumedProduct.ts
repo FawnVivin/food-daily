@@ -1,5 +1,5 @@
+import type { User } from "./user";
 import type { Product, ProductParams } from "./product";
-import { User } from "./user";
 
 export type ConsumedProduct = ProductParams & {
   id: number,

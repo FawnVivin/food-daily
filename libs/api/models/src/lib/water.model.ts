@@ -1,14 +1,20 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "@food-daily/api/models";
-import {WaterType} from "@food-daily/shared/types"
+
+import { User } from "./user.model";
+
+import type {WaterType} from "@food-daily/shared/types"
+
 @Entity()
 export class Water implements WaterType {
   @PrimaryGeneratedColumn()
   id: number;
+  
   @Column()
   quantity: number;
+
   @CreateDateColumn()
   date: Date;
+
   @ManyToOne(() => User, (user) => user.water)
   @JoinColumn()
   user: User;
