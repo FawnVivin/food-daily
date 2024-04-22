@@ -24,6 +24,7 @@ export type User = UserNorms & {
   target: keyof typeof Target,
   role: Role,
   products: Product[]
+  trainer: number
 }
 
 export type UpdateUserDto = {

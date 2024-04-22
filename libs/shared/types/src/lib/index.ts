@@ -5,3 +5,5 @@ export * from './product'
 export * from './consumedProduct'
 
 export * from './water'
+
+export * from './trainer'

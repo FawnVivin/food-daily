@@ -1,9 +1,13 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
 import { Role } from "@food-daily/shared/types";
-import { ConsumedProduct, Product } from "@food-daily/api/models";
+
+
+import { Water } from "./water.model";
+import { Trainer } from "./trainer.model";
+import { Product } from "./product.model";
+import { ConsumedProduct } from "./consumedProduct.model";
 
 import type { Activity, Sex, Target, User as UserType } from "@food-daily/shared/types"
-import { Water } from "./water.model";
 
 @Entity()
 export class User implements UserType {
@@ -57,12 +61,14 @@ export class User implements UserType {
 
   @OneToMany(() => ConsumedProduct, (consumedProduct) => consumedProduct.user)
   consumedProducts: ConsumedProduct[];
-
-  // @OneToMany(() => Weight, (weight) => weight.userId)
-  // weight: number;
-  //
+  
   @OneToMany(() => Water, (water) => water.user)
   water: number;
+
+  @ManyToOne(() => Trainer, (trainer) => trainer.id)
+  @JoinColumn()
+  trainer: number;
+  
   constructor(user: Partial<User>) {
     Object.assign(this, user);
   }

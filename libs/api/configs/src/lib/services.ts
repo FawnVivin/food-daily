@@ -1,6 +1,5 @@
-import { ConsumedProductModule, ProductModule, UserModule, WaterModule } from "@food-daily/api/services";
-
-import { AuthorizationModule } from '../../../services/src/lib/authorization'
+import { ConsumedProductModule, ProductModule, UserModule, WaterModule, TrainerModule,  AuthorizationModule } from "@food-daily/api/services";
 
 
-export const services = [UserModule, ProductModule, ConsumedProductModule, AuthorizationModule, WaterModule]
+
+export const services = [UserModule, ProductModule, ConsumedProductModule, AuthorizationModule, WaterModule, TrainerModule]

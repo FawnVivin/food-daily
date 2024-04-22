@@ -1,4 +1,4 @@
-import type { ConsumedProduct, CreateUserDto, UpdateUserDto } from "@food-daily/shared/types";
+import type { ConsumedProduct } from "@food-daily/shared/types";
 
 export const userRoutes = {
   root: "users",

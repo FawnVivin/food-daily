@@ -45,6 +45,7 @@ export class UsersService {
     user.weight = weight;
     user.height = height;
     user.target = target;
+    // user = {...user,...newUser}
     await this.entityManager.save(user);
   }
 
