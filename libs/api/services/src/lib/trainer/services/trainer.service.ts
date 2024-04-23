@@ -21,19 +21,26 @@ export class TrainerService {
     await this.entityManager.save(newTrainer);
   }
 
-  async findByUserId(userId:number) {
+  async findById(trainerId:number) {
   
     const trainer = await this.trainerRepository.findOne({
-      where: { user: { id:userId } }});
+      where: {id: trainerId}, relations:["users"]});
 
      return trainer
   }
 
   async updateTrainer(trainerId:number, newTrainer: TrainerDto) {
-      let trainer = await this.trainerRepository.findOneBy({ id:trainerId });
+      const trainer = await this.trainerRepository.findOneBy({ id:trainerId });
 
-      trainer = {...trainer, ...newTrainer}
+      trainer.name = newTrainer.name
+      trainer.description = newTrainer.description
+
       await this.entityManager.save(trainer);
 
   }
+
+  async remove(id: number) {
+    await this.trainerRepository.delete(id);
+  }
+
 }

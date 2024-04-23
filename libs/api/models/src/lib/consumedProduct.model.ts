@@ -1,5 +1,8 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Product, User } from "@food-daily/api/models";
+
+
+import { Product } from "./product.model";
+import { User } from "./user.model";
 
 import type { ConsumedProduct as ConsumedProductType, Meal } from "@food-daily/shared/types";
 

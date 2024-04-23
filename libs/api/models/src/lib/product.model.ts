@@ -1,6 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { ConsumedProduct, User } from "@food-daily/api/models";
 import { ProductStatus } from "@food-daily/shared/types";
+
+import { User } from "./user.model";
+import { ConsumedProduct } from "./consumedProduct.model";
 
 import type { Product as ProductType } from "@food-daily/shared/types";
 
