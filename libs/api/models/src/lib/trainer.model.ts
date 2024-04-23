@@ -16,7 +16,7 @@ export class Trainer implements TrainerType {
   description: string;
 
   @OneToMany(() => User, (user) => user.trainer)
-  user: User;
+  users: User[];
   constructor(trainer: Partial<Trainer>) {
     Object.assign(this, trainer);
   }
