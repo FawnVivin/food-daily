@@ -1,11 +1,16 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { EntityManager, MoreThanOrEqual, Repository } from "typeorm";
+import { EntityManager, MoreThanOrEqual, Repository, Between } from "typeorm";
 import { ConsumedProduct, Product, User } from "@food-daily/api/models";
+import { WeekLabels} from "@food-daily/shared/types";
 
 import { BaseProductsService } from "../../baseProduct/services";
 
-import type { CreateConsumedProductDto, DailyStats } from "@food-daily/shared/types";
+import { daysAgo } from "./helpers";
+
+import type { CreateConsumedProductDto, DailyStats} from "@food-daily/shared/types";
+
+
 
 @Injectable()
 export class ConsumedProductsService {
@@ -77,12 +82,12 @@ export class ConsumedProductsService {
     await this.entityManager.save(newConsumedProduct);
   }
 
-  async getDailyStats(userId: number): Promise<DailyStats> {
-    const date = new Date();
-    const today = new Date(date.getFullYear(),
-      date.getMonth(),
-      date.getDate());
-    let products = await this.consumedProductRepository.find({
+  async getDailyStats(userId: number, date?:Date): Promise<DailyStats> {
+    const currentDate = date || new Date();
+    const today = new Date(currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate());
+    const products = await this.consumedProductRepository.find({
       where: {
         date: MoreThanOrEqual(today),
         user: { id: userId }
@@ -99,6 +104,53 @@ export class ConsumedProductsService {
       carbohydrates: carbohydratesSum,
       fats: fatsSum
     };
+  }
+
+  async getWeeklyStats(userId: number) {
+
+    const dateFrom = daysAgo(7); 
+    const dates = [];
+    let currentDate = new Date()
+
+    while (dateFrom < currentDate) {
+        dates.push(new Date (currentDate));
+        currentDate = daysAgo(1,currentDate);
+    }
+
+    const calories = []
+    const proteins = []
+    const fats = []
+    const carbohydrates = []
+    const products = await this.consumedProductRepository.find({where:{date: Between(dateFrom, new Date()), user: {id: userId}}})    
+    const statsLabels = dates.map((date)=>WeekLabels[date.getDay()]).reverse()
+
+    for (const date of dates.reverse()){
+      const dateProducts = products.filter(({date: productDate})=>productDate.getDate() === date.getDate() && productDate.getMonth() === date.getMonth() && date.getFullYear === productDate.getFullYear)
+
+      calories.push(dateProducts.reduce((calories, product) => calories += product.calories, 0))
+      proteins.push(dateProducts.reduce((proteins, product) => proteins += product.proteins, 0))
+      fats.push(dateProducts.reduce((fats, product) => fats += product.fats, 0))
+      carbohydrates.push(dateProducts.reduce((carbohydrates, product) => carbohydrates += product.carbohydrates, 0))
+    }
+
+    return { 
+        calories: {
+          values: calories,
+          labels: statsLabels
+        }, 
+        fats: {
+          values: fats,
+          labels: statsLabels
+        }, 
+        proteins: {
+          values: proteins,
+          labels: statsLabels
+        },
+        carbohydrates: {
+          values: carbohydrates,
+          labels: statsLabels
+        }
+      }
 
   }
 }

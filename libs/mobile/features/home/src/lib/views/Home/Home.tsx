@@ -8,6 +8,7 @@ import { HomeHeader, MealList, StatisticsBlock, WaterTracker } from "../../compo
 import { HomeRoot } from "./Home.styles";
 
 import type { UserNorms } from "@food-daily/shared/types";
+
 const Home = () => {
   const { data: user, isSuccess: isUserSuccess, isLoading: isUserLoading, error: userError } = useGetUser();
   const {

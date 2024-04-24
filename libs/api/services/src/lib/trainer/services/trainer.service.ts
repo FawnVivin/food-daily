@@ -15,6 +15,10 @@ export class TrainerService {
   ) {
   }
 
+  async findAll(): Promise<Trainer[]> {
+    return this.trainerRepository.find({ relations: ["users"] });
+  }
+
   async create(trainerDto:  TrainerDto) {
     const newTrainer = new Trainer(trainerDto);
 

@@ -13,6 +13,7 @@ import type {
   DailyStats,
   Login,
   Product,
+  StatsResponse,
   UpdateConsumedProductDto,
   UpdateUserDto,
   User, WaterDto, WaterType
@@ -159,7 +160,10 @@ export const useCreateConsumedProduct = () => {
   return useMutation({
     mutationKey: ["consumedProduct", "create"],
     mutationFn: (newProduct: CreateConsumedProductDto) => api.post<CreateConsumedProductDto, void>(consumedProductsRoutes.create(), newProduct, { headers: { Authorization: `Bearer ${token}` } }),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["consumedProduct"] })
+    onSuccess() {
+      void queryClient.invalidateQueries({ queryKey: ["consumedProduct"] })
+      void queryClient.invalidateQueries({ queryKey: ["stats"] })
+    }
 
   });
 };
@@ -220,3 +224,12 @@ export const useGetWaterQuantity = (userId:number) => {
   });
 }
 
+export const useGetWeeklyStats = (userId: number| undefined) => {
+  const { token } = useToken();
+
+  console.log(userId)
+  return useQuery({
+    queryKey: ["stats", userId, token],
+    queryFn: () => api.get<StatsResponse>(consumedProductsRoutes.getWeeklyStats(userId),{ headers: { Authorization: `Bearer ${token}` } })
+  });
+}
