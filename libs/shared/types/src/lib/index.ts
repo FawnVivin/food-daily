@@ -7,3 +7,5 @@ export * from './consumedProduct'
 export * from './water'
 
 export * from './trainer'
+
+export * from './stats'

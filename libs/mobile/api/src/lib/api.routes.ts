@@ -12,7 +12,8 @@ export const consumedProductsRoutes = {
   getProductById: (productId: number) => `${consumedProductsRoutes.root}/${productId}`,
   delete: (productId: number) => `${consumedProductsRoutes.root}/${productId}`,
   update: (productId: number) => `${consumedProductsRoutes.root}/${productId}`,
-  create: () => `${consumedProductsRoutes.root}`
+  create: () => `${consumedProductsRoutes.root}`,
+  getWeeklyStats: (userId: number)=> `${consumedProductsRoutes.root}/weeklyStats/${userId}`
 };
 
 export const authorizationRoutes = {

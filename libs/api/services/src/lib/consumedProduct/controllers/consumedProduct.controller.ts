@@ -46,7 +46,12 @@ export class ConsumedProductsController {
   async getDailyStats(@Param("userId") userId: number) {
     return this.consumedProductsService.getDailyStats(userId);
   }
-
+  
+  @Get("weeklyStats/:userId")
+  async getWeeklyStats(@Param("userId") userId: number) {
+    return this.consumedProductsService.getWeeklyStats(userId);
+  }
+  
   @HasRole(Role.User)
   @UseGuards(JwtAuthGuard)
   @Get(":meal/:userId")

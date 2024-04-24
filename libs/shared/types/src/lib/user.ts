@@ -9,7 +9,8 @@ export type UserNorms = {
 
 export enum Role {
   Admin='admin',
-  User='user'
+  User='user',
+  Trainer='trainer'
 }
 
 export type User = UserNorms & {
