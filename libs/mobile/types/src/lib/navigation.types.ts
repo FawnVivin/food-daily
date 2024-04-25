@@ -42,6 +42,13 @@ export type RootStackParamList = {
   UserProductScreen: {
     productId: number
   },
+
+}
+
+export type TrainerStackParamList = {
+  RegistrationScreen: undefined,
+  AuthorizationScreen: undefined,
+  TrainerPanelScreen: undefined
 }
 
 export type ScreenNavigationProps = StackNavigationProp<RootStackParamList & TabParamList>

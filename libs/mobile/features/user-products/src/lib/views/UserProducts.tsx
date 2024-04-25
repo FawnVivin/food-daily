@@ -12,16 +12,19 @@ import type { ScreenNavigationProps } from "@food-daily/mobile/types";
 
 const UserProducts = () => {
   const navigation = useNavigation<ScreenNavigationProps>();
-  const { data, isLoading, isSuccess } = useGetUser();
+  const { data: user, isLoading, isSuccess } = useGetUser()
   const handlePlusPress = () => navigation.navigate("CreateProductScreen");
 
   if (isLoading || !isSuccess) return <ScreenLoader />;
+  const {visitor} = user
+
+  if (!visitor) return null
   return (
     <Fragment>
       <Header title={"Ваши продукты"} backButton={false} />
       <ScrollView>
         <UserProductsWrapper>
-          <ProductsList products={data.products} screenType={ProductScreens.userProduct} />
+          <ProductsList products={visitor.products} screenType={ProductScreens.userProduct} />
         </UserProductsWrapper>
       </ScrollView>
       <PlusButton onPress={handlePlusPress} />

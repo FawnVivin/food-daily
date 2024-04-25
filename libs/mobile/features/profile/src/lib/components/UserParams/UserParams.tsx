@@ -3,10 +3,10 @@ import { ParamItem } from '@food-daily/mobile/ui'
 import { UserParamsRoot } from './UserParams.styles'
 
 import type { FC } from 'react'
-import type { User } from '@food-daily/shared/types'
+import type { Visitor } from '@food-daily/shared/types'
 
 
-const UserParams:FC<User> = ({weight, height, age}) => (
+const UserParams:FC<Visitor> = ({weight, height, age}) => (
     <UserParamsRoot>
       <ParamItem title={'Рост'} value={height} postfix={' см.'} />
       <ParamItem title={'Вес'} value={weight} postfix={' кг.'} />

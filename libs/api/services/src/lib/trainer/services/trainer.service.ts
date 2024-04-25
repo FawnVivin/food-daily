@@ -7,7 +7,7 @@ import type { TrainerDto } from "@food-daily/shared/types";
 
 
 @Injectable()
-export class TrainerService {
+export class TrainersService {
   constructor(
     @InjectRepository(Trainer)
     private trainerRepository: Repository<Trainer>,
@@ -16,19 +16,19 @@ export class TrainerService {
   }
 
   async findAll(): Promise<Trainer[]> {
-    return this.trainerRepository.find({ relations: ["users"] });
+    return this.trainerRepository.find({ relations: ["visitors"] });
   }
 
   async create(trainerDto:  TrainerDto) {
     const newTrainer = new Trainer(trainerDto);
 
-    await this.entityManager.save(newTrainer);
+    return await this.entityManager.save(newTrainer);
   }
 
   async findById(trainerId:number) {
   
     const trainer = await this.trainerRepository.findOne({
-      where: {id: trainerId}, relations:["users"]});
+      where: {id: trainerId}, relations:["visitors"]});
 
      return trainer
   }

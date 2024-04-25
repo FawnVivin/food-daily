@@ -7,37 +7,41 @@ import { HomeHeader, MealList, StatisticsBlock, WaterTracker } from "../../compo
 
 import { HomeRoot } from "./Home.styles";
 
-import type { UserNorms } from "@food-daily/shared/types";
+import type { VisitorNorms } from "@food-daily/shared/types";
 
 const Home = () => {
-  const { data: user, isSuccess: isUserSuccess, isLoading: isUserLoading, error: userError } = useGetUser();
+  const {data:user, isSuccess, isPending, isError} = useGetUser()  
   const {
     data: stats,
     isSuccess: isStatsSuccess,
     isLoading: isStatsLoading,
     error: statsError
-  } = useGetDailyStats(user?.id);
+  } = useGetDailyStats(user?.visitor?.id);
 
 
-  if (statsError || userError) return <Chip icon="information" mode={"outlined"}>Простите у нас ошибочки(((</Chip>;
-  if (!isUserSuccess || !isStatsSuccess || isUserLoading || isStatsLoading) return <ScreenLoader />;
-  const userNorms: UserNorms = {
-    calorieNorm: user.calorieNorm,
-    carbohydrateNorm: user.carbohydrateNorm,
-    proteinNorm: user.proteinNorm,
-    fatsNorm: user.fatsNorm
+  if (statsError || isError) return <Chip icon="information" mode={"outlined"}>Простите у нас ошибочки(((</Chip>;
+  if (!isSuccess || !isStatsSuccess || isPending || isStatsLoading) return <ScreenLoader />;
+  const {visitor} = user
+
+  if (!visitor) return null
+
+  const userNorms: VisitorNorms = {
+    calorieNorm: visitor.calorieNorm,
+    carbohydrateNorm: visitor.carbohydrateNorm,
+    proteinNorm: visitor.proteinNorm,
+    fatsNorm: visitor.fatsNorm
   };
 
   return (
     <ScrollView>
       <HomeRoot>
-        <HomeHeader name={user.name} />
+        <HomeHeader name={visitor.name} />
         <StatisticsBlock userNorms={userNorms} currentStats={stats} />
         <Section title={"Приемы пищи"}>
           <MealList />
         </Section>
         <Section title={"Трекер воды"}>
-          <WaterTracker userId={user.id}/>
+          <WaterTracker userId={visitor.id}/>
         </Section>
       </HomeRoot>
     </ScrollView>

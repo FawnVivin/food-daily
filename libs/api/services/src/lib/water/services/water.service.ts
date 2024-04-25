@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { EntityManager, MoreThanOrEqual, Repository } from "typeorm";
-import { User, Water } from "@food-daily/api/models";
+import { Visitor, Water } from "@food-daily/api/models";
 
 import type { WaterDto } from "@food-daily/shared/types";
 
@@ -20,17 +20,17 @@ export class WaterService {
 
     await this.entityManager.save(newWater);
   }
-  async findByUserId(userId:number) {
+  async findByUserId(visitorId:number) {
     const date = new Date();
     const today = new Date(date.getFullYear(),
       date.getMonth(),
       date.getDate());
     const water = await this.waterRepository.findOne({
-      where: { user: { id:userId } , date: MoreThanOrEqual(today) }});
+      where: { visitor: { id:visitorId } , date: MoreThanOrEqual(today) }});
 
     if (!water){
-      const user = new User({id:userId})
-      const newWater = new Water({quantity:0, user });
+      const visitor = new Visitor({id:visitorId})
+      const newWater = new Water({quantity:0, visitor });
 
       await this.entityManager.save(newWater);
       return newWater
@@ -39,13 +39,13 @@ export class WaterService {
      return water
   }
 
-  async updateQuantity(newQuantity: number, userId:number) {
+  async updateQuantity(newQuantity: number, visitorId:number) {
     const date = new Date();
     const today = new Date(date.getFullYear(),
       date.getMonth(),
       date.getDate());
     const water = await this.waterRepository.findOne({
-      where: { user: {id:userId} , date: MoreThanOrEqual(today) }});
+      where: { visitor: {id:visitorId} , date: MoreThanOrEqual(today) }});
 
       water.quantity = newQuantity;
       await this.entityManager.save(water);

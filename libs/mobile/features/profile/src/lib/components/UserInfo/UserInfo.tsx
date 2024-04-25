@@ -1,20 +1,21 @@
 import { Avatar, Button, Text } from "react-native-paper";
-import type { ScreenNavigationProps } from "@food-daily/mobile/types";
 import { Target } from "@food-daily/mobile/types";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useToken } from "@food-daily/mobile/hooks";
 
 import { MainInfoWrapper, UserInfoRoot } from "./UserInfo.styles";
 
-import type { User } from "@food-daily/shared/types";
+import type { Visitor } from "@food-daily/shared/types";
 import type { FC } from "react";
-import { useToken } from "@food-daily/mobile/hooks";
+import type { ScreenNavigationProps } from "@food-daily/mobile/types";
 
-const UserInfo: FC<User> = ({ name, target }) => {
+const UserInfo: FC<Visitor> = ({ name, target }) => {
   const navigation = useNavigation<ScreenNavigationProps>();
   const {token, changeToken } = useToken();
+
   const handlePress = () => {
-    changeToken("").then(() => {
+    void changeToken("").then(() => {
       navigation.navigate("AuthorizationScreen")
     });
   };

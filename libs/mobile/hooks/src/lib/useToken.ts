@@ -5,12 +5,13 @@ export const useToken = () => {
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    SecureStore.getItemAsync("token").then((data) => setToken(data));
+    void SecureStore.getItemAsync("token").then((data) => setToken(data));
   }, []);
 
   const changeToken = async (newToken: string) => {
     await SecureStore.setItemAsync("token", newToken);
     setToken(newToken);
   };
+
   return { token, changeToken };
 };

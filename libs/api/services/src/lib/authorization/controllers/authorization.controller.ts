@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common'
 import { Request } from 'express'
-import { CreateUserDto} from '@food-daily/shared/types';
+import { RegistrationBody} from '@food-daily/shared/types';
 
 import { AuthorizationService } from '../services'
 import { JwtAuthGuard, LocalAuthGuard } from '../guards'
@@ -8,19 +8,19 @@ import { JwtAuthGuard, LocalAuthGuard } from '../guards'
 import type { Payload } from '../types'
 import type { User } from '@food-daily/shared/types'
 
-@Controller('auth')
+@Controller('user')
 export class AuthorizationController {
   constructor(private authService: AuthorizationService) {
   }
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Req() req: Request) {
+  login(@Req() req: Request) {
     return this.authService.login(req.user as User)
   }
   @Post('registration')
-  async registration(@Body() user: CreateUserDto) {
-    return this.authService.registration(user)
+  async registration(@Body() {user, trainer, visitor}: RegistrationBody) {
+    return this.authService.registration(user, trainer, visitor)
   }
 
   @UseGuards(JwtAuthGuard)

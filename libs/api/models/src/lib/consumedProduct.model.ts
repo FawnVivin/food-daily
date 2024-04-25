@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGenerat
 
 
 import { Product } from "./product.model";
-import { User } from "./user.model";
+import { Visitor } from "./visitor.model";
 
 import type { ConsumedProduct as ConsumedProductType, Meal } from "@food-daily/shared/types";
 
@@ -36,9 +36,9 @@ export class ConsumedProduct implements ConsumedProductType {
   @JoinColumn()
   product: Product;
   
-  @ManyToOne(() => User, (user) => user.consumedProducts)
+  @ManyToOne(() => Visitor, (visitor) => visitor.consumedProducts)
   @JoinColumn()
-  user: User;
+  visitor: Visitor;
 
   constructor(consumedProduct: Partial<ConsumedProduct>) {
     Object.assign(this, consumedProduct);

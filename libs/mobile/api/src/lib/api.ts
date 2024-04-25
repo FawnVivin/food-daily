@@ -3,19 +3,21 @@ import { apiUrl, queryClient } from "@food-daily/mobile/constants";
 import { useToken } from "@food-daily/mobile/hooks";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-import { authorizationRoutes, consumedProductsRoutes, productsRoutes, userRoutes, waterRoutes } from "./api.routes";
+import { authorizationRoutes, consumedProductsRoutes, productsRoutes, visitorRoutes, waterRoutes } from "./api.routes";
 
 import type {
   ConsumedProduct,
   ConsumedProductDto,
   CreateConsumedProductDto,
-  CreateProductDto, CreateUserDto,
+  CreateProductDto,
   DailyStats,
+  FullUser,
   Login,
   Product,
+  RegistrationBody,
   StatsResponse,
   UpdateConsumedProductDto,
-  UpdateUserDto,
+  UpdateVisitorDto,
   User, WaterDto, WaterType
 } from "@food-daily/shared/types";
 
@@ -26,22 +28,20 @@ export const api = {
     return res.data;
   },
   async post<B, T>(url: string, body: B, params = {}): Promise<T> {
-    const res = await axios.post(`${apiUrl}${url}`, body, { ...params });
+    const res = await axios.post<T>(`${apiUrl}${url}`, body, { ...params });
 
     return res.data;
   },
   async put<B>(url: string, body: B, params = {}): Promise<void> {
-    const res = await axios.put(`${apiUrl}${url}`, body, { ...params });
-
-    return res.data;
+    await axios.put(`${apiUrl}${url}`, body, { ...params });
   },
   async delete(url: string, params = {}): Promise<void> {
-    const res = await axios.delete(`${apiUrl}${url}`, { ...params });
+    await axios.delete(`${apiUrl}${url}`, { ...params });
   }
 };
 
 export const useLogin = () => {
-  const { changeToken, token } = useToken();
+  const { changeToken } = useToken();
 
   return useMutation({
     mutationKey: ["auth"],
@@ -57,11 +57,11 @@ export const useLogin = () => {
 };
 
 export const useRegistration = () => {
-  const { changeToken, token } = useToken();
+  const { changeToken } = useToken();
 
   return useMutation({
     mutationKey: ["registration"],
-    mutationFn: (data: CreateUserDto) => api.post<CreateUserDto, {
+    mutationFn: (data: RegistrationBody) => api.post<RegistrationBody, {
       access_token: string,
       user: User
     }>(authorizationRoutes.registration(), data),
@@ -77,48 +77,37 @@ export const useGetUser = () => {
 
   return useQuery({
     queryKey: ["user", token],
-    queryFn: () => api.get<User>(authorizationRoutes.root, { headers: { Authorization: `Bearer ${token}` } })
+    queryFn: () => api.get<FullUser>(authorizationRoutes.root, { headers: { Authorization: `Bearer ${token}` } })
   });
 };
 
-export const useGetUserById = (userId:number|undefined) => {
-  const { token } = useToken();
-
-  return useQuery({
-    queryKey: ["user",userId, token],
-    queryFn: () => api.get<User>(`${userRoutes.root}/${userId}`, { headers: { Authorization: `Bearer ${token}` } }),
-  enabled:!!userId
-  });
-};
-
-
-export const useUpdateUser = (userId: number) => {
+export const useUpdateVisitor = (visitorId: number) => {
   const { token } = useToken();
 
   return useMutation({
     mutationKey: ["user"],
-    mutationFn: (newUser: UpdateUserDto) => api.put<UpdateUserDto>(userRoutes.updateUser(userId), newUser, { headers: { Authorization: `Bearer ${token}` } }),
+    mutationFn: (newVisitor: UpdateVisitorDto) => api.put<UpdateVisitorDto>(visitorRoutes.updateVisitor(visitorId), newVisitor, { headers: { Authorization: `Bearer ${token}` } }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["user"] })
   });
 };
 
-export const useGetDailyStats = (userId: number | undefined) => {
+export const useGetDailyStats = (visitorId: number | undefined) => {
   const { token } = useToken();
 
   return useQuery({
     queryKey: ["consumedProduct", "stats", token],
-    queryFn: userId ? () => api.get<DailyStats>(consumedProductsRoutes.dailyStats(userId), { headers: { Authorization: `Bearer ${token}` } }) : undefined,
-    enabled: !!userId
+    queryFn: visitorId ? () => api.get<DailyStats>(consumedProductsRoutes.dailyStats(visitorId), { headers: { Authorization: `Bearer ${token}` } }) : undefined,
+    enabled: !!visitorId
   });
 };
 
-export const useGetProductsByMeal = (meal: ConsumedProduct["meal"], userId?: number) => {
+export const useGetProductsByMeal = (meal: ConsumedProduct["meal"], visitorId?: number) => {
   const { token } = useToken();
 
   return useQuery({
     queryKey: ["consumedProduct", "meal", meal, token],
-    queryFn: userId ? () => api.get<ConsumedProductDto[]>(consumedProductsRoutes.getProductsByMeal(meal, userId), { headers: { Authorization: `Bearer ${token}` } }) : undefined,
-    enabled: !!userId
+    queryFn: visitorId ? () => api.get<ConsumedProductDto[]>(consumedProductsRoutes.getProductsByMeal(meal, visitorId), { headers: { Authorization: `Bearer ${token}` } }) : undefined,
+    enabled: !!visitorId
   });
 };
 
@@ -215,21 +204,20 @@ export const useUpdateWaterQuantity = () => {
   });
 }
 
-export const useGetWaterQuantity = (userId:number) => {
+export const useGetWaterQuantity = (visitorId:number) => {
   const { token } = useToken();
 
   return useQuery({
-    queryKey: ["water", userId, token],
-    queryFn: () => api.get<WaterType>(waterRoutes.getWaterById(userId),{ headers: { Authorization: `Bearer ${token}` } })
+    queryKey: ["water", visitorId, token],
+    queryFn: () => api.get<WaterType>(waterRoutes.getWaterById(visitorId),{ headers: { Authorization: `Bearer ${token}` } })
   });
 }
 
-export const useGetWeeklyStats = (userId: number| undefined) => {
+export const useGetWeeklyStats = (visitorId: number| undefined) => {
   const { token } = useToken();
 
-  console.log(userId)
   return useQuery({
-    queryKey: ["stats", userId, token],
-    queryFn: () => api.get<StatsResponse>(consumedProductsRoutes.getWeeklyStats(userId),{ headers: { Authorization: `Bearer ${token}` } })
+    queryKey: ["stats", visitorId, token],
+    queryFn: () => api.get<StatsResponse>(consumedProductsRoutes.getWeeklyStats(visitorId),{ headers: { Authorization: `Bearer ${token}` } })
   });
 }

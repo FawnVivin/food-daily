@@ -1,6 +1,5 @@
 import { Button, Text } from "react-native-paper";
 import { FormTextInput } from "@food-daily/mobile/ui";
-import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
@@ -9,6 +8,7 @@ import { useLogin } from "@food-daily/mobile/api";
 import { authorizationFormSchema } from "./schemas/Authorization.schema";
 import { AuthorizationRoot, Title } from "./Authorization.styles";
 
+import type { SubmitHandler } from "react-hook-form";
 import type { Login } from "@food-daily/shared/types";
 import type { ScreenNavigationProps } from "@food-daily/mobile/types";
 
@@ -19,14 +19,16 @@ export const Authorization = () => {
   });
   const navigation = useNavigation<ScreenNavigationProps>();
   const { mutate, error } = useLogin();
+
   const handleAuthPress: SubmitHandler<Login> = (data) => {
     mutate(data, {
-      onSuccess: () => {
+      onSuccess() {
         navigation.navigate("HomeScreen");
         reset();
       }
     });
   };
+
   const handleRegistrationPress = () => {
     navigation.navigate("RegistrationScreen");
   };

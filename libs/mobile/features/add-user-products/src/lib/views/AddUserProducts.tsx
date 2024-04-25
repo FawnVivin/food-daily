@@ -7,15 +7,18 @@ import { useGetUser } from "@food-daily/mobile/api";
 import { AddUserProductsWrapper } from "./AddUserProducts.styles";
 
 const AddUserProducts = () => {
-  const { data: user, isLoading, isSuccess } = useGetUser();
+  const {data: user, isLoading, isSuccess} = useGetUser()
 
   if (isLoading || !isSuccess) return <ScreenLoader />;
+  const {visitor} = user
+
+  if (!visitor) return null
   return (
     <Fragment>
       <Header title={"Ваши продукты"} />
       <ScrollView>
         <AddUserProductsWrapper>
-          <ProductsList products={user.products} screenType={ProductScreens.searchProduct} />
+          <ProductsList products={visitor.products} screenType={ProductScreens.searchProduct} />
         </AddUserProductsWrapper>
       </ScrollView>
     </Fragment>

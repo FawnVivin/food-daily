@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registrationSchema } from "./shemas";
 import { RegistrationFormSection, RegistrationRoot } from "./Registration.styles";
 
-import type { CreateUserDto } from "@food-daily/shared/types";
+import type { CreateVisitorDto, RegistrationBody } from "@food-daily/shared/types";
 import type { CreateUserType } from "./Registration.types";
 import type { ScreenNavigationProps } from "@food-daily/mobile/types";
 import type { SubmitHandler} from "react-hook-form";
@@ -21,7 +21,15 @@ const Registration = () => {
   const navigation = useNavigation<ScreenNavigationProps>();
 
   const handlePress: SubmitHandler<CreateUserType> = (data) => {
-    mutate(data as CreateUserDto);
+    const body: RegistrationBody = {
+      user:{
+        email: data.email,
+        password: data.password
+      },
+      visitor: data as CreateVisitorDto
+    }
+
+    mutate(body);
     navigation.navigate("HomeScreen");
   };
 

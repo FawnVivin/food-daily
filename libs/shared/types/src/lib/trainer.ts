@@ -1,10 +1,10 @@
-import type { User } from "./user"
+import type { Visitor } from "./visitor"
 
 export type TrainerType = {
   id: number
   name: string
   description: string
-  users: User[]
+  visitors: Visitor[]
 }
 
-export type TrainerDto = Omit<TrainerType,'id'|'users'>
+export type TrainerDto = Omit<TrainerType,'id'|'visitors'>

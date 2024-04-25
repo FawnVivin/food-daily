@@ -15,15 +15,18 @@ import type { CreateProductDto } from "@food-daily/shared/types";
 import type { SubmitHandler } from "react-hook-form";
 
 const CreateProduct = () => {
-  const { data: user, isSuccess } = useGetUser();
+  const {data:user, isSuccess} = useGetUser()
   const formMethods = useForm<CreateProductDto>({ resolver: zodResolver(createProductFormSchema), mode: "onChange" });
   const { mutate } = useCreateProduct();
   const navigation = useNavigation();
 
   if (!isSuccess) return null;
+  const {visitor} = user
+
+  if (!visitor) return null
 
   const handlePress: SubmitHandler<CreateProductDto> = (data) => {
-    mutate({ ...data, authorId: user.id }, { onSuccess: () => navigation.goBack() });
+    mutate({ ...data, authorId: visitor.id }, { onSuccess: () => navigation.goBack() });
   };
 
   return (

@@ -1,9 +1,9 @@
 import { Controller } from "react-hook-form";
 import { PaperSelect } from "react-native-paper-select";
-import type { FC } from "react";
 import { useState } from "react";
 import { TextInput, useTheme } from "react-native-paper";
 
+import type { FC } from "react";
 import type { FormSelectProps, SelectItem } from "./FormSelect.types";
 
 const FormSelect: FC<FormSelectProps> = ({

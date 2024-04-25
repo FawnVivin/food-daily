@@ -8,18 +8,21 @@ import { ProfileForm, UserInfo, UserParams } from "../components";
 import { ProfileRoot } from "./Profile.styles";
 
 const Profile = () => {
-  const { data, isLoading, isSuccess, error } = useGetUser();
+  const {data: user, isLoading, isSuccess} = useGetUser()
 
   if (isLoading || !isSuccess) return <ScreenLoader />;
+  const {visitor} = user
+
+  if (!visitor) return null
   return (
     <Fragment>
       <Header title={"Профиль"} backButton={false} />
       <ProfileRoot>
-        <UserInfo {...data} />
+        <UserInfo {...visitor} />
         <Divider />
-        <UserParams {...data} />
+        <UserParams {...visitor} />
         <Divider />
-        <ProfileForm {...data} />
+        <ProfileForm {...visitor} />
       </ProfileRoot>
     </Fragment>
   );

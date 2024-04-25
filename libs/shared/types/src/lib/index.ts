@@ -9,3 +9,5 @@ export * from './water'
 export * from './trainer'
 
 export * from './stats'
+
+export * from './visitor'
