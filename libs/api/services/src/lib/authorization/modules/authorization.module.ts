@@ -7,10 +7,12 @@ import { LocalStrategy, JwtStrategy } from '../strategies'
 import { AuthorizationController } from '../controllers'
 import { jwtConstants } from '../constants'
 import { UserModule } from '../../user'
+import { VisitorModule } from '../../visitor'
+import { TrainerModule } from '../../trainer'
 
 
 @Module({
-  imports: [ PassportModule, UserModule, JwtModule.register({
+  imports: [ PassportModule, UserModule, VisitorModule, TrainerModule, JwtModule.register({
     secret: jwtConstants.secret,
     signOptions: { expiresIn: '30d' }
   })],

@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
-import { User } from "./user.model";
+
+import { Visitor } from "./visitor.model";
 
 import type {WaterType} from "@food-daily/shared/types"
 
@@ -15,9 +16,9 @@ export class Water implements WaterType {
   @CreateDateColumn()
   date: Date;
 
-  @ManyToOne(() => User, (user) => user.water)
+  @ManyToOne(() => Visitor, (visitor) => visitor.water)
   @JoinColumn()
-  user: User;
+  visitor: Visitor;
   constructor(weight: Partial<Water>) {
     Object.assign(this, weight);
   }

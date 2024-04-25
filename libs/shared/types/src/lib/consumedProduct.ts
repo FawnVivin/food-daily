@@ -1,5 +1,5 @@
-import type { User } from "./user";
 import type { Product, ProductParams } from "./product";
+import type { Visitor } from "./visitor";
 
 export type ConsumedProduct = ProductParams & {
   id: number,
@@ -10,14 +10,14 @@ export type ConsumedProduct = ProductParams & {
 
 export type ConsumedProductDto = ConsumedProduct & {
   product: Product
-  user: User
+  visitor: Visitor
 }
 
 export type CreateConsumedProductDto = {
   weight: number,
   meal: keyof typeof Meal,
   productId: number,
-  userId: number
+  visitorId: number
 }
 
 export type DailyStats = {

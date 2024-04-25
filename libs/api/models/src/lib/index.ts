@@ -7,3 +7,5 @@ export * from './product.model'
 export * from './water.model'
 
 export * from './trainer.model'
+
+export * from './visitor.model'

@@ -21,15 +21,15 @@ const SearchProductForm: FC<SearchProductFormProps> = ({ id }) => {
     resolver: zodResolver(searchProductFormSchema),
     mode: "onChange"
   });
-  const { data: user, isSuccess } = useGetUser();
+  const {data:user, isPending, isSuccess} = useGetUser()  
   const { mutate } = useCreateConsumedProduct();
   const navigation = useNavigation<ScreenNavigationProps>()
 
   const handlePress: SubmitHandler<SearchProductFormParams> = ({ meal, weight }) => {
     const mealType = meal as keyof typeof Meal;
 
-    if (isSuccess) {
-      mutate({ userId: user.id, productId: id, meal: mealType, weight }, {onSuccess:()=>navigation.navigate('HomeScreen')});
+    if (isSuccess && user.visitor) {
+      mutate({ visitorId: user.visitor.id, productId: id, meal: mealType, weight }, {onSuccess:()=>navigation.navigate('HomeScreen')});
     }
   };
 

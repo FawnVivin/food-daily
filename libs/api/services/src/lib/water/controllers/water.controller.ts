@@ -21,7 +21,7 @@ export class WaterController {
   }
   @UseGuards(JwtAuthGuard)
   @Put()
-  async update(@Body() {quantity, userId}: WaterDto) {
-    return this.waterService.updateQuantity(quantity, userId)
+  async update(@Body() {quantity, visitorId}: WaterDto) {
+    return this.waterService.updateQuantity(quantity, visitorId)
   }
 }

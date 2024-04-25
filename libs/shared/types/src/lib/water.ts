@@ -5,5 +5,5 @@ export type WaterType = {
 
 export type WaterDto = {
   quantity: number
-  userId: number
+  visitorId: number
 }

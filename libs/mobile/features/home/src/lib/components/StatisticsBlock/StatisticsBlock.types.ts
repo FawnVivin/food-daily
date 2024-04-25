@@ -1,6 +1,6 @@
-import type { DailyStats, UserNorms } from '@food-daily/shared/types'
+import type { DailyStats, VisitorNorms } from '@food-daily/shared/types'
 
 export type StatisticsBlockProps = {
-    userNorms: UserNorms
+    userNorms: VisitorNorms
     currentStats: DailyStats
 }

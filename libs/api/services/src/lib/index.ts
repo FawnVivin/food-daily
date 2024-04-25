@@ -9,3 +9,5 @@ export * from './water'
 export * from './trainer'
 
 export * from './authorization'
+
+export * from './visitor'

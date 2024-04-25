@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { EntityManager, MoreThanOrEqual, Repository, Between } from "typeorm";
-import { ConsumedProduct, Product, User } from "@food-daily/api/models";
+import { ConsumedProduct, Product, Visitor } from "@food-daily/api/models";
 import { WeekLabels} from "@food-daily/shared/types";
 
 import { BaseProductsService } from "../../baseProduct/services";
@@ -23,11 +23,11 @@ export class ConsumedProductsService {
   }
 
   async create(consumedProductDto: CreateConsumedProductDto) {
-    const user = new User({id:consumedProductDto.userId})
+    const visitor = new Visitor({id:consumedProductDto.visitorId})
     const product = new Product({id:consumedProductDto.productId})
     const newConsumedProduct = new ConsumedProduct(consumedProductDto)
 
-    newConsumedProduct.user = user
+    newConsumedProduct.visitor = visitor
     newConsumedProduct.product = product
     const {
       fats,
@@ -52,14 +52,14 @@ export class ConsumedProductsService {
     return this.consumedProductRepository.findOne({ where: { id }, relations: ["product"] });
   }
 
-  async findAllByMeal(meal: ConsumedProduct["meal"], userId: number): Promise<ConsumedProduct[]> {
+  async findAllByMeal(meal: ConsumedProduct["meal"], visitorId: number): Promise<ConsumedProduct[]> {
     const date = new Date();
     const today = new Date(date.getFullYear(),
       date.getMonth(),
       date.getDate());
 
     return this.consumedProductRepository.find({
-      where: { meal, user: { id: userId }, date: MoreThanOrEqual(today) },
+      where: { meal, visitor: { id: visitorId }, date: MoreThanOrEqual(today) },
       relations: ["product"]
     });
   }
@@ -82,7 +82,7 @@ export class ConsumedProductsService {
     await this.entityManager.save(newConsumedProduct);
   }
 
-  async getDailyStats(userId: number, date?:Date): Promise<DailyStats> {
+  async getDailyStats(visitorId: number, date?:Date): Promise<DailyStats> {
     const currentDate = date || new Date();
     const today = new Date(currentDate.getFullYear(),
       currentDate.getMonth(),
@@ -90,7 +90,7 @@ export class ConsumedProductsService {
     const products = await this.consumedProductRepository.find({
       where: {
         date: MoreThanOrEqual(today),
-        user: { id: userId }
+        visitor: { id: visitorId }
       }
     });
     const caloriesSum = products.reduce((calories, product) => calories += product.calories, 0);
@@ -106,7 +106,7 @@ export class ConsumedProductsService {
     };
   }
 
-  async getWeeklyStats(userId: number) {
+  async getWeeklyStats(visitorId: number) {
 
     const dateFrom = daysAgo(7); 
     const dates = [];
@@ -121,7 +121,7 @@ export class ConsumedProductsService {
     const proteins = []
     const fats = []
     const carbohydrates = []
-    const products = await this.consumedProductRepository.find({where:{date: Between(dateFrom, new Date()), user: {id: userId}}})    
+    const products = await this.consumedProductRepository.find({where:{date: Between(dateFrom, new Date()), visitor: {id: visitorId}}})    
     const statsLabels = dates.map((date)=>WeekLabels[date.getDay()]).reverse()
 
     for (const date of dates.reverse()){

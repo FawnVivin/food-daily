@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { ProductStatus } from "@food-daily/shared/types";
 
-import { User } from "./user.model";
 import { ConsumedProduct } from "./consumedProduct.model";
+import { Visitor } from "./visitor.model";
 
 import type { Product as ProductType } from "@food-daily/shared/types";
 
@@ -33,7 +33,7 @@ export class Product implements ProductType {
   @Column({ type: "enum", enum: ProductStatus, default: ProductStatus.added})
   status: ProductStatus;
 
-  @ManyToOne(() => User, (user) => user.products)
+  @ManyToOne(() => Visitor, (visitor) => visitor.products)
   @JoinColumn({ name: "authorId" })
   authorId: number;
 

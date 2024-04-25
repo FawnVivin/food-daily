@@ -83,17 +83,14 @@
       "@food-daily/mobile/features/statistics": [
         "libs/mobile/features/statistics/src/index.ts"
       ],
+      "@food-daily/mobile/features/trainer-panel": [
+        "libs/mobile/features/trainer-panel/src/index.ts"
+      ],
       "@food-daily/mobile/features/user-product": [
         "libs/mobile/features/user-product/src/index.ts"
       ],
       "@food-daily/mobile/features/user-products": [
         "libs/mobile/features/user-products/src/index.ts"
-      ],
-      "@food-daily/mobile/fixtures": [
-        "libs/mobile/fixtures/src/index.ts"
-      ],
-      "@food-daily/mobile/helpers": [
-        "libs/mobile/helpers/src/index.ts"
       ],
       "@food-daily/mobile/hooks": [
         "libs/mobile/hooks/src/index.ts"

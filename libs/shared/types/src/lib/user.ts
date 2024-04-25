@@ -1,11 +1,5 @@
-import type { Product } from './product'
-
-export type UserNorms = {
-  calorieNorm: number,
-  proteinNorm: number,
-  fatsNorm: number,
-  carbohydrateNorm: number,
-}
+import type { TrainerDto, TrainerType } from "./trainer"
+import type { CreateVisitorDto, Visitor } from "./visitor"
 
 export enum Role {
   Admin='admin',
@@ -13,62 +7,29 @@ export enum Role {
   Trainer='trainer'
 }
 
-export type User = UserNorms & {
+export type User =  {
   id: number,
-  name: string,
-  age: number,
   email: string,
-  sex: keyof typeof Sex,
-  weight: number,
-  height: number,
-  activity: keyof typeof Activity,
-  target: keyof typeof Target,
   role: Role,
-  products: Product[]
-  trainer: number
 }
 
-export type UpdateUserDto = {
-  age: number,
-  sex: keyof typeof Sex,
-  weight: number,
-  height: number,
-  target: keyof typeof Target,
-  activity: keyof typeof Activity,
+export type FullUser = User & {
+  trainer?: TrainerType,
+  visitor?: Visitor
 }
 
 export type CreateUserDto = {
-  name: string,
-  age: number,
-  sex: keyof typeof Sex,
   email: string,
-  weight: number,
-  height: number,
-  target: keyof typeof Target,
-  activity: keyof typeof Activity,
   password: string
+}
+
+export type RegistrationBody = {
+  user: CreateUserDto,
+  trainer?: TrainerDto,
+  visitor?: CreateVisitorDto
 }
 
 export type Login = {
   email: string,
   password: string
-}
-
-export enum Activity {
-  minimal,
-  weak,
-  middle,
-  high,
-  extreme
-}
-
-export enum Target {
-  loss,
-  gain,
-  retention
-}
-
-export enum Sex {
-  male,
-  female
 }

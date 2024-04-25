@@ -2,7 +2,7 @@ import { useTheme } from 'react-native-paper'
 import { Header, ScreenLoader } from '@food-daily/mobile/ui'
 import { ScrollView } from 'react-native'
 import { Fragment } from 'react'
-import {useGetUser, useGetWeeklyStats} from '@food-daily/mobile/api'
+import { useGetUser, useGetWeeklyStats} from '@food-daily/mobile/api'
 
 import { Chart } from '../components'
 
@@ -10,10 +10,10 @@ import { StatisticsRoot } from './Statistics.styles'
 
 const Statistics = () => {
   const { colors } = useTheme()
-  const { data: user, isSuccess: isUserSuccess, isPending: isUserPending, error: userError } = useGetUser();
-  const {data, isPending, isSuccess} = useGetWeeklyStats(user?.id)
+  const { data: user } = useGetUser()
+  const { data, isPending, isSuccess } = useGetWeeklyStats(user?.visitor?.id)
 
-  if (isPending || isUserPending || !isSuccess || !isUserSuccess) return <ScreenLoader />
+  if (isPending ||!isSuccess) return <ScreenLoader />
   return (
     <Fragment>
       <Header title={'Статистика'} backButton={false}/>

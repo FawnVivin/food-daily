@@ -1,8 +1,9 @@
 import type { ConsumedProduct } from "@food-daily/shared/types";
 
-export const userRoutes = {
-  root: "users",
-  updateUser: (userId: number) => `${userRoutes.root}/${userId}`
+export const visitorRoutes = {
+  root: "visitors",
+  updateVisitor: (visitorId: number) => `${visitorRoutes.root}/${visitorId}`,
+  getByUserId: (userId: number) => `${visitorRoutes.root}/${userId}`
 };
 
 export const consumedProductsRoutes = {
@@ -13,11 +14,11 @@ export const consumedProductsRoutes = {
   delete: (productId: number) => `${consumedProductsRoutes.root}/${productId}`,
   update: (productId: number) => `${consumedProductsRoutes.root}/${productId}`,
   create: () => `${consumedProductsRoutes.root}`,
-  getWeeklyStats: (userId: number)=> `${consumedProductsRoutes.root}/weeklyStats/${userId}`
+  getWeeklyStats: (visitorId: number)=> `${consumedProductsRoutes.root}/weeklyStats/${visitorId}`
 };
 
 export const authorizationRoutes = {
-  root: "auth",
+  root: "user",
   login: () => `${authorizationRoutes.root}/login`,
   registration:()=>`${authorizationRoutes.root}/registration`
 };

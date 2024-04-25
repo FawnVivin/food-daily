@@ -5,11 +5,11 @@ import { PFCItem } from '../../../PFCItem'
 
 import { PFCBlockRoot } from './PFCBlock.styles'
 
-import type { DailyStats, UserNorms } from '@food-daily/shared/types'
+import type { DailyStats, VisitorNorms } from '@food-daily/shared/types'
 import type { FC } from 'react'
 
 
-const PFCBlock: FC<DailyStats & UserNorms> = ({ carbohydrateNorm, carbohydrates, proteinNorm, proteins, fatsNorm, fats }) => {
+const PFCBlock: FC<DailyStats & VisitorNorms> = ({ carbohydrateNorm, carbohydrates, proteinNorm, proteins, fatsNorm, fats }) => {
   const { colors } = useTheme()
 
   return (
