@@ -4,6 +4,8 @@ import { Statistics } from '@food-daily/mobile/features/statistics'
 import { UserProducts } from '@food-daily/mobile/features/user-products'
 import { Profile } from '@food-daily/mobile/features/profile'
 import { useTheme } from 'react-native-paper'
+import { useGetUser } from '@food-daily/mobile/api'
+import { ScreenLoader } from '@food-daily/mobile/ui'
 
 import { Home } from '../Home'
 
@@ -14,7 +16,12 @@ const Tab = createBottomTabNavigator<TabParamList>()
 
 const HomeScreen = () => {
   const { colors } = useTheme()
+  const {data: user, isSuccess, isPending} = useGetUser()
 
+  if (!isSuccess || isPending) return <ScreenLoader/>
+  const {visitor} = user
+
+  if (!visitor) return null
   return (
     <Tab.Navigator
       initialRouteName='Home'
@@ -39,8 +46,9 @@ const HomeScreen = () => {
         }}
       />
       <Tab.Screen
-        name='Statistics'
+        name='StatisticsScreen'
         component={Statistics}
+        initialParams={{visitorId: visitor.id}}
         options={{
           tabBarIcon({ color, focused }) {
             if (focused) {

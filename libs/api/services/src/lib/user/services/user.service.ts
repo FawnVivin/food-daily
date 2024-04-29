@@ -2,8 +2,9 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { EntityManager, Repository } from "typeorm";
 import { User } from "@food-daily/api/models";
+import { Role } from "@food-daily/shared/types";
 
-import type { CreateUserDto } from "@food-daily/shared/types";
+import type { CreateUserDto} from "@food-daily/shared/types";
 
 
 
@@ -20,17 +21,17 @@ export class UsersService {
   }
 
   async findOneById(id: number): Promise<User> {
-    return this.userRepository.findOne({where:{id},relations:["trainer","visitor.products"]}) ;
+    return this.userRepository.findOne({where:{id},relations:["trainer.visitors","visitor.products"]}) ;
   }
 
   async create(userDto: CreateUserDto, trainerId?:number, visitorId?:number) {
     const newUser = new User(userDto);
 
     if (trainerId){
+      newUser.role = Role.Trainer
       newUser.trainer = trainerId
     }
     else if (visitorId){
-      console.log(visitorId)
       newUser.visitor = visitorId
     }
 

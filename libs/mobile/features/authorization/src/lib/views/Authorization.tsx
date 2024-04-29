@@ -8,22 +8,22 @@ import { useLogin } from "@food-daily/mobile/api";
 import { authorizationFormSchema } from "./schemas/Authorization.schema";
 import { AuthorizationRoot, Title } from "./Authorization.styles";
 
-import type { SubmitHandler } from "react-hook-form";
-import type { Login } from "@food-daily/shared/types";
+import type { Login} from "@food-daily/shared/types";
 import type { ScreenNavigationProps } from "@food-daily/mobile/types";
+import type { SubmitHandler } from "react-hook-form";
 
 export const Authorization = () => {
   const { control, handleSubmit, reset, formState: { errors, isValid } } = useForm<Login>({
     mode: "onSubmit",
     resolver: zodResolver(authorizationFormSchema)
   });
-  const navigation = useNavigation<ScreenNavigationProps>();
+  const navigation = useNavigation<ScreenNavigationProps>() ;
   const { mutate, error } = useLogin();
+
 
   const handleAuthPress: SubmitHandler<Login> = (data) => {
     mutate(data, {
       onSuccess() {
-        navigation.navigate("HomeScreen");
         reset();
       }
     });
