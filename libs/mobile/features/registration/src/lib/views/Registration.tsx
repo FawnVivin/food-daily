@@ -4,7 +4,7 @@ import { FormSelect, FormTextInput, Header } from "@food-daily/mobile/ui";
 import { activityItems, sexItems, targetItems } from "@food-daily/mobile/constants";
 import { Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-import { useRegistration } from "@food-daily/mobile/api";
+import { useGetUser, useRegistrationVisitor } from "@food-daily/mobile/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { registrationSchema } from "./shemas";
@@ -17,16 +17,19 @@ import type { SubmitHandler} from "react-hook-form";
 
 const Registration = () => {
   const { control, handleSubmit, formState: { errors } } = useForm<CreateUserType>({ mode: "onChange", resolver: zodResolver(registrationSchema) });
-  const { mutate } = useRegistration();
+  const { mutate } = useRegistrationVisitor();
+  const {data: user} = useGetUser()
   const navigation = useNavigation<ScreenNavigationProps>();
 
   const handlePress: SubmitHandler<CreateUserType> = (data) => {
+    if (!user?.trainer) return
+    const visitor = {...data, trainer: user.trainer.id} as CreateVisitorDto
     const body: RegistrationBody = {
       user:{
         email: data.email,
         password: data.password
       },
-      visitor: data as CreateVisitorDto
+      visitor
     }
 
     mutate(body);

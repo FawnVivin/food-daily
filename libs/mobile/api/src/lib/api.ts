@@ -50,27 +50,19 @@ export const useLogin = () => {
       user: User
     }>(authorizationRoutes.login(), data),
     async onSuccess({ access_token }) {
-      await changeToken(access_token);
+      changeToken(access_token);
       await queryClient.invalidateQueries({ queryKey: ["user"] });
     }
   });
 };
 
-export const useRegistration = () => {
-  const { changeToken } = useToken();
-
-  return useMutation({
-    mutationKey: ["registration"],
-    mutationFn: (data: RegistrationBody) => api.post<RegistrationBody, {
-      access_token: string,
-      user: User
-    }>(authorizationRoutes.registration(), data),
-    async onSuccess({ access_token }) {
-      await changeToken(access_token);
+export const useRegistrationVisitor = () => useMutation({
+    mutationKey: ["registrationVisitor"],
+    mutationFn: (data: RegistrationBody) => api.post<RegistrationBody, void>(authorizationRoutes.registration(), data),
+    async onSuccess() {
       await queryClient.invalidateQueries({ queryKey: ["user"] });
     }
   });
-};
 
 export const useGetUser = () => {
   const { token } = useToken();

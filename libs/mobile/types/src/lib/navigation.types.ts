@@ -14,10 +14,15 @@ export enum ProductScreens {
   searchProduct = "SearchProductScreen"
 }
 
-export type TabParamList = {
+export type CommonParamList = {
+  StatisticsScreen: {
+    visitorId: number
+  }
+}
+
+export type TabParamList = CommonParamList & {
   Home: undefined;
   Profile: undefined;
-  Statistics: undefined,
   UserProducts: undefined
 };
 
@@ -45,10 +50,12 @@ export type RootStackParamList = {
 
 }
 
-export type TrainerStackParamList = {
+export type TrainerStackParamList = CommonParamList & {
   RegistrationScreen: undefined,
   AuthorizationScreen: undefined,
-  TrainerPanelScreen: undefined
+  HomeScreen: undefined,
 }
 
 export type ScreenNavigationProps = StackNavigationProp<RootStackParamList & TabParamList>
+
+export type TrainerScreenNavigatorProps = StackNavigationProp<TrainerStackParamList>

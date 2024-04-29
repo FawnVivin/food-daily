@@ -1,3 +1,1 @@
-export * from './UserRoutes'
-
-export * from './TrainerRoutes'
+export * from './Routes'

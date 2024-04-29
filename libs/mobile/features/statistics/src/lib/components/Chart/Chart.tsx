@@ -22,7 +22,7 @@ const Chart:FC<ChartProps> = ({data,legend,lineColor, suffix=''}) => {
       }}
       yAxisSuffix={suffix}
       height={220}
-      width={Dimensions.get('screen').width - 72}
+      width={Dimensions.get('screen').width - 60}
       onDataPointClick={(value) => console.log(value.value)}
       chartConfig={chartConfig()}
       getDotColor={() => colors.onBackground}
