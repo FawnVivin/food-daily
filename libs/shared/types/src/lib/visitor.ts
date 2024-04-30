@@ -1,3 +1,4 @@
+import type { TrainerType } from './trainer'
 import type { User } from './user'
 import type { Product } from './product'
 
@@ -22,6 +23,14 @@ export type Visitor = VisitorNorms & {
   user: User
 }
 
+export type VisitorWithTrainer = Omit<Visitor, 'trainer'> & {
+  trainer?: TrainerType
+}
+
+export type VisitorSearchParams = {
+  name: string
+}
+
 export type UpdateVisitorDto = {
   age: number,
   sex: keyof typeof Sex,
@@ -29,6 +38,10 @@ export type UpdateVisitorDto = {
   height: number,
   target: keyof typeof Target,
   activity: keyof typeof Activity,
+}
+
+export type UpdateVisitorTrainerDto = {
+  trainerId: number 
 }
 
 export type CreateVisitorDto = {

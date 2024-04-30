@@ -5,21 +5,33 @@ import { Authorization } from "@food-daily/mobile/features/authorization";
 
 import TrainerRoutes from "./TrainerRoutes";
 import UserRoutes from "./UserRoutes";
+import AdminRoutes from "./AdminRoutes";
 
 import type { TrainerStackParamList } from "@food-daily/mobile/types";
 
 const Routes = () => {
-  const { data:user } = useGetUser();
-  const Stack = createNativeStackNavigator<TrainerStackParamList>();
+  const { data: user } = useGetUser()
+  const Stack = createNativeStackNavigator<TrainerStackParamList>()
 
-    if (user?.role === Role.User) return <UserRoutes/>
-    if (user?.role === Role.Trainer) return <TrainerRoutes />
-    return (
-      <Stack.Navigator screenOptions={{ headerShown: false, animation: 'slide_from_right' }}>
-        <Stack.Screen name={'AuthorizationScreen'} component={Authorization} />
-      </Stack.Navigator>
-    )
-
+  switch (user?.role) {
+    case Role.User:
+      return <UserRoutes />
+    case Role.Trainer:
+      return <TrainerRoutes />
+    case Role.Admin:
+      return <AdminRoutes />
+    default:
+      return (
+        <Stack.Navigator
+          screenOptions={{ headerShown: false, animation: 'slide_from_right' }}
+        >
+          <Stack.Screen
+            name={'AuthorizationScreen'}
+            component={Authorization}
+          />
+        </Stack.Navigator>
+      )
+  }
 }
 
 export default Routes

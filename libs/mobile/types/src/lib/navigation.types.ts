@@ -56,6 +56,17 @@ export type TrainerStackParamList = CommonParamList & {
   HomeScreen: undefined,
 }
 
+export type AdminStackParamList = {
+  HomeScreen: undefined,
+  AuthorizationScreen: undefined,
+}
+
+export type AdminTabParamList = {
+  VisitorsScreen: undefined;
+  TrainersScreen: undefined;
+  ProductsScreen: undefined
+};
+
 export type ScreenNavigationProps = StackNavigationProp<RootStackParamList & TabParamList>
 
 export type TrainerScreenNavigatorProps = StackNavigationProp<TrainerStackParamList>

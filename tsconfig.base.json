@@ -50,6 +50,18 @@
       "@food-daily/mobile/features/add-user-products": [
         "libs/mobile/features/add-user-products/src/index.ts"
       ],
+      "@food-daily/mobile/features/admin-panel": [
+        "libs/mobile/features/admin-panel/src/index.ts"
+      ],
+      "@food-daily/mobile/features/admin-products-list": [
+        "libs/mobile/features/admin-products-list/src/index.ts"
+      ],
+      "@food-daily/mobile/features/admin-trainers-list": [
+        "libs/mobile/features/admin-trainers-list/src/index.ts"
+      ],
+      "@food-daily/mobile/features/admin-visitors-list": [
+        "libs/mobile/features/admin-visitors-list/src/index.ts"
+      ],
       "@food-daily/mobile/features/authorization": [
         "libs/mobile/features/authorization/src/index.ts"
       ],

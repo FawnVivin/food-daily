@@ -7,16 +7,18 @@ import type { FC } from "react";
 import type { FormSelectProps, SelectItem } from "./FormSelect.types";
 
 const FormSelect: FC<FormSelectProps> = ({
-                                           control,
-                                           name,
-                                           data,
-                                           icon,
-                                           defaultValue,
-                                           label
-                                         }) => {
-  const defaultSelectItem = data.filter((item) => item._id === defaultValue)[0];
-  const [selectedList, setSelectedList] = useState<SelectItem[]>([defaultSelectItem]);
-  const { colors } = useTheme();
+  control,
+  name,
+  data,
+  icon,
+  defaultValue,
+  label
+}) => {
+  const defaultSelectItem = data.filter((item) => item._id === defaultValue)[0]
+  const [selectedList, setSelectedList] = useState<SelectItem[]>([
+    defaultSelectItem
+  ])
+  const { colors } = useTheme()
 
   return (
     <Controller
@@ -27,8 +29,8 @@ const FormSelect: FC<FormSelectProps> = ({
           label={label}
           multiEnable={false}
           onSelection={(value) => {
-            onChange(value.selectedList[0]._id);
-            setSelectedList([...value.selectedList]);
+            onChange(value.selectedList[0]._id)
+            setSelectedList([...value.selectedList])
           }}
           selectedArrayList={selectedList}
           value={selectedList[0]?.value || value}
@@ -37,13 +39,12 @@ const FormSelect: FC<FormSelectProps> = ({
           dialogTitleStyle={{
             color: colors.primary
           }}
-          dialogCloseButtonText={"Закрыть"}
-          dialogDoneButtonText={"Выбрать"}
+          dialogCloseButtonText={'Закрыть'}
+          dialogDoneButtonText={'Выбрать'}
           checkboxProps={{
             checkboxColor: colors.primary,
             checkboxUncheckedColor: colors.onPrimaryContainer,
             checkboxLabelStyle: { color: colors.onPrimaryContainer }
-
           }}
           textInputStyle={{
             backgroundColor: colors.backdrop,
@@ -52,8 +53,8 @@ const FormSelect: FC<FormSelectProps> = ({
             borderTopRightRadius: 15
           }}
           textInputProps={{
-            activeUnderlineColor: "transparent",
-            underlineColor: "transparent",
+            activeUnderlineColor: 'transparent',
+            underlineColor: 'transparent',
             left: icon && <TextInput.Icon icon={icon} />
           }}
           containerStyle={{ marginBottom: -10 }}
@@ -62,8 +63,7 @@ const FormSelect: FC<FormSelectProps> = ({
       name={name}
       defaultValue={defaultValue}
     />
-
-  );
-};
+  )
+}
 
 export default FormSelect;

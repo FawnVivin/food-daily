@@ -1,12 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { EntityManager, Repository } from "typeorm";
+import { EntityManager, Repository, Like } from "typeorm";
 import { Visitor } from "@food-daily/api/models";
 
 
 import { StatsHelper } from "./helpers";
 
-import type { CreateVisitorDto, UpdateVisitorDto} from "@food-daily/shared/types";
+import type { CreateVisitorDto, UpdateVisitorDto, UpdateVisitorTrainerDto} from "@food-daily/shared/types";
 
 @Injectable()
 export class VisitorsService {
@@ -49,7 +49,13 @@ export class VisitorsService {
     // user = {...user,...newUser}
     await this.entityManager.save(visitor);
   }
+  async updateVisitorTrainer(id: number, newTrainer: UpdateVisitorTrainerDto) {
+    const visitor = await this.visitorRepository.findOneBy({ id });
+    const { trainerId } = newTrainer;    
+    const newVisitor = new Visitor({...visitor, trainer: trainerId});
 
+    await this.entityManager.save(newVisitor);
+  }
 
   async findOneById(id: number): Promise<Visitor> {
     console.log(id)
@@ -61,7 +67,14 @@ export class VisitorsService {
     });
   }
 
+  async findAllByName(name: string): Promise<Visitor[]> {
+    return this.visitorRepository.find({
+      where: { name: Like(`%${name}%`) },
+      relations: ['trainer']
+    })
+  }
+
   async findAll(): Promise<Visitor[]> {
-    return this.visitorRepository.find({ relations: ["products"] });
+    return this.visitorRepository.find({ relations: ["trainer"] });
   }
 }

@@ -17,7 +17,7 @@ const VisitorItem:FC<VisitorItemProps> = ({itemNumber, ...visitor}) => {
   const navigation = useNavigation<TrainerScreenNavigatorProps>();
   const handlePress = () => navigation.navigate('StatisticsScreen', {visitorId: visitor.id})
   const toggleModal = () => setVisible(prev=>!prev)
-  const containerStyle = {backgroundColor: colors.background, padding: 20, margin:35, height:280};
+  const containerStyle = {backgroundColor: colors.background, padding: 20, margin:35, height:280, borderRadius: 20};
 
   return (
     <Fragment>
