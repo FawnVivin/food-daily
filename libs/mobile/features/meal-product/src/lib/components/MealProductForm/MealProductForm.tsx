@@ -1,15 +1,16 @@
 import { useTheme } from "react-native-paper";
-import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { DialogBlock, FormTextInput } from "@food-daily/mobile/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { FC } from "react";
 import { useState } from "react";
 import { useDeleteConsumedProduct, useUpdateConsumedProduct } from "@food-daily/mobile/api";
 import { useNavigation } from "@react-navigation/native";
 
 import { DeleteButton, EditButton, MealButtons, MealProductFormRoot } from "./MealProductForm.styles";
 import { mealProductFormSchema } from "./schemas";
+
+import type { FC } from "react";
+import type { SubmitHandler } from "react-hook-form";
 import type { MealProductFormProps } from "./MealProductForm.types";
 import type { UpdateConsumedProductDto } from "@food-daily/shared/types";
 
@@ -21,7 +22,7 @@ const MealProductForm: FC<MealProductFormProps> = ({ weight, id }) => {
     mode: "onChange"
   });
   const navigation = useNavigation();
-  const { mutate: updateProduct } = useUpdateConsumedProduct(id);
+  const { mutate: updateProduct } = useUpdateConsumedProduct(id)
   const { mutate: deleteProduct } = useDeleteConsumedProduct(id);
   const { colors } = useTheme();
 

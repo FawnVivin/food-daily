@@ -25,6 +25,14 @@ export class TrainersService {
     return await this.entityManager.save(newTrainer);
   }
 
+  async findByName(name: string) {
+  
+    const trainer = await this.trainerRepository.findOne({
+      where: {name}, relations:["visitors"]});
+
+     return trainer
+  }
+  
   async findById(trainerId:number) {
   
     const trainer = await this.trainerRepository.findOne({

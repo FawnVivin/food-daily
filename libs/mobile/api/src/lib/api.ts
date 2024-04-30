@@ -3,7 +3,7 @@ import { apiUrl, queryClient } from "@food-daily/mobile/constants";
 import { useToken } from "@food-daily/mobile/hooks";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-import { authorizationRoutes, consumedProductsRoutes, productsRoutes, visitorRoutes, waterRoutes } from "./api.routes";
+import { authorizationRoutes, consumedProductsRoutes, productsRoutes, trainerRoutes, usersRoutes, visitorRoutes, waterRoutes } from "./api.routes";
 
 import type {
   ConsumedProduct,
@@ -16,9 +16,11 @@ import type {
   Product,
   RegistrationBody,
   StatsResponse,
+  TrainerType,
   UpdateConsumedProductDto,
   UpdateVisitorDto,
-  User, WaterDto, WaterType
+  UpdateVisitorTrainerDto,
+  User, VisitorWithTrainer, WaterDto, WaterType
 } from "@food-daily/shared/types";
 
 export const api = {
@@ -82,6 +84,18 @@ export const useUpdateVisitor = (visitorId: number) => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["user"] })
   });
 };
+
+export const useGetAllVisitorsByName = (name:string) => {
+  const { token } = useToken();
+
+  return useQuery({
+    queryKey: ['visitor', name, token],
+    queryFn: () =>
+      api.get<VisitorWithTrainer[]>(visitorRoutes.getAllVisitorsByName(name), {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+  })
+}
 
 export const useGetDailyStats = (visitorId: number | undefined) => {
   const { token } = useToken();
@@ -212,4 +226,45 @@ export const useGetWeeklyStats = (visitorId: number| undefined) => {
     queryKey: ["stats", visitorId, token],
     queryFn: () => api.get<StatsResponse>(consumedProductsRoutes.getWeeklyStats(visitorId),{ headers: { Authorization: `Bearer ${token}` } })
   });
+}
+
+export const useGetTrainers = () => {
+  const { token } = useToken();
+
+  return useQuery({
+    queryKey: ["trainers", token],
+    queryFn: () => api.get<TrainerType[]>(trainerRoutes.root,{ headers: { Authorization: `Bearer ${token}` } })
+  });
+}
+
+export const useUpdateVisitorTrainer = (visitorId:number) => {
+  const { token } = useToken();
+
+  return useMutation({
+    mutationKey: ['visitor', token],
+    mutationFn: (body: UpdateVisitorTrainerDto) =>
+      api.put<UpdateVisitorTrainerDto>(
+        visitorRoutes.updateVisitorTrainer(visitorId),
+        body,
+        { headers: { Authorization: `Bearer ${token}` } }
+      ),
+    onSuccess: ()=> queryClient.invalidateQueries({queryKey:['visitor']})
+  })
+}
+
+export const useDeleteVisitor = (userId:number) => {
+  const { token } = useToken();
+
+  return useMutation({
+    mutationKey: ['users', token],
+    mutationFn: () =>
+      api.delete(
+        usersRoutes.deleteVisitor(userId),
+        { headers: { Authorization: `Bearer ${token}` } }
+      ),
+    onSuccess() {
+      void queryClient.invalidateQueries({queryKey:['visitor']})
+      void queryClient.invalidateQueries({queryKey:['trainers']})
+    }
+  })
 }

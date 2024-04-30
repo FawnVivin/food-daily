@@ -1,3 +1,3 @@
-export type ProductItemNumberProps = {
+export type VisitorItemNumberProps = {
   itemNumber:number
 }

@@ -1,8 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { EntityManager, Repository } from "typeorm";
+import { EntityManager, Repository, Equal } from "typeorm";
 import { User } from "@food-daily/api/models";
 import { Role } from "@food-daily/shared/types";
+
+import { VisitorsService } from "../../visitor";
+import { TrainersService } from "../../trainer";
 
 import type { CreateUserDto} from "@food-daily/shared/types";
 
@@ -11,6 +14,8 @@ import type { CreateUserDto} from "@food-daily/shared/types";
 @Injectable()
 export class UsersService {
   constructor(
+    private visitorsService: VisitorsService,
+    private trainersService: TrainersService,
     @InjectRepository(User)
     private userRepository: Repository<User>,
     private readonly entityManager: EntityManager
@@ -36,5 +41,20 @@ export class UsersService {
     }
 
     await this.entityManager.save(newUser);
+  }
+
+  
+  async removeVisitor(id: number) {
+    const user = await this.userRepository.findOne({where:{visitor: Equal(id)}})
+
+    await this.userRepository.delete(user.id);
+    await this.visitorsService.remove(id);
+  }
+
+  async removeTrainer(id: number) {
+    const user = await this.userRepository.findOne({where:{trainer: Equal(id)}})
+
+    await this.userRepository.delete(user.id);
+    await this.trainersService.remove(id);
   }
 }
